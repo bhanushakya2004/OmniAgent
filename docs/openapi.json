@@ -329,6 +329,31 @@
         "summary": "Get authenticated user profile",
         "description": "Return profile details for the currently authenticated user.",
         "operationId": "get_current_user_profile_api_v1_auth_me_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -339,13 +364,18 @@
                 }
               }
             }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
+        }
       }
     },
     "/api/v1/auth/merchant-check": {
@@ -356,27 +386,57 @@
         "summary": "Verify merchant role authorization",
         "description": "Test probe verifying merchant role guard.",
         "operationId": "merchant_check_api_v1_auth_merchant_check_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
+                  "type": "object",
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "type": "object",
                   "title": "Response Merchant Check Api V1 Auth Merchant Check Get"
                 }
               }
             }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
           }
-        },
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ]
+        }
       }
     },
     "/api/v1/stores/nearby": {
@@ -700,10 +760,500 @@
           }
         }
       }
+    },
+    "/api/v1/missions": {
+      "post": {
+        "tags": [
+          "missions"
+        ],
+        "summary": "Create a new mission",
+        "description": "Initiate a shopping mission across specified physical stores.",
+        "operationId": "create_mission_api_v1_missions_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMissionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "title": "Response Create Mission Api V1 Missions Post"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "missions"
+        ],
+        "summary": "List past missions for authenticated user",
+        "description": "List historical shopping missions.",
+        "operationId": "list_missions_api_v1_missions_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 20,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissionListResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/missions/{mission_id}/stream": {
+      "get": {
+        "tags": [
+          "missions"
+        ],
+        "summary": "Stream real-time agent workflow events via SSE",
+        "description": "Server-Sent Events (SSE) stream emitting real-time agent thought steps and final grounded basket.",
+        "operationId": "stream_mission_api_v1_missions__mission_id__stream_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "mission_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Mission Id"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/missions/{mission_id}": {
+      "get": {
+        "tags": [
+          "missions"
+        ],
+        "summary": "Get mission details, grounded basket, and traces",
+        "description": "Retrieve full mission entity with verified items, physical aisle coordinates, and execution trace.",
+        "operationId": "get_mission_api_v1_missions__mission_id__get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "mission_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Mission Id"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissionResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/missions/{mission_id}/items/{item_id}": {
+      "patch": {
+        "tags": [
+          "missions"
+        ],
+        "summary": "Update quantity or remove an item from basket",
+        "description": "Update item quantity (0 removes item from basket) and recalculates total.",
+        "operationId": "update_mission_item_api_v1_missions__mission_id__items__item_id__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "mission_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Mission Id"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Item Id"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMissionItemRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissionItemResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/missions/{mission_id}/route": {
+      "get": {
+        "tags": [
+          "missions"
+        ],
+        "summary": "Get monotonic in-store wayfinding walking path",
+        "description": "Calculate and return ordered walking path through physical aisles and shelves.",
+        "operationId": "get_mission_route_api_v1_missions__mission_id__route_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "mission_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Mission Id"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissionRouteResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "CreateMissionRequest": {
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Prompt",
+            "description": "Natural language mission prompt"
+          },
+          "store_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "minItems": 1,
+            "title": "Store Ids",
+            "description": "List of physical store UUIDs"
+          },
+          "language": {
+            "type": "string",
+            "maxLength": 10,
+            "minLength": 2,
+            "title": "Language",
+            "description": "ISO language code",
+            "default": "en"
+          },
+          "input_modalities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Input Modalities",
+            "description": "Modalities used (text, voice, image)"
+          },
+          "constraints": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Constraints",
+            "description": "Optional upfront constraints"
+          }
+        },
+        "type": "object",
+        "required": [
+          "prompt",
+          "store_ids"
+        ],
+        "title": "CreateMissionRequest",
+        "description": "Payload to initiate a new mission."
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -716,6 +1266,404 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "MissionItemResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "mission_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Mission Id"
+          },
+          "product_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Id"
+          },
+          "product_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Name"
+          },
+          "product_brand": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product Brand"
+          },
+          "requested_label": {
+            "type": "string",
+            "title": "Requested Label"
+          },
+          "quantity": {
+            "type": "integer",
+            "title": "Quantity"
+          },
+          "unit_price": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit Price"
+          },
+          "subtotal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtotal"
+          },
+          "store_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Store Id"
+          },
+          "store_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Store Name"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "aisle": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aisle"
+          },
+          "bay": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bay"
+          },
+          "shelf": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shelf"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "mission_id",
+          "requested_label",
+          "quantity",
+          "status"
+        ],
+        "title": "MissionItemResponse",
+        "description": "Item in a mission basket grounded in real inventory."
+      },
+      "MissionListItemResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "raw_text": {
+            "type": "string",
+            "title": "Raw Text"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "total_cost": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Cost"
+          },
+          "item_count": {
+            "type": "integer",
+            "title": "Item Count"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "raw_text",
+          "status",
+          "item_count",
+          "created_at"
+        ],
+        "title": "MissionListItemResponse",
+        "description": "Compact summary of a mission for listing."
+      },
+      "MissionListResponse": {
+        "properties": {
+          "missions": {
+            "items": {
+              "$ref": "#/components/schemas/MissionListItemResponse"
+            },
+            "type": "array",
+            "title": "Missions"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          }
+        },
+        "type": "object",
+        "required": [
+          "missions",
+          "total"
+        ],
+        "title": "MissionListResponse",
+        "description": "Paginated list of missions."
+      },
+      "MissionResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "User Id"
+          },
+          "raw_text": {
+            "type": "string",
+            "title": "Raw Text"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "language": {
+            "type": "string",
+            "title": "Language"
+          },
+          "input_modalities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Input Modalities"
+          },
+          "constraints": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Constraints"
+          },
+          "selected_store_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Selected Store Ids"
+          },
+          "total_cost": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Cost"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MissionItemResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "traces": {
+            "items": {
+              "$ref": "#/components/schemas/MissionTraceResponse"
+            },
+            "type": "array",
+            "title": "Traces"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "user_id",
+          "raw_text",
+          "status",
+          "language",
+          "input_modalities",
+          "selected_store_ids",
+          "created_at"
+        ],
+        "title": "MissionResponse",
+        "description": "Comprehensive mission detail."
+      },
+      "MissionRouteResponse": {
+        "properties": {
+          "mission_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Mission Id"
+          },
+          "total_stops": {
+            "type": "integer",
+            "title": "Total Stops"
+          },
+          "waypoints": {
+            "items": {
+              "$ref": "#/components/schemas/RouteWaypointResponse"
+            },
+            "type": "array",
+            "title": "Waypoints"
+          }
+        },
+        "type": "object",
+        "required": [
+          "mission_id",
+          "total_stops",
+          "waypoints"
+        ],
+        "title": "MissionRouteResponse",
+        "description": "Monotonic store walking route."
+      },
+      "MissionTraceResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "step": {
+            "type": "string",
+            "title": "Step"
+          },
+          "agent": {
+            "type": "string",
+            "title": "Agent"
+          },
+          "input_summary": {
+            "type": "string",
+            "title": "Input Summary"
+          },
+          "output_summary": {
+            "type": "string",
+            "title": "Output Summary"
+          },
+          "latency_ms": {
+            "type": "integer",
+            "title": "Latency Ms"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "step",
+          "agent",
+          "input_summary",
+          "output_summary",
+          "latency_ms",
+          "created_at"
+        ],
+        "title": "MissionTraceResponse",
+        "description": "Agent trace step response."
       },
       "RefreshTokenRequest": {
         "properties": {
@@ -734,6 +1682,61 @@
         "type": "object",
         "title": "RefreshTokenRequest",
         "description": "Explicit refresh token payload for non-cookie HTTP clients."
+      },
+      "RouteWaypointResponse": {
+        "properties": {
+          "step_number": {
+            "type": "integer",
+            "title": "Step Number"
+          },
+          "store_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Store Id"
+          },
+          "store_name": {
+            "type": "string",
+            "title": "Store Name"
+          },
+          "aisle": {
+            "type": "integer",
+            "title": "Aisle"
+          },
+          "bay": {
+            "type": "integer",
+            "title": "Bay"
+          },
+          "shelf": {
+            "type": "integer",
+            "title": "Shelf"
+          },
+          "product_name": {
+            "type": "string",
+            "title": "Product Name"
+          },
+          "quantity": {
+            "type": "integer",
+            "title": "Quantity"
+          },
+          "action": {
+            "type": "string",
+            "title": "Action"
+          }
+        },
+        "type": "object",
+        "required": [
+          "step_number",
+          "store_id",
+          "store_name",
+          "aisle",
+          "bay",
+          "shelf",
+          "product_name",
+          "quantity",
+          "action"
+        ],
+        "title": "RouteWaypointResponse",
+        "description": "Wayfinding stop in store."
       },
       "SearchResult": {
         "properties": {
@@ -1146,6 +2149,22 @@
         ],
         "title": "TokenResponse",
         "description": "Access token payload returned upon login and refresh."
+      },
+      "UpdateMissionItemRequest": {
+        "properties": {
+          "quantity": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Quantity",
+            "description": "Updated quantity (0 to remove)"
+          }
+        },
+        "type": "object",
+        "required": [
+          "quantity"
+        ],
+        "title": "UpdateMissionItemRequest",
+        "description": "Payload to update an item's quantity in a mission basket."
       },
       "UserLoginRequest": {
         "properties": {
