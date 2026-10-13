@@ -13,6 +13,7 @@ from fastapi.responses import JSONResponse
 
 from omnimission.api.v1.auth import router as auth_router
 from omnimission.api.v1.catalog import router as catalog_router
+from omnimission.api.v1.missions import router as missions_router
 from omnimission.api.v1.stores import router as stores_router
 from omnimission.core.config import get_settings
 from omnimission.core.errors import ProblemDetail, ProblemException, problem_exception_handler
@@ -129,6 +130,7 @@ def create_app() -> FastAPI:
     app.include_router(auth_router, prefix="/api/v1")
     app.include_router(stores_router, prefix="/api/v1")
     app.include_router(catalog_router, prefix="/api/v1")
+    app.include_router(missions_router, prefix="/api/v1")
 
     return app
 
