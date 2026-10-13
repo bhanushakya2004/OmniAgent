@@ -14,6 +14,7 @@ import {
   SlidersHorizontal,
   ChevronDown,
   Compass,
+  Activity,
 } from "lucide-react";
 import { apiClient } from "@/lib/api-client";
 import { useAuthStore } from "@/stores/auth-store";
@@ -27,6 +28,7 @@ import { ReasoningTimeline } from "@/components/shopper/reasoning-timeline";
 import { BasketView, MissionDetailData } from "@/components/shopper/basket-view";
 import { WayfindingRoute } from "@/components/shopper/wayfinding-route";
 import { CartDrawer } from "@/components/shopper/cart-drawer";
+import { AgentInspectorModal } from "@/components/shopper/agent-inspector-modal";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -34,6 +36,7 @@ export default function ShopPage(): React.JSX.Element {
   const [activeMode, setActiveMode] = useState<"search" | "ai">("ai");
   const [showStorePicker, setShowStorePicker] = useState(false);
   const [activeMissionId, setActiveMissionId] = useState<string | null>(null);
+  const [showInspector, setShowInspector] = useState(false);
 
   const { user, logout } = useAuthStore();
   const { cart, openCart, fetchCart } = useCartStore();
@@ -119,6 +122,16 @@ export default function ShopPage(): React.JSX.Element {
                   {totalCartItems}
                 </span>
               )}
+            </button>
+
+            {/* Agent Inspector Button */}
+            <button
+              onClick={() => setShowInspector(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 text-purple-600 dark:text-purple-400 border border-purple-500/30 text-xs font-bold transition-all shadow-sm"
+              title="Open Glass-Box Agent Inspector"
+            >
+              <Activity className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Inspect AI</span>
             </button>
 
             {/* User Account / Guest Sign In */}
@@ -246,6 +259,13 @@ export default function ShopPage(): React.JSX.Element {
 
       {/* Slide-over Cart Drawer */}
       <CartDrawer />
+
+      {/* Glass-Box Agent Inspector Modal */}
+      <AgentInspectorModal
+        missionId={activeMissionId}
+        isOpen={showInspector}
+        onClose={() => setShowInspector(false)}
+      />
     </div>
   );
 }

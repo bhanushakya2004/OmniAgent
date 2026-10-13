@@ -158,3 +158,13 @@ async def test_resumable_sse_stream_replay(
     assert "id: 3" in body2
     assert "id: 4" in body2
     assert "mission_complete" in body2
+
+    # 4. Query Glass-Box Agent Inspector telemetry
+    insp_url = f"/api/v1/missions/{mission_id}/inspector"
+    insp_resp = await client.get(insp_url, headers=headers)
+    assert insp_resp.status_code == 200
+    telemetry = insp_resp.json()
+    assert telemetry["mission_id"] == str(mission_id)
+    assert telemetry["telemetry"]["event_count"] == 4
+    assert len(telemetry["events"]) == 4
+    assert len(telemetry["thoughts"]) >= 1

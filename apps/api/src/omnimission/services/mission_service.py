@@ -412,3 +412,62 @@ class MissionService:
             total_stops=len(waypoints),
             waypoints=waypoints,
         )
+
+    async def get_mission_inspector_telemetry(
+        self,
+        session: AsyncSession,
+        mission_id: uuid.UUID,
+        principal: Principal,
+    ) -> dict[str, Any]:
+        """Compile comprehensive glass-box inspector telemetry for a mission."""
+        mission = await self.repo.get_by_id(session, mission_id)
+        if not mission:
+            raise NotFoundError(detail=f"Mission {mission_id} not found", code="MISSION_NOT_FOUND")
+
+        if mission.user_id and principal.is_authenticated:
+            if mission.user_id != principal.user_id:
+                raise ForbiddenError(
+                    detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
+                )
+        elif mission.guest_session_id and principal.is_guest:
+            if mission.guest_session_id != principal.guest_session_id:
+                raise ForbiddenError(
+                    detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
+                )
+
+        events = await self.event_persistence.get_events_after(session, mission_id, after_seq=0)
+
+        thoughts = [e.payload for e in events if e.event_type == "agent_thought"]
+        tool_calls = [e.payload for e in events if e.event_type == "tool_call"]
+        tool_results = [e.payload for e in events if e.event_type == "tool_result"]
+        grounding_checks = [e.payload for e in events if e.event_type == "grounding_check"]
+        basket_updates = [e.payload for e in events if e.event_type == "basket_update"]
+
+        return {
+            "mission_id": str(mission.id),
+            "status": mission.status,
+            "raw_text": mission.raw_text,
+            "selected_store_ids": [str(s) for s in mission.selected_store_ids],
+            "total_cost": float(mission.total_cost or 0),
+            "item_count": len(mission.items),
+            "telemetry": {
+                "model": "gemini-2.5-flash",
+                "event_count": len(events),
+                "tool_call_count": len(tool_calls),
+                "grounding_check_count": len(grounding_checks),
+            },
+            "thoughts": thoughts,
+            "tool_calls": tool_calls,
+            "tool_results": tool_results,
+            "grounding_checks": grounding_checks,
+            "basket_updates": basket_updates,
+            "events": [
+                {
+                    "sequence_id": e.sequence_id,
+                    "event_type": e.event_type,
+                    "payload": e.payload,
+                    "created_at": e.created_at.isoformat() if e.created_at else None,
+                }
+                for e in events
+            ],
+        }
