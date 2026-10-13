@@ -62,8 +62,8 @@ class VisionAgentRunner:
             "Analyze this product photo or pantry shelf image. Identify the brand, product name, and category. "
             "Formulate the most effective search query to find this exact item or closest alternative in a store catalog. "
             "Return ONLY valid JSON matching this schema: "
-            "{\"primary_query\": string, \"description\": string, \"suggested_action\": string, "
-            "\"detected_items\": [{\"label\": string, \"brand\": string, \"category\": string, \"confidence\": float}]}"
+            '{"primary_query": string, "description": string, "suggested_action": string, '
+            '"detected_items": [{"label": string, "brand": string, "category": string, "confidence": float}]}'
         )
         if user_prompt:
             prompt += f"\nShopper instructions: {user_prompt}"
@@ -94,9 +94,7 @@ class VisionAgentRunner:
             resp = await client.post(url, json=payload)
             resp.raise_for_status()
             data = resp.json()
-            raw_text = (
-                data["candidates"][0]["content"]["parts"][0]["text"]
-            )
+            raw_text = data["candidates"][0]["content"]["parts"][0]["text"]
             parsed = json.loads(raw_text)
 
             detected = [
@@ -120,16 +118,28 @@ class VisionAgentRunner:
         """Deterministic offline fallback for test suites and environments without API keys."""
         text = (user_prompt or "").lower()
         if "chocolate" in text:
-            item = DetectedProduct(label="Amul 55% Dark Chocolate", brand="Amul", category="Snacks & Confectionery")
+            item = DetectedProduct(
+                label="Amul 55% Dark Chocolate", brand="Amul", category="Snacks & Confectionery"
+            )
             query = "Amul Dark Chocolate 150g"
         elif "shampoo" in text or "travel" in text:
-            item = DetectedProduct(label="Travel Shampoo 50ml", brand="Dove", category="Personal Care")
+            item = DetectedProduct(
+                label="Travel Shampoo 50ml", brand="Dove", category="Personal Care"
+            )
             query = "Travel Shampoo 50ml"
         elif "milk" in text or "almond" in text:
-            item = DetectedProduct(label="Almond Milk Unsweetened 1L", brand="Raw Pressery", category="Dairy & Alternatives")
+            item = DetectedProduct(
+                label="Almond Milk Unsweetened 1L",
+                brand="Raw Pressery",
+                category="Dairy & Alternatives",
+            )
             query = "Almond Milk Unsweetened 1L"
         else:
-            item = DetectedProduct(label="Organic Rolled Oats 500g", brand="True Elements", category="Breakfast & Cereals")
+            item = DetectedProduct(
+                label="Organic Rolled Oats 500g",
+                brand="True Elements",
+                category="Breakfast & Cereals",
+            )
             query = "Organic Rolled Oats 500g"
 
         return VisionAnalysisResult(

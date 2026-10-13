@@ -125,7 +125,9 @@ async def test_voice_transcription_endpoint(client: AsyncClient) -> None:
     files = {"file": ("query.webm", VALID_WEBM_BYTES, "audio/webm")}
     data = {"hint_language": "hi"}
 
-    voice_resp = await client.post("/api/v1/voice/transcribe", headers=headers, files=files, data=data)
+    voice_resp = await client.post(
+        "/api/v1/voice/transcribe", headers=headers, files=files, data=data
+    )
     assert voice_resp.status_code == 200
     res = voice_resp.json()
     assert "text" in res

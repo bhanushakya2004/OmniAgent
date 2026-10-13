@@ -75,9 +75,7 @@ class GeminiTranscriptionProvider:
             resp = await client.post(url, json=payload)
             resp.raise_for_status()
             data = resp.json()
-            raw_text = (
-                data["candidates"][0]["content"]["parts"][0]["text"]
-            )
+            raw_text = data["candidates"][0]["content"]["parts"][0]["text"]
             parsed = json.loads(raw_text)
             return TranscriptionResult(
                 text=parsed.get("text", "").strip(),

@@ -80,22 +80,26 @@ class MissionService:
             for trace in mission.traces:
                 yield {
                     "event": "timeline",
-                    "data": json.dumps({
-                        "step": trace.step,
-                        "status": "completed",
-                        "agent": trace.agent,
-                        "title": trace.step.replace("_", " ").title(),
-                        "description": trace.output_summary,
-                        "latency_ms": trace.latency_ms,
-                    }),
+                    "data": json.dumps(
+                        {
+                            "step": trace.step,
+                            "status": "completed",
+                            "agent": trace.agent,
+                            "title": trace.step.replace("_", " ").title(),
+                            "description": trace.output_summary,
+                            "latency_ms": trace.latency_ms,
+                        }
+                    ),
                 }
             yield {
                 "event": "done",
-                "data": json.dumps({
-                    "mission_id": str(mission.id),
-                    "status": "completed",
-                    "total_cost": str(mission.total_cost) if mission.total_cost else "0.00",
-                }),
+                "data": json.dumps(
+                    {
+                        "mission_id": str(mission.id),
+                        "status": "completed",
+                        "total_cost": str(mission.total_cost) if mission.total_cost else "0.00",
+                    }
+                ),
             }
             return
 
@@ -130,7 +134,9 @@ class MissionService:
             raise NotFoundError(detail=f"Mission {mission_id} not found", code="MISSION_NOT_FOUND")
 
         if mission.user_id != user_id:
-            raise ForbiddenError(detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN")
+            raise ForbiddenError(
+                detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
+            )
 
         items_resp: list[MissionItemResponse] = []
         for it in mission.items:
@@ -221,7 +227,9 @@ class MissionService:
             raise NotFoundError(detail=f"Mission {mission_id} not found", code="MISSION_NOT_FOUND")
 
         if mission.user_id != user_id:
-            raise ForbiddenError(detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN")
+            raise ForbiddenError(
+                detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
+            )
 
         item = await self.repo.get_item_by_id(session, item_id)
         if not item or item.mission_id != mission_id:
@@ -280,7 +288,9 @@ class MissionService:
             raise NotFoundError(detail=f"Mission {mission_id} not found", code="MISSION_NOT_FOUND")
 
         if mission.user_id != user_id:
-            raise ForbiddenError(detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN")
+            raise ForbiddenError(
+                detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
+            )
 
         # Convert mission items into OptimizedBasketItem for WayfindingService
         basket_items: list[OptimizedBasketItem] = []

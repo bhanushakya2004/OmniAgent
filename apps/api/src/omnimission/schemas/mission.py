@@ -11,11 +11,19 @@ from pydantic import BaseModel, Field
 class CreateMissionRequest(BaseModel):
     """Payload to initiate a new mission."""
 
-    prompt: str = Field(..., min_length=1, max_length=2000, description="Natural language mission prompt")
-    store_ids: list[uuid.UUID] = Field(..., min_length=1, description="List of physical store UUIDs")
+    prompt: str = Field(
+        ..., min_length=1, max_length=2000, description="Natural language mission prompt"
+    )
+    store_ids: list[uuid.UUID] = Field(
+        ..., min_length=1, description="List of physical store UUIDs"
+    )
     language: str = Field("en", min_length=2, max_length=10, description="ISO language code")
-    input_modalities: list[str] = Field(default_factory=lambda: ["text"], description="Modalities used (text, voice, image)")
-    constraints: dict[str, Any] | None = Field(default=None, description="Optional upfront constraints")
+    input_modalities: list[str] = Field(
+        default_factory=lambda: ["text"], description="Modalities used (text, voice, image)"
+    )
+    constraints: dict[str, Any] | None = Field(
+        default=None, description="Optional upfront constraints"
+    )
 
 
 class UpdateMissionItemRequest(BaseModel):

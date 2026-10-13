@@ -47,7 +47,9 @@ async def analyze_vision_image(
 
     content = await storage.get(raw_filename)
     if not content:
-        raise NotFoundError(detail=f"Uploaded file '{raw_filename}' not found", code="FILE_NOT_FOUND")
+        raise NotFoundError(
+            detail=f"Uploaded file '{raw_filename}' not found", code="FILE_NOT_FOUND"
+        )
 
     # Detect extension MIME
     ext = Path(raw_filename).suffix.lower()

@@ -51,7 +51,9 @@ class PlannerAgentRunner:
                 if response and isinstance(response.content, NeededItemList):
                     return response.content
             except Exception as err:
-                self.logger.warning("live_planner_agent_failed_using_deterministic_fallback", error=str(err))
+                self.logger.warning(
+                    "live_planner_agent_failed_using_deterministic_fallback", error=str(err)
+                )
 
         # Deterministic domain expansion
         items: list[NeededItem] = []
@@ -59,12 +61,48 @@ class PlannerAgentRunner:
 
         if intent.goal_type == "travel_kit" or intent.is_travel_size:
             items = [
-                NeededItem(label="Travel Shampoo 50ml", category="Personal Care", quantity=1, unit="ml", importance="essential"),
-                NeededItem(label="Mini Toothpaste 30g", category="Personal Care", quantity=1, unit="g", importance="essential"),
-                NeededItem(label="Compact Travel Toothbrush", category="Personal Care", quantity=1, unit="piece", importance="essential"),
-                NeededItem(label="Pocket Hand Sanitizer 50ml", category="Personal Care", quantity=1, unit="ml", importance="essential"),
-                NeededItem(label="Pocket Deodorant Roll-on", category="Personal Care", quantity=1, unit="ml", importance="essential"),
-                NeededItem(label="Travel Sunscreen 50ml", category="Personal Care", quantity=1, unit="ml", importance="optional"),
+                NeededItem(
+                    label="Travel Shampoo 50ml",
+                    category="Personal Care",
+                    quantity=1,
+                    unit="ml",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Mini Toothpaste 30g",
+                    category="Personal Care",
+                    quantity=1,
+                    unit="g",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Compact Travel Toothbrush",
+                    category="Personal Care",
+                    quantity=1,
+                    unit="piece",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Pocket Hand Sanitizer 50ml",
+                    category="Personal Care",
+                    quantity=1,
+                    unit="ml",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Pocket Deodorant Roll-on",
+                    category="Personal Care",
+                    quantity=1,
+                    unit="ml",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Travel Sunscreen 50ml",
+                    category="Personal Care",
+                    quantity=1,
+                    unit="ml",
+                    importance="optional",
+                ),
             ]
             rationale = "Generated flight-compliant, airline baggage travel kit under 100ml."
 
@@ -72,30 +110,110 @@ class PlannerAgentRunner:
             count = intent.servings_or_people or 8
             cup_packs = max(1, count // 10)
             items = [
-                NeededItem(label="Paper Beverage Cups", category="Party & Household", quantity=cup_packs, unit="pack", importance="essential"),
-                NeededItem(label="Compostable Dinner Plates", category="Party & Household", quantity=cup_packs, unit="pack", importance="essential"),
-                NeededItem(label="Party Table Napkins", category="Party & Household", quantity=1, unit="pack", importance="essential"),
-                NeededItem(label="Aloo Bhujia Spicy Snack", category="Snacks & Munchies", quantity=2, unit="pack", importance="essential"),
-                NeededItem(label="Classic Salted Potato Chips", category="Snacks & Munchies", quantity=2, unit="pack", importance="essential"),
-                NeededItem(label="Spiced Ginger Ale Sparkling Cans", category="Beverages", quantity=1, unit="pack", importance="essential"),
+                NeededItem(
+                    label="Paper Beverage Cups",
+                    category="Party & Household",
+                    quantity=cup_packs,
+                    unit="pack",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Compostable Dinner Plates",
+                    category="Party & Household",
+                    quantity=cup_packs,
+                    unit="pack",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Party Table Napkins",
+                    category="Party & Household",
+                    quantity=1,
+                    unit="pack",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Aloo Bhujia Spicy Snack",
+                    category="Snacks & Munchies",
+                    quantity=2,
+                    unit="pack",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Classic Salted Potato Chips",
+                    category="Snacks & Munchies",
+                    quantity=2,
+                    unit="pack",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Spiced Ginger Ale Sparkling Cans",
+                    category="Beverages",
+                    quantity=1,
+                    unit="pack",
+                    importance="essential",
+                ),
             ]
             rationale = f"Balanced party supplies and snacks tailored for {count} guests."
 
         elif "cake" in desc or intent.goal_type == "recipe":
             items = [
-                NeededItem(label="Maida All-Purpose Flour", category="Baking & Cooking", quantity=1, unit="kg", importance="essential"),
-                NeededItem(label="Cocoa Powder", category="Baking & Cooking", quantity=1, unit="g", importance="essential"),
-                NeededItem(label="Double Action Baking Powder", category="Baking & Cooking", quantity=1, unit="g", importance="essential"),
-                NeededItem(label="Pure Baking Soda", category="Baking & Cooking", quantity=1, unit="g", importance="essential"),
-                NeededItem(label="High Protein Greek Yogurt Curd", category="Dairy", quantity=1, unit="g", importance="essential"),
-                NeededItem(label="Protein Powder Supplement", category="Health & Nutrition", quantity=1, unit="pack", importance="essential"),
-                NeededItem(label="Bourbon Vanilla Extract", category="Baking & Cooking", quantity=1, unit="ml", importance="optional"),
+                NeededItem(
+                    label="Maida All-Purpose Flour",
+                    category="Baking & Cooking",
+                    quantity=1,
+                    unit="kg",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Cocoa Powder",
+                    category="Baking & Cooking",
+                    quantity=1,
+                    unit="g",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Double Action Baking Powder",
+                    category="Baking & Cooking",
+                    quantity=1,
+                    unit="g",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Pure Baking Soda",
+                    category="Baking & Cooking",
+                    quantity=1,
+                    unit="g",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="High Protein Greek Yogurt Curd",
+                    category="Dairy",
+                    quantity=1,
+                    unit="g",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Protein Powder Supplement",
+                    category="Health & Nutrition",
+                    quantity=1,
+                    unit="pack",
+                    importance="essential",
+                ),
+                NeededItem(
+                    label="Bourbon Vanilla Extract",
+                    category="Baking & Cooking",
+                    quantity=1,
+                    unit="ml",
+                    importance="optional",
+                ),
             ]
             rationale = "Formulated complete eggless cake recipe with Greek yogurt binder and protein supplement."
 
         else:
             items = [
-                NeededItem(label=intent.description, category="General", quantity=1, importance="essential")
+                NeededItem(
+                    label=intent.description, category="General", quantity=1, importance="essential"
+                )
             ]
             rationale = f"Planned items directly matching intent query: {intent.description}"
 
