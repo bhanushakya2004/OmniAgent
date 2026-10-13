@@ -82,6 +82,11 @@ class Cart(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         order_by="CartItem.created_at",
     )
 
+    @property
+    def subtotal(self) -> Decimal:
+        """Compute the sum of line item subtotals."""
+        return sum((it.subtotal for it in self.items), Decimal("0.00"))
+
 
 class CartItem(Base, UUIDPrimaryKeyMixin, TimestampMixin):
     """Individual product line item in a cart snapshotting unit price and aisle coordinates."""
@@ -147,6 +152,11 @@ class CartItem(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         "Cart",
         back_populates="items",
     )
+
+    @property
+    def subtotal(self) -> Decimal:
+        """Compute line item subtotal price."""
+        return Decimal(self.qty) * self.unit_price
 
     __table_args__ = (
         UniqueConstraint("cart_id", "store_id", "product_id", name="uq_cart_store_product"),

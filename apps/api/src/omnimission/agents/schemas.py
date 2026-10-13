@@ -136,3 +136,27 @@ class TimelineEvent(BaseModel):
     description: str
     latency_ms: int = 0
     data: dict[str, Any] | None = None
+
+
+class CartItemSummary(BaseModel):
+    """Grounded product item summary added to cart."""
+
+    product_id: uuid.UUID
+    product_name: str
+    quantity: int
+    unit_price: Decimal
+    subtotal: Decimal
+    aisle: int
+    store_id: uuid.UUID
+
+
+class CartActionResult(BaseModel):
+    """Outcome of CartAgent execution."""
+
+    success: bool
+    cart_id: uuid.UUID
+    added_items: list[CartItemSummary] = Field(default_factory=list)
+    skipped_items: list[str] = Field(default_factory=list)
+    total_amount: Decimal
+    item_count: int
+    message: str

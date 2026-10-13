@@ -8,6 +8,7 @@ from omnimission.models.commerce import (
 )
 from omnimission.models.inventory import StoreInventory
 from omnimission.models.knowledge import KGEdge, KGNode, KnowledgeChunk, KnowledgeDoc
+from omnimission.models.memory import UserMemory
 from omnimission.models.mission import Mission, MissionItem, MissionRun
 from omnimission.models.product import Product
 from omnimission.models.refresh_token import RefreshToken
@@ -35,4 +36,5 @@ __all__ = [
     "Order",
     "OrderItem",
     "PaymentSimulated",
+    "UserMemory",
 ]
