@@ -4,17 +4,22 @@ import time
 import uuid
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 import structlog
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from omnimission.api.v1.auth import router as auth_router
 from omnimission.api.v1.catalog import router as catalog_router
 from omnimission.api.v1.missions import router as missions_router
 from omnimission.api.v1.stores import router as stores_router
+from omnimission.api.v1.uploads import router as uploads_router
+from omnimission.api.v1.vision import router as vision_router
+from omnimission.api.v1.voice import router as voice_router
 from omnimission.core.config import get_settings
 from omnimission.core.errors import ProblemDetail, ProblemException, problem_exception_handler
 from omnimission.core.logging import get_logger, setup_logging
@@ -126,11 +131,19 @@ def create_app() -> FastAPI:
             await session.execute(text("SELECT 1"))
         return {"status": "ready", "database": "connected"}
 
+    # Static files mounting for uploads
+    upload_dir = Path(settings.local_storage_path).resolve()
+    upload_dir.mkdir(parents=True, exist_ok=True)
+    app.mount("/static/uploads", StaticFiles(directory=str(upload_dir)), name="uploads")
+
     # Mount API routers
     app.include_router(auth_router, prefix="/api/v1")
     app.include_router(stores_router, prefix="/api/v1")
     app.include_router(catalog_router, prefix="/api/v1")
     app.include_router(missions_router, prefix="/api/v1")
+    app.include_router(uploads_router, prefix="/api/v1")
+    app.include_router(voice_router, prefix="/api/v1")
+    app.include_router(vision_router, prefix="/api/v1")
 
     return app
 
