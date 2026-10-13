@@ -1,0 +1,6 @@
+-- Enable PostgreSQL extensions for OmniMission AI
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "pg_trgm";
+CREATE EXTENSION IF NOT EXISTS "vector";
+CREATE EXTENSION IF NOT EXISTS "cube";
+CREATE EXTENSION IF NOT EXISTS "earthdistance";

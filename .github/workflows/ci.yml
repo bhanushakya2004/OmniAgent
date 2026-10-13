@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend-lint-test:
+    name: Backend Lint, Typecheck & Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: omni
+          POSTGRES_PASSWORD: omni
+          POSTGRES_DB: omnimission
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U omni -d omnimission"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.8.x"
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install backend dependencies
+        working-directory: apps/api
+        run: uv sync --frozen
+
+      - name: Run Ruff Lint & Format
+        working-directory: apps/api
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+
+      - name: Run Mypy Strict Typecheck
+        working-directory: apps/api
+        run: uv run mypy src
+
+      - name: Run Alembic Migrations
+        working-directory: apps/api
+        env:
+          DATABASE_URL: postgresql+psycopg://omni:omni@localhost:5432/omnimission
+        run: uv run alembic upgrade head
+
+      - name: Run Pytest Test Suite
+        working-directory: apps/api
+        env:
+          DATABASE_URL: postgresql+psycopg://omni:omni@localhost:5432/omnimission
+          JWT_SECRET: test-secret-key-32-chars-long-minimum!
+        run: uv run pytest --cov=omnimission tests/
+
+  frontend-lint-build:
+    name: Frontend Lint & Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+          cache-dependency-path: apps/web/package-lock.json
+
+      - name: Install frontend dependencies
+        working-directory: apps/web
+        run: npm ci
+
+      - name: Run ESLint & Typecheck
+        working-directory: apps/web
+        run: |
+          npm run lint
+          npx tsc --noEmit
+
+      - name: Build Next.js Application
+        working-directory: apps/web
+        env:
+          NEXT_PUBLIC_API_BASE_URL: http://localhost:8000
+        run: npm run build
