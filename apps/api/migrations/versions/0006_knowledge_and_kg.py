@@ -8,9 +8,9 @@ Create Date: 2026-10-13 15:00:00.000000
 
 from collections.abc import Sequence
 
+import sqlalchemy as sa
 from alembic import op
 from pgvector.sqlalchemy import Vector
-import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
 revision: str = "0006_knowledge_and_kg"
@@ -27,15 +27,14 @@ def upgrade() -> None:
         sa.Column("doc_id", sa.String(100), nullable=False, unique=True),
         sa.Column("title", sa.String(255), nullable=False),
         sa.Column("type", sa.String(50), nullable=False),
-        sa.Column(
-            "tags", postgresql.ARRAY(sa.String()), nullable=False, server_default="{}"
-        ),
-        sa.Column(
-            "diet_tags", postgresql.ARRAY(sa.String()), nullable=False, server_default="{}"
-        ),
+        sa.Column("tags", postgresql.ARRAY(sa.String()), nullable=False, server_default="{}"),
+        sa.Column("diet_tags", postgresql.ARRAY(sa.String()), nullable=False, server_default="{}"),
         sa.Column("servings_base", sa.Integer(), nullable=True),
         sa.Column(
-            "ingredients", postgresql.JSONB(astext_type=sa.Text()), nullable=False, server_default="[]"
+            "ingredients",
+            postgresql.JSONB(astext_type=sa.Text()),
+            nullable=False,
+            server_default="[]",
         ),
         sa.Column("summary", sa.String(1000), nullable=False),
         sa.Column("content", sa.Text(), nullable=False),
@@ -82,7 +81,10 @@ def upgrade() -> None:
         sa.Column("name", sa.String(255), nullable=False),
         sa.Column("entity_type", sa.String(50), nullable=False),
         sa.Column(
-            "properties", postgresql.JSONB(astext_type=sa.Text()), nullable=False, server_default="{}"
+            "properties",
+            postgresql.JSONB(astext_type=sa.Text()),
+            nullable=False,
+            server_default="{}",
         ),
         sa.Column(
             "created_at", sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False
@@ -114,7 +116,10 @@ def upgrade() -> None:
         sa.Column("relation_type", sa.String(50), nullable=False),
         sa.Column("weight", sa.Float(), nullable=False, server_default="1.0"),
         sa.Column(
-            "properties", postgresql.JSONB(astext_type=sa.Text()), nullable=False, server_default="{}"
+            "properties",
+            postgresql.JSONB(astext_type=sa.Text()),
+            nullable=False,
+            server_default="{}",
         ),
         sa.Column(
             "created_at", sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False

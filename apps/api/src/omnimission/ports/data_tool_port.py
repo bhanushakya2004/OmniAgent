@@ -16,9 +16,7 @@ class DataToolPort(ABC):
         pass
 
     @abstractmethod
-    async def get_product_location(
-        self, store_id: uuid.UUID, sku: str
-    ) -> dict[str, Any] | None:
+    async def get_product_location(self, store_id: uuid.UUID, sku: str) -> dict[str, Any] | None:
         """Lookup physical aisle, bay, and shelf coordinates for a SKU in a store."""
         pass
 
@@ -37,9 +35,7 @@ class DataToolPort(ABC):
         pass
 
     @abstractmethod
-    async def get_store_details(
-        self, store_id: uuid.UUID
-    ) -> dict[str, Any] | None:
+    async def get_store_details(self, store_id: uuid.UUID) -> dict[str, Any] | None:
         """Retrieve store metadata, address, contact, and opening hours."""
         pass
 

@@ -1,6 +1,5 @@
 """Unit and integration tests for Google MCP Toolbox gateway and database views."""
 
-
 import pytest
 
 from omnimission.adapters.toolbox_gateway import ToolboxGateway

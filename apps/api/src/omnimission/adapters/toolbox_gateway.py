@@ -80,9 +80,7 @@ class ToolboxGateway(DataToolPort):
             rows = result.mappings().all()
             return [dict(r) for r in rows]
 
-    async def get_product_location(
-        self, store_id: uuid.UUID, sku: str
-    ) -> dict[str, Any] | None:
+    async def get_product_location(self, store_id: uuid.UUID, sku: str) -> dict[str, Any] | None:
         """Lookup physical aisle, bay, and shelf coordinates for a SKU in a store."""
         stmt = text(
             """
@@ -128,9 +126,7 @@ class ToolboxGateway(DataToolPort):
         )
 
         async with self.session_factory() as session:
-            result = await session.execute(
-                stmt, {"store_id": store_id, "product_id": product_id}
-            )
+            result = await session.execute(stmt, {"store_id": store_id, "product_id": product_id})
             row = result.mappings().first()
             return dict(row) if row else None
 
@@ -178,9 +174,7 @@ class ToolboxGateway(DataToolPort):
             rows = result.mappings().all()
             return [dict(r) for r in rows]
 
-    async def get_store_details(
-        self, store_id: uuid.UUID
-    ) -> dict[str, Any] | None:
+    async def get_store_details(self, store_id: uuid.UUID) -> dict[str, Any] | None:
         """Retrieve store metadata, address, contact, and opening hours."""
         stmt = text(
             """
@@ -229,9 +223,7 @@ class ToolboxGateway(DataToolPort):
         )
 
         async with self.session_factory() as session:
-            result = await session.execute(
-                stmt, {"lat": lat, "lng": lng, "radius_km": radius_km}
-            )
+            result = await session.execute(stmt, {"lat": lat, "lng": lng, "radius_km": radius_km})
             rows = result.mappings().all()
             return [dict(r) for r in rows]
 
@@ -261,9 +253,7 @@ class ToolboxGateway(DataToolPort):
             sid = uuid.UUID(store_id_str)
             return await self.get_product_location(sid, sku)
 
-        async def verify_stock(
-            store_id_str: str, product_id_str: str
-        ) -> dict[str, Any] | None:
+        async def verify_stock(store_id_str: str, product_id_str: str) -> dict[str, Any] | None:
             """Verify current on-shelf stock level and price for a product.
 
             Args:

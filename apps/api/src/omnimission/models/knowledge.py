@@ -127,9 +127,7 @@ class KGNode(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         default=dict,
     )
 
-    __table_args__ = (
-        UniqueConstraint("name", "entity_type", name="uq_kg_node_name_type"),
-    )
+    __table_args__ = (UniqueConstraint("name", "entity_type", name="uq_kg_node_name_type"),)
 
 
 class KGEdge(Base, UUIDPrimaryKeyMixin, TimestampMixin):
