@@ -38,7 +38,9 @@ def upgrade() -> None:
         sa.Column("title", sa.String(length=255), nullable=False),
         sa.Column("description", sa.String(length=1000), nullable=False),
         sa.Column("payload", postgresql.JSONB(astext_type=sa.Text()), nullable=False),
-        sa.Column("status", sa.String(length=30), nullable=False, server_default="pending_approval"),
+        sa.Column(
+            "status", sa.String(length=30), nullable=False, server_default="pending_approval"
+        ),
         sa.Column("decision_note", sa.String(length=500), nullable=True),
         sa.Column("decided_at", sa.DateTime(timezone=True), nullable=True),
         sa.Column(

@@ -1,4 +1,4 @@
-.PHONY: help db dev migrate seed lint test types clean
+.PHONY: help db dev migrate seed lint test types eval clean
 
 help:
 	@echo "OmniMission AI Development Commands:"
@@ -9,6 +9,7 @@ help:
 	@echo "  make dev-web   Run Next.js development server"
 	@echo "  make lint      Run code linters across api and web"
 	@echo "  make test      Run test suites across api and web"
+	@echo "  make eval      Run automated evaluation harness (RAG, Grounding, NL2SQL)"
 	@echo "  make types     Generate TypeScript client types from OpenAPI schema"
 
 db:
@@ -37,6 +38,9 @@ test:
 types:
 	cd apps/api && uv run python -m omnimission.scripts.export_openapi
 	cd apps/web && npm run generate-types
+
+eval:
+	cd apps/api && uv run python -m omnimission.scripts.run_evals
 
 clean:
 	docker compose down -v
