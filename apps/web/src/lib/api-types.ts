@@ -348,10 +348,86 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/uploads": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Upload multimodal image or audio file
+         * @description Upload an image (JPEG, PNG, WebP) or audio (WebM, WAV, MP3, OGG, M4A) file.
+         *
+         *     Enforces magic-byte verification and a 10 MB file size limit.
+         */
+        post: operations["upload_file_api_v1_uploads_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/voice/transcribe": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Transcribe spoken audio to text
+         * @description Transcribe spoken audio in English, Hindi, Tamil, Kannada or other languages into text.
+         */
+        post: operations["transcribe_voice_api_v1_voice_transcribe_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/vision/analyze": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Analyze uploaded product or shelf image
+         * @description Analyze a previously uploaded product photo or pantry shelf image.
+         *
+         *     Formulates optimal catalog search queries and detects candidate items.
+         */
+        post: operations["analyze_vision_image_api_v1_vision_analyze_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** Body_transcribe_voice_api_v1_voice_transcribe_post */
+        Body_transcribe_voice_api_v1_voice_transcribe_post: {
+            /** File */
+            file: string;
+            /** Hint Language */
+            hint_language?: string | null;
+        };
+        /** Body_upload_file_api_v1_uploads_post */
+        Body_upload_file_api_v1_uploads_post: {
+            /** File */
+            file: string;
+        };
         /**
          * CreateMissionRequest
          * @description Payload to initiate a new mission.
@@ -801,6 +877,32 @@ export interface components {
             quantity: number;
         };
         /**
+         * UploadResponse
+         * @description File upload confirmation.
+         */
+        UploadResponse: {
+            /**
+             * File Url
+             * @description URL to access uploaded asset
+             */
+            file_url: string;
+            /**
+             * Filename
+             * @description Original filename
+             */
+            filename: string;
+            /**
+             * Content Type
+             * @description Verified MIME type
+             */
+            content_type: string;
+            /**
+             * Size Bytes
+             * @description File size in bytes
+             */
+            size_bytes: number;
+        };
+        /**
          * UserLoginRequest
          * @description Payload for credentials login.
          */
@@ -885,6 +987,60 @@ export interface components {
             input?: unknown;
             /** Context */
             ctx?: Record<string, never>;
+        };
+        /**
+         * VisionAnalyzeRequest
+         * @description Payload to request image visual parsing.
+         */
+        VisionAnalyzeRequest: {
+            /**
+             * File Url
+             * @description URL of uploaded image (from /uploads)
+             */
+            file_url: string;
+            /**
+             * Prompt
+             * @description Optional shopper guidance or query
+             */
+            prompt?: string | null;
+        };
+        /**
+         * VisionAnalyzeResponse
+         * @description Visual analysis response with candidate search query.
+         */
+        VisionAnalyzeResponse: {
+            /** Primary Query */
+            primary_query: string;
+            /** Description */
+            description: string;
+            /** Detected Items */
+            detected_items?: {
+                [key: string]: unknown;
+            }[];
+            /** Suggested Action */
+            suggested_action: string;
+        };
+        /**
+         * VoiceTranscribeResponse
+         * @description Speech-to-text response.
+         */
+        VoiceTranscribeResponse: {
+            /**
+             * Text
+             * @description Transcribed text
+             */
+            text: string;
+            /**
+             * Language
+             * @description Detected language code (e.g. en, hi)
+             */
+            language: string;
+            /**
+             * Confidence
+             * @description Confidence score between 0 and 1
+             * @default 1
+             */
+            confidence: number;
         };
     };
     responses: never;
@@ -1486,6 +1642,114 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MissionRouteResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    upload_file_api_v1_uploads_post: {
+        parameters: {
+            query?: {
+                /** @description Optional access token for SSE EventSource */
+                token?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_upload_file_api_v1_uploads_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UploadResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    transcribe_voice_api_v1_voice_transcribe_post: {
+        parameters: {
+            query?: {
+                /** @description Optional access token for SSE EventSource */
+                token?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_transcribe_voice_api_v1_voice_transcribe_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VoiceTranscribeResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    analyze_vision_image_api_v1_vision_analyze_post: {
+        parameters: {
+            query?: {
+                /** @description Optional access token for SSE EventSource */
+                token?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VisionAnalyzeRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VisionAnalyzeResponse"];
                 };
             };
             /** @description Validation Error */

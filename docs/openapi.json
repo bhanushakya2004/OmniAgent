@@ -1193,10 +1193,250 @@
           }
         }
       }
+    },
+    "/api/v1/uploads": {
+      "post": {
+        "tags": [
+          "uploads"
+        ],
+        "summary": "Upload multimodal image or audio file",
+        "description": "Upload an image (JPEG, PNG, WebP) or audio (WebM, WAV, MP3, OGG, M4A) file.\n\nEnforces magic-byte verification and a 10 MB file size limit.",
+        "operationId": "upload_file_api_v1_uploads_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_file_api_v1_uploads_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/voice/transcribe": {
+      "post": {
+        "tags": [
+          "voice"
+        ],
+        "summary": "Transcribe spoken audio to text",
+        "description": "Transcribe spoken audio in English, Hindi, Tamil, Kannada or other languages into text.",
+        "operationId": "transcribe_voice_api_v1_voice_transcribe_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_transcribe_voice_api_v1_voice_transcribe_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceTranscribeResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/vision/analyze": {
+      "post": {
+        "tags": [
+          "vision"
+        ],
+        "summary": "Analyze uploaded product or shelf image",
+        "description": "Analyze a previously uploaded product photo or pantry shelf image.\n\nFormulates optimal catalog search queries and detects candidate items.",
+        "operationId": "analyze_vision_image_api_v1_vision_analyze_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VisionAnalyzeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VisionAnalyzeResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Body_transcribe_voice_api_v1_voice_transcribe_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          },
+          "hint_language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hint Language"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_transcribe_voice_api_v1_voice_transcribe_post"
+      },
+      "Body_upload_file_api_v1_uploads_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_upload_file_api_v1_uploads_post"
+      },
       "CreateMissionRequest": {
         "properties": {
           "prompt": {
@@ -2166,6 +2406,39 @@
         "title": "UpdateMissionItemRequest",
         "description": "Payload to update an item's quantity in a mission basket."
       },
+      "UploadResponse": {
+        "properties": {
+          "file_url": {
+            "type": "string",
+            "title": "File Url",
+            "description": "URL to access uploaded asset"
+          },
+          "filename": {
+            "type": "string",
+            "title": "Filename",
+            "description": "Original filename"
+          },
+          "content_type": {
+            "type": "string",
+            "title": "Content Type",
+            "description": "Verified MIME type"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "title": "Size Bytes",
+            "description": "File size in bytes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file_url",
+          "filename",
+          "content_type",
+          "size_bytes"
+        ],
+        "title": "UploadResponse",
+        "description": "File upload confirmation."
+      },
       "UserLoginRequest": {
         "properties": {
           "email": {
@@ -2327,6 +2600,92 @@
           "type"
         ],
         "title": "ValidationError"
+      },
+      "VisionAnalyzeRequest": {
+        "properties": {
+          "file_url": {
+            "type": "string",
+            "title": "File Url",
+            "description": "URL of uploaded image (from /uploads)"
+          },
+          "prompt": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Prompt",
+            "description": "Optional shopper guidance or query"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file_url"
+        ],
+        "title": "VisionAnalyzeRequest",
+        "description": "Payload to request image visual parsing."
+      },
+      "VisionAnalyzeResponse": {
+        "properties": {
+          "primary_query": {
+            "type": "string",
+            "title": "Primary Query"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "detected_items": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Detected Items"
+          },
+          "suggested_action": {
+            "type": "string",
+            "title": "Suggested Action"
+          }
+        },
+        "type": "object",
+        "required": [
+          "primary_query",
+          "description",
+          "suggested_action"
+        ],
+        "title": "VisionAnalyzeResponse",
+        "description": "Visual analysis response with candidate search query."
+      },
+      "VoiceTranscribeResponse": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Text",
+            "description": "Transcribed text"
+          },
+          "language": {
+            "type": "string",
+            "title": "Language",
+            "description": "Detected language code (e.g. en, hi)"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence",
+            "description": "Confidence score between 0 and 1",
+            "default": 1.0
+          }
+        },
+        "type": "object",
+        "required": [
+          "text",
+          "language"
+        ],
+        "title": "VoiceTranscribeResponse",
+        "description": "Speech-to-text response."
       }
     },
     "securitySchemes": {
