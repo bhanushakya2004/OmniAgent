@@ -1,3 +1,4 @@
+from omnimission.models.action_proposal import ActionProposal
 from omnimission.models.commerce import (
     Cart,
     CartItem,
@@ -38,4 +39,5 @@ __all__ = [
     "OrderItem",
     "PaymentSimulated",
     "UserMemory",
+    "ActionProposal",
 ]

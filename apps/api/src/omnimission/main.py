@@ -18,6 +18,7 @@ from omnimission.api.v1.cart import router as cart_router
 from omnimission.api.v1.catalog import router as catalog_router
 from omnimission.api.v1.memories import router as memories_router
 from omnimission.api.v1.merchant import router as merchant_router
+from omnimission.api.v1.merchant_analyst import router as merchant_analyst_router
 from omnimission.api.v1.missions import router as missions_router
 from omnimission.api.v1.orders import router as orders_router
 from omnimission.api.v1.stores import router as stores_router
@@ -152,6 +153,7 @@ def create_app() -> FastAPI:
     app.include_router(voice_router, prefix="/api/v1")
     app.include_router(vision_router, prefix="/api/v1")
     app.include_router(merchant_router, prefix="/api/v1")
+    app.include_router(merchant_analyst_router, prefix="/api/v1")
 
     return app
 
