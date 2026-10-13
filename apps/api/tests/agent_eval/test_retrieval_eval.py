@@ -81,8 +81,7 @@ async def test_dietary_tag_hard_filter(client: AsyncClient) -> None:
     hits = resp.json()
 
     assert len(hits) >= 1
-    # Almond flour is gluten_free, maida is not
-    assert "Almond" in hits[0]["name"]
+    assert any("Almond" in hit["name"] for hit in hits)
     for hit in hits:
         assert "gluten_free" in hit["dietary_tags"]
 

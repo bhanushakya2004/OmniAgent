@@ -1,7 +1,11 @@
 """Deterministic seed data for OmniMission AI Indian retail ecosystem."""
 
 import uuid
-from typing import Any, TypedDict
+
+from omnimission.seed.catalog_expanded import EXPANDED_CATALOG_ITEMS
+from omnimission.seed.types import CatalogItemDict, DemoStoreDict, DemoUserDict
+
+__all__ = ["CatalogItemDict", "DemoStoreDict", "DemoUserDict"]
 
 SEED_NAMESPACE = uuid.UUID("a3b8d1c0-7f2e-4e6a-9d3c-1b8e4f5a6b7c")
 
@@ -9,46 +13,6 @@ SEED_NAMESPACE = uuid.UUID("a3b8d1c0-7f2e-4e6a-9d3c-1b8e4f5a6b7c")
 def deterministic_uuid(name: str) -> uuid.UUID:
     """Generate deterministic UUID from name string."""
     return uuid.uuid5(SEED_NAMESPACE, name)
-
-
-class DemoUserDict(TypedDict):
-    id: uuid.UUID
-    email: str
-    full_name: str
-    role: str
-    password: str
-    preferred_language: str
-
-
-class DemoStoreDict(TypedDict):
-    id: uuid.UUID
-    merchant_id: uuid.UUID
-    name: str
-    address: str
-    city: str
-    lat: float
-    lng: float
-    phone: str | None
-    opening_hours: dict[str, Any]
-    is_active: bool
-
-
-class CatalogItemDict(TypedDict):
-    slug: str
-    name: str
-    brand: str
-    description: str
-    category: str
-    subcategory: str | None
-    size_label: str | None
-    unit: str | None
-    is_travel_size: bool
-    dietary_tags: list[str]
-    price: float
-    mrp: float
-    aisle: int
-    bay: int
-    shelf: int
 
 
 # Demo Accounts
@@ -678,3 +642,5 @@ CATALOG_ITEMS: list[CatalogItemDict] = [
         "shelf": 1,
     },
 ]
+
+CATALOG_ITEMS.extend(EXPANDED_CATALOG_ITEMS)

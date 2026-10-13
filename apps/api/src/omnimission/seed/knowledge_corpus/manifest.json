@@ -1,0 +1,2973 @@
+[
+  {
+    "doc_id": "recipe:eggless-strawberry-cake",
+    "title": "Fresh Eggless Strawberry Cream Cake",
+    "type": "recipe",
+    "tags": [
+      "baking",
+      "cake",
+      "strawberry",
+      "eggless",
+      "dessert",
+      "party"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 8,
+    "summary": "Soft moist vanilla sponge layered with Mahabaleshwar strawberry crush, whipped non-dairy cream, and fresh strawberry slices.",
+    "ingredients": [
+      {
+        "name": "Maida Premium Refined Flour",
+        "qty": 250,
+        "unit": "g",
+        "category": "Flours",
+        "optional": false,
+        "substitutes": [
+          "cake-flour-fine-1kg",
+          "gluten-free-flour-1kg"
+        ]
+      },
+      {
+        "name": "Superfine Powdered Sugar",
+        "qty": 180,
+        "unit": "g",
+        "category": "Sugars & Sweeteners",
+        "optional": false,
+        "substitutes": [
+          "caster-sugar-1kg"
+        ]
+      },
+      {
+        "name": "Double Action Baking Powder",
+        "qty": 10,
+        "unit": "g",
+        "category": "Baking Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Pure Edible Baking Soda",
+        "qty": 5,
+        "unit": "g",
+        "category": "Baking Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Amul Masti Dahi Curd",
+        "qty": 200,
+        "unit": "g",
+        "category": "Yogurt & Curd",
+        "optional": false,
+        "substitutes": [
+          "greek-yogurt-400g",
+          "condensed-milk-400g"
+        ]
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 80,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": [
+          "amul-butter-500g"
+        ]
+      },
+      {
+        "name": "Sprig Natural Bourbon Vanilla Extract",
+        "qty": 5,
+        "unit": "ml",
+        "category": "Essence & Flavors",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fresh Mahabaleshwar Sweet Strawberries",
+        "qty": 200,
+        "unit": "g",
+        "category": "Fresh Fruits",
+        "optional": false,
+        "substitutes": [
+          "strawberry-compote-250g"
+        ]
+      },
+      {
+        "name": "Mapro Whole Fruit Strawberry Crush",
+        "qty": 100,
+        "unit": "ml",
+        "category": "Fruit Crushes & Syrups",
+        "optional": false,
+        "substitutes": [
+          "strawberry-compote-250g"
+        ]
+      },
+      {
+        "name": "Rich's Non-Dairy Whip Topping Cream",
+        "qty": 300,
+        "unit": "ml",
+        "category": "Cream & Whipping",
+        "optional": false,
+        "substitutes": [
+          "amul-fresh-cream-250ml"
+        ]
+      },
+      {
+        "name": "Oddy Ecobake Non-Stick Baking Parchment Paper",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Kitchen Disposables",
+        "optional": true,
+        "substitutes": []
+      },
+      {
+        "name": "HomeBasics Anodized Aluminium Round Cake Pan 8-inch",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Bakeware",
+        "optional": true,
+        "substitutes": []
+      }
+    ],
+    "content": "An authentic bakery-style layered strawberry gateau prepared without eggs.\n1. Sponge Aeration: Whisk curd and powdered sugar until smooth, then add baking powder and baking soda. Let rest for 5 minutes until frothy bubbles form.\n2. Wet & Dry Fold: Gently fold in oil, vanilla extract, and sifted maida flour without over-beating.\n3. Bake: Pour into parchment-lined 8-inch cake tin and bake at 180\u00b0C for 30-35 minutes until a toothpick comes out clean.\n4. Assembly: Slice cooled sponge into 2 layers. Soak each layer with water-diluted strawberry crush. Pipe chilled whipped cream, lay fresh strawberry slices, and frost the exterior."
+  },
+  {
+    "doc_id": "recipe:high-protein-eggless-chocolate-cake",
+    "title": "High-Protein Eggless Dark Chocolate Fudge Cake",
+    "type": "recipe",
+    "tags": [
+      "baking",
+      "cake",
+      "chocolate",
+      "high_protein",
+      "eggless",
+      "fitness"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless",
+      "high_protein"
+    ],
+    "servings_base": 6,
+    "summary": "Rich decadent chocolate cake fortified with whey or plant protein powder, dark cocoa, and Greek yogurt moisture.",
+    "ingredients": [
+      {
+        "name": "Urban Platter Californian Superfine Blanched Almond Flour",
+        "qty": 150,
+        "unit": "g",
+        "category": "Flours",
+        "optional": false,
+        "substitutes": [
+          "maida-flour-1kg"
+        ]
+      },
+      {
+        "name": "Cadbury Rich Cocoa Powder",
+        "qty": 50,
+        "unit": "g",
+        "category": "Baking Essentials",
+        "optional": false,
+        "substitutes": [
+          "dutch-processed-black-cocoa-100g"
+        ]
+      },
+      {
+        "name": "MuscleBlaze Raw Whey Protein Concentrate 80%",
+        "qty": 60,
+        "unit": "g",
+        "category": "Protein Supplements",
+        "optional": false,
+        "substitutes": [
+          "plant-protein-chocolate-500g"
+        ]
+      },
+      {
+        "name": "Double Action Baking Powder",
+        "qty": 8,
+        "unit": "g",
+        "category": "Baking Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Epigamia Natural Greek Yogurt High Protein Plain Curd",
+        "qty": 200,
+        "unit": "g",
+        "category": "Yogurt & Curd",
+        "optional": false,
+        "substitutes": [
+          "curd-dahi-amul-400g"
+        ]
+      },
+      {
+        "name": "Nestle Milkmaid Sweetened Condensed Milk",
+        "qty": 150,
+        "unit": "g",
+        "category": "Baking Essentials",
+        "optional": false,
+        "substitutes": [
+          "caster-sugar-1kg"
+        ]
+      },
+      {
+        "name": "Morde Real 55% Dark Chocolate Drops for Baking",
+        "qty": 100,
+        "unit": "g",
+        "category": "Chocolate & Candies",
+        "optional": false,
+        "substitutes": [
+          "white-chocolate-chips-200g"
+        ]
+      },
+      {
+        "name": "Sprig Natural Bourbon Vanilla Extract",
+        "qty": 5,
+        "unit": "ml",
+        "category": "Essence & Flavors",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "content": "A fitness-friendly protein dessert delivering 16g protein per slice.\n1. Sift almond flour, cocoa powder, whey protein powder, and baking powder together.\n2. In a separate bowl, blend Greek yogurt, condensed milk, and vanilla extract.\n3. Fold wet and dry ingredients gently together with melted dark chocolate chips.\n4. Bake in preheated oven at 175\u00b0C for 25 minutes. Serve warm with greek yogurt or fresh berries."
+  },
+  {
+    "doc_id": "recipe:vegan-gluten-free-blueberry-muffins",
+    "title": "Vegan Gluten-Free Blueberry Breakfast Muffins",
+    "type": "recipe",
+    "tags": [
+      "baking",
+      "muffins",
+      "vegan",
+      "gluten_free",
+      "breakfast"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "vegan",
+      "dairy_free",
+      "gluten_free",
+      "eggless"
+    ],
+    "servings_base": 6,
+    "summary": "Hearty wholesome morning muffins loaded with wild blueberries, rolled oat flour, and flaxseed egg replacement.",
+    "ingredients": [
+      {
+        "name": "True Elements Rolled Oat Flour Certified Gluten Free",
+        "qty": 200,
+        "unit": "g",
+        "category": "Flours",
+        "optional": false,
+        "substitutes": [
+          "gluten-free-flour-1kg"
+        ]
+      },
+      {
+        "name": "True Elements Cold Milled Golden Flaxseed Powder",
+        "qty": 20,
+        "unit": "g",
+        "category": "Superfoods",
+        "optional": false,
+        "substitutes": [
+          "chia-seeds-organic-250g"
+        ]
+      },
+      {
+        "name": "Oatly Barista Edition Gluten Free Oat Milk",
+        "qty": 180,
+        "unit": "ml",
+        "category": "Plant Milk",
+        "optional": false,
+        "substitutes": [
+          "almond-milk-unsweetened-1l"
+        ]
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 60,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fresh Imported Premium Blueberries Punnet",
+        "qty": 125,
+        "unit": "g",
+        "category": "Fresh Fruits",
+        "optional": false,
+        "substitutes": [
+          "fresh-strawberries-200g"
+        ]
+      },
+      {
+        "name": "Double Action Baking Powder",
+        "qty": 8,
+        "unit": "g",
+        "category": "Baking Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Trust Classic Natural Demerara Brown Sugar",
+        "qty": 80,
+        "unit": "g",
+        "category": "Sugars & Sweeteners",
+        "optional": false,
+        "substitutes": [
+          "caster-sugar-1kg"
+        ]
+      }
+    ],
+    "content": "Golden vegan morning muffins with bursting pockets of warm blueberries.\n1. Make Flax Egg: Combine 2 tablespoons flaxseed powder with 6 tablespoons warm oat milk. Let sit 10 minutes to thicken.\n2. Combine dry gluten-free oat flour, brown sugar, and baking powder.\n3. Mix flax egg, sunflower oil, and remaining oat milk. Fold together gently.\n4. Fold in fresh blueberries and spoon into muffin tin. Bake at 190\u00b0C for 22 minutes."
+  },
+  {
+    "doc_id": "recipe:mumbai-butter-pav-bhaji",
+    "title": "Authentic Mumbai Street Butter Pav Bhaji",
+    "type": "recipe",
+    "tags": [
+      "cooking",
+      "street_food",
+      "dinner",
+      "party",
+      "mumbai"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 6,
+    "summary": "Classic Mumbai street food spiced vegetable mash served with toasted butter pav and lemon wedges.",
+    "ingredients": [
+      {
+        "name": "Everest Pav Bhaji Masala",
+        "qty": 30,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Amul Pasteurised Salted Butter Block",
+        "qty": 150,
+        "unit": "g",
+        "category": "Butter & Margarine",
+        "optional": false,
+        "substitutes": [
+          "pure-ghee-amul-1l"
+        ]
+      },
+      {
+        "name": "Dabur Hommade Ginger Garlic Paste",
+        "qty": 40,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": [
+          "fresh-ginger-250g",
+          "fresh-garlic-peeled-200g"
+        ]
+      },
+      {
+        "name": "Everest Kashmiri Lal Stemless Mild Red Chilli Powder",
+        "qty": 15,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Tata Salt Vacuum Evaporated Iodised Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fresh Farm Yellow Seedless Juicy Lemons",
+        "qty": 3,
+        "unit": "piece",
+        "category": "Fresh Fruits",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fresh Hydroponic Cleaned Coriander Leaves",
+        "qty": 50,
+        "unit": "g",
+        "category": "Fresh Fruits",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "content": "Spicy, buttery Mumbai street food classic.\n1. Boil potatoes, cauliflower, and green peas until tender. Mash thoroughly.\n2. Heat butter on a flat tava. Saute chopped onions, ginger garlic paste, and tomatoes until soft.\n3. Add Everest Pav Bhaji masala and Kashmiri red chilli powder. Mash together with butter.\n4. Add mashed vegetables with warm water and simmer for 15 minutes, mashing continuously.\n5. Serve with generous dollop of Amul butter, chopped onions, and fresh lemon juice."
+  },
+  {
+    "doc_id": "recipe:shahi-paneer-butter-masala",
+    "title": "Restaurant-Style Shahi Paneer Butter Masala",
+    "type": "recipe",
+    "tags": [
+      "cooking",
+      "curry",
+      "paneer",
+      "dinner",
+      "party"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "gluten_free",
+      "high_protein",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "summary": "Velvety cashew tomato gravy simmered with fresh malai paneer cubes, butter, and kasuri methi.",
+    "ingredients": [
+      {
+        "name": "Amul Fresh Malai Paneer 200g Vacuum Pack",
+        "qty": 400,
+        "unit": "g",
+        "category": "Paneer & Tofu",
+        "optional": false,
+        "substitutes": [
+          "tofu-firm-organic-200g"
+        ]
+      },
+      {
+        "name": "Amul Pasteurised Salted Butter Block",
+        "qty": 50,
+        "unit": "g",
+        "category": "Butter & Margarine",
+        "optional": false,
+        "substitutes": [
+          "pure-ghee-amul-1l"
+        ]
+      },
+      {
+        "name": "Amul Pure Low Fat Fresh Dairy Cream",
+        "qty": 100,
+        "unit": "ml",
+        "category": "Cream & Whipping",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Nutraj Mangalore Black Pepper Roasted Cashews",
+        "qty": 50,
+        "unit": "g",
+        "category": "Dry Fruits & Nuts",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "MDH Aromatic Dried Fenugreek Leaves (Kasuri Methi)",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Everest Kashmiri Lal Stemless Mild Red Chilli Powder",
+        "qty": 15,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Catch Superb 13-Spice Garam Masala Powder",
+        "qty": 5,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "content": "A rich Mughlai vegetarian delicacy.\n1. Gravy Base: Boil tomatoes, cashews, and whole spices for 15 minutes, then blend into a silky smooth puree.\n2. Tempering: Melt butter in pan, add Kashmiri chilli powder and the strained tomato-cashew puree.\n3. Simmer: Cook on low flame for 12 minutes until butter releases on edges.\n4. Finish: Add fresh malai paneer cubes, fresh dairy cream, crushed kasuri methi, and garam masala."
+  },
+  {
+    "doc_id": "trip_kit:3-day-mumbai-business",
+    "title": "3-Day Mumbai Business Trip Travel-Size Toiletries Kit",
+    "type": "trip_kit",
+    "tags": [
+      "travel",
+      "toiletries",
+      "mumbai",
+      "business",
+      "airline_compliant"
+    ],
+    "diet_tags": [],
+    "servings_base": 1,
+    "summary": "Airline hand-baggage compliant (all liquids <=100ml) compact personal grooming kit for a 72-hour metro trip.",
+    "ingredients": [
+      {
+        "name": "Pantene Pro-V Hair Fall Control Mini Travel Shampoo 50ml",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Colgate Total 12-Hour Antibacterial Mini Toothpaste 30g",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Oral-B Compact Travel Folding Toothbrush with Cap",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Nivea Pearl & Beauty Pocket Deodorant Roll-on 35ml",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Dettol Instant Hand Sanitizer Pocket Bottle 50ml",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Minimalist SPF 50 Multi-Vitamin Travel Sunscreen 50g",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Himalaya Purifying Neem Mini Travel Face Wash 50ml",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Dettol Disinfectant Pocket Wet Wipes (Pack of 10)",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Listerine Cool Mint Antiseptic Travel Mouthwash 80ml",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": true,
+        "substitutes": []
+      }
+    ],
+    "content": "Complete airport cabin-baggage compliant packing checklist.\n- All bottles are strictly 50ml or under (airline security rules require \u2264 100ml).\n- Includes folding toothbrush and antibacterial wipes for clean travel across airports, cabs, and hotels.\n- Total liquids volume fits inside a standard 1-quart transparent toiletry pouch."
+  },
+  {
+    "doc_id": "trip_kit:5-day-goa-beach",
+    "title": "5-Day Goa Beach Vacation Skincare & Hygiene Kit",
+    "type": "trip_kit",
+    "tags": [
+      "travel",
+      "beach",
+      "goa",
+      "sunscreen",
+      "vacation"
+    ],
+    "diet_tags": [],
+    "servings_base": 1,
+    "summary": "Sun protection, soothing aloe, insect defense, and compact travel hygiene for coastal beach travel.",
+    "ingredients": [
+      {
+        "name": "Minimalist SPF 50 Multi-Vitamin Travel Sunscreen 50g",
+        "qty": 2,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Dettol Refreshing Citrus Travel Body Wash 50ml",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Dove Daily Shine Hair Conditioner Travel Size 50ml",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Nivea Hydro Care SPF 15 Hydrating Lip Balm Stick 4.8g",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Savlon Pocket Mini Travel Emergency First Aid Kit",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Dettol Disinfectant Pocket Wet Wipes (Pack of 10)",
+        "qty": 2,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "content": "Essential coastal travel hygiene kit.\n- High SPF water-resistant broad spectrum sunscreen to prevent sunburn during beach outings.\n- Travel conditioner to protect hair from salt water dryness.\n- Pocket first aid kit for scrapes, shells, or bike tours."
+  },
+  {
+    "doc_id": "party_guide:8-guest-house-party",
+    "title": "House Party Kit for 8 Guests (Snacks, Drinks & Tableware)",
+    "type": "household_guide",
+    "tags": [
+      "party",
+      "snacks",
+      "drinks",
+      "disposables",
+      "host"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 8,
+    "summary": "Zero-stress hosting checklist calculating exact drink cans, snack portions, compostable cups, and cleaning bags for 8 people.",
+    "ingredients": [
+      {
+        "name": "Origami Biodegradable Paper Beverage Cups (Pack of 50)",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Disposables",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Origami Heavy Duty Compostable Dinner Plates 10-inch (Pack of 25)",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Disposables",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Paseo Luxury 2-Ply Party Table Napkins (Pack of 100)",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Disposables",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Origami Compostable Birchwood Party Spoons & Forks (Pack of 50)",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Disposables",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Schweppes Spiced Ginger Ale Can 300ml (Pack of 6)",
+        "qty": 2,
+        "unit": "piece",
+        "category": "Soft Drinks & Mixers",
+        "optional": false,
+        "substitutes": [
+          "coca-cola-can-300ml-6pack",
+          "tonic-water-schweppes-300ml-6can"
+        ]
+      },
+      {
+        "name": "Coca-Cola Original Refreshing Taste Can 300ml (Pack of 6)",
+        "qty": 2,
+        "unit": "piece",
+        "category": "Soft Drinks & Mixers",
+        "optional": false,
+        "substitutes": [
+          "thums-up-can-300ml-6pack"
+        ]
+      },
+      {
+        "name": "Lay's Classic Salted Potato Chips Big Sharing Bag 115g",
+        "qty": 3,
+        "unit": "piece",
+        "category": "Chips",
+        "optional": false,
+        "substitutes": [
+          "nachos-corn-chips-cheese-150g"
+        ]
+      },
+      {
+        "name": "Doritos Cheese Supreme Crunchy Tortilla Nachos 150g",
+        "qty": 2,
+        "unit": "piece",
+        "category": "Chips",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Cantina Mexican Spicy Tomato Chunky Salsa Dip 250g",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Dips & Sauces",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Haldiram's Nagpur Aloo Bhujia Spicy Crunchy Snack 400g",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Namkeen",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Shalimar Premium Oxo-Biodegradable Dustbin Trash Bags Medium (Pack of 30)",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Cleaning Essentials",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "content": "Hosting formula for 8 people:\n- Beverage formula: 3-4 drinks per guest = ~24 cans (2x Ginger Ale 6-packs + 2x Cola 6-packs).\n- Snack formula: 100g chips/nachos per person = ~800g total (3x Lays + 2x Doritos + 1x Salsa dip).\n- Disposable buffer: 3 cups per guest = 24-30 cups (1 pack of 50 covers the full evening).\n- Post-party waste: Biodegradable trash bags make cleanup take under 5 minutes."
+  },
+  {
+    "doc_id": "dietary_rule:eggless-baking-mechanics",
+    "title": "Eggless Baking Substitution Rules & Ratios",
+    "type": "dietary_rule",
+    "tags": [
+      "dietary",
+      "eggless",
+      "baking",
+      "science",
+      "substitution"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "vegan",
+      "eggless"
+    ],
+    "servings_base": null,
+    "ingredients": [],
+    "summary": "Comprehensive scientific conversion ratios for replacing whole eggs in cake sponges, cookies, and brownies.",
+    "content": "When baking eggless, eggs provide three primary functions: Moisture, Leavening (lift), and Emulsification (binding).\nUse these exact substitutions per 1 large egg:\n1. Dahi/Curd or Greek Yogurt: 1/4 cup (60g) thick curd + 1/4 tsp baking soda. Excellent for soft fluffy vanilla and fruit sponges.\n2. Sweetened Condensed Milk: 1/4 cup (60g) condensed milk (reduce recipe sugar by 2 tablespoons). Provides rich caramel crumb and tender moisture.\n3. Flax Egg (Vegan): 1 tbsp (10g) ground golden flaxseed powder + 3 tbsp warm water. Whisk and rest for 10 minutes until gelatinous. Superb for chocolate cakes, brownies, and nutty breads.\n4. Vinegar & Baking Soda Reaction: 1 tbsp white vinegar or apple cider vinegar + 1 tsp baking soda. Chemical reaction releases carbon dioxide, producing tall airy sponge cakes without eggs.\n5. Mashed Banana: 1/4 cup ripe banana. Best for pancakes and tea loaves (adds slight banana flavor)."
+  },
+  {
+    "doc_id": "dietary_rule:gluten-free-flour-guide",
+    "title": "Gluten-Free Flour Selection & Cross-Contamination Rules",
+    "type": "dietary_rule",
+    "tags": [
+      "dietary",
+      "gluten_free",
+      "celiac",
+      "flours"
+    ],
+    "diet_tags": [
+      "gluten_free",
+      "vegan",
+      "vegetarian"
+    ],
+    "servings_base": null,
+    "ingredients": [],
+    "summary": "Rules for choosing gluten-free flours and binders (almond, oat, tapioca, rice) and avoiding wheat cross-contact.",
+    "content": "Gluten provides elasticity and traps gas in baked goods. To replace wheat flour safely:\n1. Almond Flour: 100% grain-free blanched ground almonds. High protein and healthy fats. Best for soft cakes, macarons, and keto baking.\n2. Certified Gluten-Free Oat Flour: Rich in soluble fiber, gives familiar bakery chewiness. Must be certified gluten-free to avoid cross-contamination in grain mills.\n3. Tapioca Starch / Corn Starch: Added in 15-20% ratio to gluten-free flour blends to mimic gluten's stretch and prevent crumbly texture.\n4. Xanthan Gum or Psyllium Husk: Add 1/2 tsp per cup of gluten-free flour to provide tensile strength."
+  },
+  {
+    "doc_id": "recipe:hyderabadi-dum-biryani",
+    "title": "Authentic Hyderabadi Royal Dum Biryani",
+    "type": "recipe",
+    "tags": [
+      "biryani",
+      "rice",
+      "dinner",
+      "party"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "gluten_free",
+      "eggless"
+    ],
+    "servings_base": 6,
+    "ingredients": [
+      {
+        "name": "India Gate Classic Aged Long Grain Basmati Rice",
+        "qty": 500,
+        "unit": "g",
+        "category": "Rice",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Amul Fresh Malai Paneer",
+        "qty": 300,
+        "unit": "g",
+        "category": "Paneer & Tofu",
+        "optional": false,
+        "substitutes": [
+          "tofu-firm-organic-200g"
+        ]
+      },
+      {
+        "name": "Amul Pure Cow Milk Desi Ghee",
+        "qty": 80,
+        "unit": "ml",
+        "category": "Ghee & Butter",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Everest Shahi Royal Biryani Masala",
+        "qty": 30,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Amul Masti Dahi Pasteurised Curd",
+        "qty": 150,
+        "unit": "g",
+        "category": "Yogurt & Curd",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Dabur Natural Kewra Water Aroma Essence",
+        "qty": 10,
+        "unit": "ml",
+        "category": "Essence & Flavors",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Fragrant layered basmati rice and marinated paneer cooked in sealed dum pot with saffron, mint, and desi ghee.",
+    "content": "1. Parboil aged basmati rice with whole cloves, cardamom, and cinnamon until 70% cooked.\n2. Layer marinated spiced paneer at the base of heavy pot.\n3. Layer rice, drizzle saffron milk, desi ghee, kewra water, and fried onions.\n4. Seal pot lid with dough and cook on low heat for 25 minutes."
+  },
+  {
+    "doc_id": "recipe:amritsari-chole-bhature",
+    "title": "Traditional Amritsari Pindi Chole",
+    "type": "recipe",
+    "tags": [
+      "chole",
+      "punjabi",
+      "curry",
+      "lunch"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free",
+      "high_protein",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Fortune White Chickpeas Big Kabuli Chana",
+        "qty": 300,
+        "unit": "g",
+        "category": "Pulses & Dals",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "MDH Chana Masala Spice Blend",
+        "qty": 30,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Brooke Bond Red Label Natural Care Masala Chai",
+        "qty": 10,
+        "unit": "g",
+        "category": "Tea & Coffee",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Kachi Ghani Pure Mustard Oil",
+        "qty": 50,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Dark robust chickpea curry simmered with black tea bag for rich dark color and pomegranate seed tanginess.",
+    "content": "1. Soak kabuli chana overnight. Pressure cook with a black tea bag for authentic dark color.\n2. In mustard oil, fry ginger juliennes, green chillies, and MDH chana masala.\n3. Simmer cooked chickpeas with ground anardana and amchur for 20 minutes until thick."
+  },
+  {
+    "doc_id": "recipe:south-indian-masala-dosa",
+    "title": "Crispy South Indian Potato Masala Dosa",
+    "type": "recipe",
+    "tags": [
+      "dosa",
+      "south_indian",
+      "breakfast"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Buhler Cleaned Premium Sona Masoori Raw Rice",
+        "qty": 400,
+        "unit": "g",
+        "category": "Rice",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Tata Sampann Skinned Whole White Urad Dal",
+        "qty": 100,
+        "unit": "g",
+        "category": "Pulses & Dals",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Tata Sampann Whole Fenugreek Seeds",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Amul Pasteurised Salted Butter Block",
+        "qty": 100,
+        "unit": "g",
+        "category": "Butter & Margarine",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Thin golden fermented rice-crepe stuffed with spiced turmeric mustard potato bhaji and served with coconut chutney.",
+    "content": "1. Soak rice, urad dal, and methi seeds for 6 hours. Grind to silky batter and ferment for 12 hours.\n2. Cook potato stuffing with mustard seeds, curry leaves, ginger, and turmeric.\n3. Pour batter on hot cast-iron tava, swirl thin, dot with butter, fill with potato bhaji, and roll."
+  },
+  {
+    "doc_id": "recipe:dal-makhani-restaurant-style",
+    "title": "Slow-Cooked Punjabi Dal Makhani",
+    "type": "recipe",
+    "tags": [
+      "dal",
+      "punjabi",
+      "dinner",
+      "comfort"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "gluten_free",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Sampann Skinned Whole White Urad Dal",
+        "qty": 200,
+        "unit": "g",
+        "category": "Pulses & Dals",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Tata Sampann Kashmiri Speckled Chitra Rajma",
+        "qty": 50,
+        "unit": "g",
+        "category": "Pulses & Dals",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Amul Pasteurised Salted Butter Block",
+        "qty": 80,
+        "unit": "g",
+        "category": "Butter & Margarine",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Amul Pure Low Fat Fresh Dairy Cream",
+        "qty": 60,
+        "unit": "ml",
+        "category": "Cream & Whipping",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "MDH Aromatic Dried Fenugreek Leaves (Kasuri Methi)",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Velvety black lentils and kidney beans slow-simmered overnight with butter, tomato puree, and fresh cream.",
+    "content": "1. Soak whole black urad and rajma overnight. Pressure cook until very soft.\n2. Cook tomato ginger puree in butter with Kashmiri chilli powder.\n3. Simmer dal on very low flame for 60 minutes, adding butter cubes until creamy and glossy."
+  },
+  {
+    "doc_id": "recipe:eggless-fudge-brownies",
+    "title": "Classic Eggless Chewy Dark Chocolate Brownies",
+    "type": "recipe",
+    "tags": [
+      "baking",
+      "brownies",
+      "chocolate",
+      "eggless"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 8,
+    "ingredients": [
+      {
+        "name": "Aashirvaad Select Maida Premium Refined Flour",
+        "qty": 150,
+        "unit": "g",
+        "category": "Flours",
+        "optional": false,
+        "substitutes": [
+          "gluten-free-flour-1kg"
+        ]
+      },
+      {
+        "name": "Morde Real 55% Dark Chocolate Drops for Baking",
+        "qty": 200,
+        "unit": "g",
+        "category": "Chocolate & Candies",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Amul Pasteurised Salted Butter Block",
+        "qty": 100,
+        "unit": "g",
+        "category": "Butter & Margarine",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Nestle Milkmaid Sweetened Condensed Milk",
+        "qty": 200,
+        "unit": "g",
+        "category": "Baking Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Cadbury Rich Cocoa Powder",
+        "qty": 30,
+        "unit": "g",
+        "category": "Baking Essentials",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Crinkly top, ultra-fudgy dark chocolate brownies made without eggs using condensed milk and melted dark chocolate.",
+    "content": "1. Melt dark chocolate and butter together over double boiler.\n2. Whisk in condensed milk and vanilla extract.\n3. Sift flour and cocoa powder; fold gently into chocolate mixture.\n4. Pour into lined square pan and bake at 170\u00b0C for 22 minutes."
+  },
+  {
+    "doc_id": "recipe:keto-almond-cookies",
+    "title": "Grain-Free Keto Almond Butter Shortbread",
+    "type": "recipe",
+    "tags": [
+      "baking",
+      "keto",
+      "cookies",
+      "gluten_free"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "gluten_free",
+      "sugar_free",
+      "eggless"
+    ],
+    "servings_base": 10,
+    "ingredients": [
+      {
+        "name": "Urban Platter Californian Superfine Blanched Almond Flour",
+        "qty": 200,
+        "unit": "g",
+        "category": "Flours",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Pintola Smooth Creamy All Natural Peanut Butter",
+        "qty": 80,
+        "unit": "g",
+        "category": "Superfoods & Seeds",
+        "optional": false,
+        "substitutes": [
+          "almond-butter-unsweetened-200g"
+        ]
+      },
+      {
+        "name": "Amul Pasteurised Salted Butter Block",
+        "qty": 60,
+        "unit": "g",
+        "category": "Butter & Margarine",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Zydus Sugar Free Green Natural Stevia Powder",
+        "qty": 20,
+        "unit": "g",
+        "category": "Sugars & Sweeteners",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Melt-in-mouth 4-ingredient diabetic-friendly keto cookies with 3g net carbs per cookie.",
+    "content": "1. Beat softened butter and stevia until light.\n2. Mix in almond butter and almond flour to form a pliable cookie dough.\n3. Roll into 10 rounds, press with fork, and bake at 160\u00b0C for 14 minutes until edges turn golden."
+  },
+  {
+    "doc_id": "recipe:masala-chai-onion-pakora",
+    "title": "Monsoon Masala Chai & Crispy Onion Pakoras",
+    "type": "recipe",
+    "tags": [
+      "tea",
+      "snacks",
+      "monsoon",
+      "chai"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "vegan",
+      "gluten_free",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Brooke Bond Red Label Natural Care Masala Chai",
+        "qty": 30,
+        "unit": "g",
+        "category": "Tea & Coffee",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Amul Taaza Homogenised Toned Milk",
+        "qty": 300,
+        "unit": "ml",
+        "category": "Milk",
+        "optional": false,
+        "substitutes": [
+          "oat-milk-unsweetened-1l"
+        ]
+      },
+      {
+        "name": "Tata Sampann Unpolished Bengal Gram Chana Dal",
+        "qty": 150,
+        "unit": "g",
+        "category": "Pulses & Dals",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 300,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Hot spiced ginger cardamom tea paired with crunchy sliced onion fritters fried in besan batter.",
+    "content": "1. Brew CTC tea with crushed fresh ginger, cardamom, and milk for 5 minutes.\n2. Slice onions thin; toss with besan (gram flour), ajwain, chilli powder, and fresh coriander with minimal water.\n3. Drop into hot sunflower oil and deep fry until dark golden and crispy."
+  },
+  {
+    "doc_id": "trip_kit:2-day-delhi-conference",
+    "title": "2-Day Delhi Corporate Summit Grooming Kit",
+    "type": "trip_kit",
+    "tags": [
+      "travel",
+      "delhi",
+      "conference",
+      "business"
+    ],
+    "diet_tags": [],
+    "servings_base": 1,
+    "ingredients": [
+      {
+        "name": "Gillette Classic Sensitive Mini Travel Shaving Foam 50g",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Gillette Guard Men's Single Blade Travel Safety Razor",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Colgate Total 12-Hour Antibacterial Mini Toothpaste 30g",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Oral-B Compact Travel Folding Toothbrush with Cap",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Dettol Instant Hand Sanitizer Pocket Bottle 50ml",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Compact grooming essentials for executive overnight business meetings in Delhi NCR.",
+    "content": "All items fit inside laptop bag front pocket; 100% security gate compliant."
+  },
+  {
+    "doc_id": "trip_kit:7-day-ladakh-high-altitude",
+    "title": "7-Day Ladakh High Altitude Extreme Care Pack",
+    "type": "trip_kit",
+    "tags": [
+      "travel",
+      "ladakh",
+      "adventure",
+      "skincare"
+    ],
+    "diet_tags": [],
+    "servings_base": 1,
+    "ingredients": [
+      {
+        "name": "Minimalist SPF 50 Multi-Vitamin Travel Sunscreen 50g",
+        "qty": 2,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Nivea Hydro Care SPF 15 Hydrating Lip Balm Stick 4.8g",
+        "qty": 2,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Vaseline Total Moisture Deep Care Mini Lotion 40ml",
+        "qty": 2,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Savlon Pocket Mini Travel Emergency First Aid Kit",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Intense UV defense and deep barrier hydration for dry sub-zero high altitude Ladakh passes.",
+    "content": "High altitude UV rays cause severe chapping; double sunscreen and SPF lip balm are non-negotiable."
+  },
+  {
+    "doc_id": "trip_kit:weekend-bangalore-staycation",
+    "title": "Weekend Bangalore Resort Staycation Pack",
+    "type": "trip_kit",
+    "tags": [
+      "travel",
+      "bangalore",
+      "staycation"
+    ],
+    "diet_tags": [],
+    "servings_base": 1,
+    "ingredients": [
+      {
+        "name": "Dettol Refreshing Citrus Travel Body Wash 50ml",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Dove Daily Shine Hair Conditioner Travel Size 50ml",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Plum BodyLovin' Vanilla Vibes Mini Travel Hand Cream 30ml",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Travel Essentials",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Aromatherapy travel minis for weekend luxury resort relaxation in Coorg or Kabini.",
+    "content": "Compact self-care essentials for relaxing weekend getaways."
+  },
+  {
+    "doc_id": "dietary_rule:vegan-dairy-replacer-matrix",
+    "title": "Vegan Dairy Replacer Matrix for Indian Cooking",
+    "type": "dietary_rule",
+    "tags": [
+      "vegan",
+      "dairy_free",
+      "substitution",
+      "matrix"
+    ],
+    "diet_tags": [
+      "vegan",
+      "dairy_free"
+    ],
+    "servings_base": null,
+    "ingredients": [],
+    "summary": "Complete ingredient swap table replacing dairy milk, paneer, butter, and yogurt in traditional Indian dishes.",
+    "content": "1. Milk: Swap cow milk with Oatly Barista Oat milk for chai/coffee, or Raw Pressery Almond milk for desserts.\n2. Paneer: Swap with firm organic Tofu for 1:1 protein and texture in palak paneer and tikkas.\n3. Butter: Swap with cold-pressed coconut oil or neutral sunflower oil in baking and rotis.\n4. Curd/Dahi: Swap with coconut yogurt or cashew curd for marinades and cake aeration."
+  },
+  {
+    "doc_id": "household_guide:zero-waste-party-protocol",
+    "title": "Eco-Friendly Zero-Plastic Party Protocol",
+    "type": "household_guide",
+    "tags": [
+      "party",
+      "eco_friendly",
+      "zero_waste",
+      "disposables"
+    ],
+    "diet_tags": [
+      "vegan"
+    ],
+    "servings_base": 12,
+    "ingredients": [
+      {
+        "name": "Origami Compostable Birchwood Party Spoons & Forks (Pack of 50)",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Disposables",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Origami Heavy Duty Compostable Dinner Plates 10-inch (Pack of 25)",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Disposables",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "GreenStalk Heavy Duty 3-Ply Paper Drinking Straws (Pack of 50)",
+        "qty": 1,
+        "unit": "piece",
+        "category": "Disposables",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "How to host an eco-conscious gathering without plastic cups, single-use polythene, or microplastics.",
+    "content": "Use sugarcane bagasse plates and birchwood cutlery that degrade naturally in compost within 90 days."
+  },
+  {
+    "doc_id": "recipe:punjabi-curry-23",
+    "title": "Artisanal Punjabi Curry Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "punjabi",
+      "curry",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Punjabi regional Curry prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Punjabi style Curry for four people."
+  },
+  {
+    "doc_id": "recipe:punjabi-ricebowl-24",
+    "title": "Artisanal Punjabi Rice Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "punjabi",
+      "rice bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Punjabi regional Rice Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Punjabi style Rice Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:punjabi-dessertplatter-25",
+    "title": "Artisanal Punjabi Dessert Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "punjabi",
+      "dessert platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Punjabi regional Dessert Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Punjabi style Dessert Platter for four people."
+  },
+  {
+    "doc_id": "recipe:punjabi-snackplatter-26",
+    "title": "Artisanal Punjabi Snack Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "punjabi",
+      "snack platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Punjabi regional Snack Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Punjabi style Snack Platter for four people."
+  },
+  {
+    "doc_id": "recipe:punjabi-soupbowl-27",
+    "title": "Artisanal Punjabi Soup Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "punjabi",
+      "soup bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Punjabi regional Soup Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Punjabi style Soup Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:southindian-curry-28",
+    "title": "Artisanal South Indian Curry Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "south indian",
+      "curry",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional South Indian regional Curry prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic South Indian style Curry for four people."
+  },
+  {
+    "doc_id": "recipe:southindian-ricebowl-29",
+    "title": "Artisanal South Indian Rice Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "south indian",
+      "rice bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional South Indian regional Rice Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic South Indian style Rice Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:southindian-dessertplatter-30",
+    "title": "Artisanal South Indian Dessert Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "south indian",
+      "dessert platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional South Indian regional Dessert Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic South Indian style Dessert Platter for four people."
+  },
+  {
+    "doc_id": "recipe:southindian-snackplatter-31",
+    "title": "Artisanal South Indian Snack Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "south indian",
+      "snack platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional South Indian regional Snack Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic South Indian style Snack Platter for four people."
+  },
+  {
+    "doc_id": "recipe:southindian-soupbowl-32",
+    "title": "Artisanal South Indian Soup Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "south indian",
+      "soup bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional South Indian regional Soup Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic South Indian style Soup Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:gujarati-curry-33",
+    "title": "Artisanal Gujarati Curry Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "gujarati",
+      "curry",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Gujarati regional Curry prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Gujarati style Curry for four people."
+  },
+  {
+    "doc_id": "recipe:gujarati-ricebowl-34",
+    "title": "Artisanal Gujarati Rice Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "gujarati",
+      "rice bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Gujarati regional Rice Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Gujarati style Rice Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:gujarati-dessertplatter-35",
+    "title": "Artisanal Gujarati Dessert Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "gujarati",
+      "dessert platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Gujarati regional Dessert Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Gujarati style Dessert Platter for four people."
+  },
+  {
+    "doc_id": "recipe:gujarati-snackplatter-36",
+    "title": "Artisanal Gujarati Snack Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "gujarati",
+      "snack platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Gujarati regional Snack Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Gujarati style Snack Platter for four people."
+  },
+  {
+    "doc_id": "recipe:gujarati-soupbowl-37",
+    "title": "Artisanal Gujarati Soup Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "gujarati",
+      "soup bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Gujarati regional Soup Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Gujarati style Soup Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:bengali-curry-38",
+    "title": "Artisanal Bengali Curry Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "bengali",
+      "curry",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Bengali regional Curry prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Bengali style Curry for four people."
+  },
+  {
+    "doc_id": "recipe:bengali-ricebowl-39",
+    "title": "Artisanal Bengali Rice Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "bengali",
+      "rice bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Bengali regional Rice Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Bengali style Rice Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:bengali-dessertplatter-40",
+    "title": "Artisanal Bengali Dessert Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "bengali",
+      "dessert platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Bengali regional Dessert Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Bengali style Dessert Platter for four people."
+  },
+  {
+    "doc_id": "recipe:bengali-snackplatter-41",
+    "title": "Artisanal Bengali Snack Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "bengali",
+      "snack platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Bengali regional Snack Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Bengali style Snack Platter for four people."
+  },
+  {
+    "doc_id": "recipe:bengali-soupbowl-42",
+    "title": "Artisanal Bengali Soup Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "bengali",
+      "soup bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Bengali regional Soup Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Bengali style Soup Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:maharashtrian-curry-43",
+    "title": "Artisanal Maharashtrian Curry Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "maharashtrian",
+      "curry",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Maharashtrian regional Curry prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Maharashtrian style Curry for four people."
+  },
+  {
+    "doc_id": "recipe:maharashtrian-ricebowl-44",
+    "title": "Artisanal Maharashtrian Rice Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "maharashtrian",
+      "rice bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Maharashtrian regional Rice Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Maharashtrian style Rice Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:maharashtrian-dessertplatter-45",
+    "title": "Artisanal Maharashtrian Dessert Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "maharashtrian",
+      "dessert platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Maharashtrian regional Dessert Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Maharashtrian style Dessert Platter for four people."
+  },
+  {
+    "doc_id": "recipe:maharashtrian-snackplatter-46",
+    "title": "Artisanal Maharashtrian Snack Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "maharashtrian",
+      "snack platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Maharashtrian regional Snack Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Maharashtrian style Snack Platter for four people."
+  },
+  {
+    "doc_id": "recipe:maharashtrian-soupbowl-47",
+    "title": "Artisanal Maharashtrian Soup Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "maharashtrian",
+      "soup bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Maharashtrian regional Soup Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Maharashtrian style Soup Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:mughlai-curry-48",
+    "title": "Artisanal Mughlai Curry Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "mughlai",
+      "curry",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Mughlai regional Curry prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Mughlai style Curry for four people."
+  },
+  {
+    "doc_id": "recipe:mughlai-ricebowl-49",
+    "title": "Artisanal Mughlai Rice Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "mughlai",
+      "rice bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Mughlai regional Rice Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Mughlai style Rice Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:mughlai-dessertplatter-50",
+    "title": "Artisanal Mughlai Dessert Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "mughlai",
+      "dessert platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Mughlai regional Dessert Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Mughlai style Dessert Platter for four people."
+  },
+  {
+    "doc_id": "recipe:mughlai-snackplatter-51",
+    "title": "Artisanal Mughlai Snack Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "mughlai",
+      "snack platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Mughlai regional Snack Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Mughlai style Snack Platter for four people."
+  },
+  {
+    "doc_id": "recipe:mughlai-soupbowl-52",
+    "title": "Artisanal Mughlai Soup Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "mughlai",
+      "soup bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Mughlai regional Soup Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Mughlai style Soup Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:italian-curry-53",
+    "title": "Artisanal Italian Curry Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "italian",
+      "curry",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Italian regional Curry prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Italian style Curry for four people."
+  },
+  {
+    "doc_id": "recipe:italian-ricebowl-54",
+    "title": "Artisanal Italian Rice Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "italian",
+      "rice bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Italian regional Rice Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Italian style Rice Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:italian-dessertplatter-55",
+    "title": "Artisanal Italian Dessert Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "italian",
+      "dessert platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Italian regional Dessert Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Italian style Dessert Platter for four people."
+  },
+  {
+    "doc_id": "recipe:italian-snackplatter-56",
+    "title": "Artisanal Italian Snack Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "italian",
+      "snack platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Italian regional Snack Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Italian style Snack Platter for four people."
+  },
+  {
+    "doc_id": "recipe:italian-soupbowl-57",
+    "title": "Artisanal Italian Soup Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "italian",
+      "soup bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Italian regional Soup Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Italian style Soup Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:mexican-curry-58",
+    "title": "Artisanal Mexican Curry Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "mexican",
+      "curry",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Mexican regional Curry prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Mexican style Curry for four people."
+  },
+  {
+    "doc_id": "recipe:mexican-ricebowl-59",
+    "title": "Artisanal Mexican Rice Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "mexican",
+      "rice bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Mexican regional Rice Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Mexican style Rice Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:mexican-dessertplatter-60",
+    "title": "Artisanal Mexican Dessert Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "mexican",
+      "dessert platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Mexican regional Dessert Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Mexican style Dessert Platter for four people."
+  },
+  {
+    "doc_id": "recipe:mexican-snackplatter-61",
+    "title": "Artisanal Mexican Snack Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "mexican",
+      "snack platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Mexican regional Snack Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Mexican style Snack Platter for four people."
+  },
+  {
+    "doc_id": "recipe:mexican-soupbowl-62",
+    "title": "Artisanal Mexican Soup Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "mexican",
+      "soup bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Mexican regional Soup Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Mexican style Soup Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:thai-curry-63",
+    "title": "Artisanal Thai Curry Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "thai",
+      "curry",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Thai regional Curry prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Thai style Curry for four people."
+  },
+  {
+    "doc_id": "recipe:thai-ricebowl-64",
+    "title": "Artisanal Thai Rice Bowl Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "thai",
+      "rice bowl",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Thai regional Rice Bowl prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Thai style Rice Bowl for four people."
+  },
+  {
+    "doc_id": "recipe:thai-dessertplatter-65",
+    "title": "Artisanal Thai Dessert Platter Meal Kit",
+    "type": "recipe",
+    "tags": [
+      "thai",
+      "dessert platter",
+      "meal_kit",
+      "dinner"
+    ],
+    "diet_tags": [
+      "vegetarian",
+      "eggless"
+    ],
+    "servings_base": 4,
+    "ingredients": [
+      {
+        "name": "Tata Salt Vacuum Evaporated Table Salt",
+        "qty": 10,
+        "unit": "g",
+        "category": "Spices & Salt",
+        "optional": false,
+        "substitutes": []
+      },
+      {
+        "name": "Fortune Sunlite Refined Sunflower Cooking Oil",
+        "qty": 40,
+        "unit": "ml",
+        "category": "Edible Oils",
+        "optional": false,
+        "substitutes": []
+      }
+    ],
+    "summary": "Traditional Thai regional Dessert Platter prepared with authentic stone-ground spices and fresh local produce.",
+    "content": "Step-by-step masterclass for preparing classic Thai style Dessert Platter for four people."
+  }
+]
