@@ -44,6 +44,7 @@ services:
       retries: 3
 
   toolbox:
+    profiles: ["toolbox"]
     image: ghcr.io/googleapis/genai-toolbox:latest
     container_name: omnimission-toolbox
     restart: unless-stopped
@@ -76,6 +77,7 @@ services:
       NEXT_PUBLIC_API_BASE_URL: http://localhost:8000
 
   caddy:
+    profiles: ["proxy"]
     image: caddy:2-alpine
     container_name: omnimission-caddy
     restart: unless-stopped
