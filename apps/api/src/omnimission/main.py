@@ -12,6 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from omnimission.api.v1.auth import router as auth_router
+from omnimission.api.v1.stores import router as stores_router
 from omnimission.core.config import get_settings
 from omnimission.core.errors import ProblemDetail, ProblemException, problem_exception_handler
 from omnimission.core.logging import get_logger, setup_logging
@@ -125,6 +126,7 @@ def create_app() -> FastAPI:
 
     # Mount API routers
     app.include_router(auth_router, prefix="/api/v1")
+    app.include_router(stores_router, prefix="/api/v1")
 
     return app
 
