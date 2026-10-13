@@ -25,6 +25,10 @@ class EventPersistenceService:
         payload: dict[str, Any],
     ) -> MissionEvent:
         """Atomically assign the next monotonic sequence_id and persist the mission event."""
+        import json
+
+        json_safe_payload = json.loads(json.dumps(payload, default=str))
+
         # Compute next sequence_id for this mission
         seq_stmt = select(func.coalesce(func.max(MissionEvent.sequence_id), 0)).where(
             MissionEvent.mission_id == mission_id
@@ -36,7 +40,7 @@ class EventPersistenceService:
             mission_id=mission_id,
             sequence_id=next_seq,
             event_type=event_type,
-            payload=payload,
+            payload=json_safe_payload,
         )
         session.add(event)
         await session.flush()

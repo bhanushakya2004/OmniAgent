@@ -139,7 +139,7 @@ class MissionService:
                 language=mission.language,
             ):
                 event_type = map_event_type(event.step)
-                payload = event.model_dump()
+                payload = event.model_dump(mode="json")
 
                 # Persist event with monotonic sequence_id
                 recorded = await self.event_persistence.record_event(

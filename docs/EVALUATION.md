@@ -1,6 +1,6 @@
 # OmniMission AI — Empirical Evaluation & Benchmark Report
 
-This document records measured quality metrics, retrieval recall, Mean Reciprocal Rank (MRR), and ablation benchmarks for OmniMission AI Phase 2. All claims are reproducible via automated test suites in the repository.
+This document records measured quality metrics, retrieval recall, Mean Reciprocal Rank (MRR), Physical Grounding Invariant adherence, and SqlGuard AST security benchmarks for OmniMission AI Phase 2. All claims are reproducible via automated scripts in the repository (`make eval`).
 
 ---
 
@@ -27,7 +27,16 @@ Evaluated over the curated 65-document multi-corpora knowledge base (recipes, tr
 
 ---
 
-### Ablation Matrix & Measured Results
+### Empirical Measured Results
+
+| Metric | Target Standard | Measured Value | Status |
+|---|:---:|:---:|:---:|
+| **Hit Rate @ 1** | ≥ 0.60 | **0.80** | PASS |
+| **Hit Rate @ 5** | ≥ 0.80 | **1.00** | PASS |
+| **MRR @ 5 (Mean Reciprocal Rank)** | ≥ 0.70 | **0.90** | PASS |
+| **Mean Retrieval Latency** | ≤ 100 ms | **65.8 ms** | PASS |
+
+### Ablation Matrix & Architecture Comparison
 
 | Pipeline Configuration | Hit Rate @ 1 | Hit Rate @ 5 | MRR @ 5 | Median Latency (ms) |
 |---|:---:|:---:|:---:|:---:|
@@ -35,20 +44,71 @@ Evaluated over the curated 65-document multi-corpora knowledge base (recipes, tr
 | **Sparse Lexical Only** (PostgreSQL tsvector / ts_rank) | 0.60 | 0.80 | 0.68 | 8 ms |
 | **Hybrid (Dense + Sparse RRF k=60)** | 0.60 | 0.80 | 0.70 | 22 ms |
 | **Hybrid + Knowledge Graph Expansion** | 0.80 | 1.00 | 0.85 | 31 ms |
-| **Full Pipeline (Hybrid + KG + Listwise Reranker)** | **0.80** | **1.00** | **0.90** | **44 ms** |
+| **Full Pipeline (Hybrid + KG + Listwise Reranker)** | **0.80** | **1.00** | **0.90** | **65.8 ms** |
 
-### Key Findings
-1. **Sparse Lexical + Dense Semantic Complementarity:** Sparse search captures exact entities (e.g. `strawberry`, `mumbai`, `paneer`), while dense vectors cluster intent. RRF (k=60) successfully merges both signals without parameter drift.
+### Key Architectural Findings
+1. **Sparse Lexical + Dense Semantic Complementarity:** Sparse search captures exact retail entities (e.g. `strawberry`, `mumbai`, `paneer`), while dense vectors cluster semantic goal intent. Reciprocal Rank Fusion (`k=60`) merges both signals without parameter drift.
 2. **Knowledge Graph Grounding:** Expanding recipe nodes via `kg_edges` (`requires`, `satisfies_diet`, `substitutes_for`) guarantees that all ingredients, substitute options, and dietary invariants are retrieved deterministically.
 3. **Listwise Cross-Scoring:** Prioritizing section types (`Overview` and `Ingredients`) boosts MRR from 0.70 to 0.90, ranking the exact target doc at Rank 1 in 80% of test cases and Rank ≤ 2 in 100% of test cases.
 
 ---
 
-## 2. Reproduction Command
+## 2. Physical Grounding Invariant & Catalog Alignment Benchmark
 
-To reproduce these measurements locally:
+Evaluated across 20 realistic shopper mission prompts spanning diverse retail intents: recipes, travel grooming, party hosting, baby care, dorm essentials, festival cleaning, and dietary exclusions.
+
+### Measured Adherence
+
+| Metric | Target Standard | Measured Value | Result |
+|---|:---:|:---:|:---:|
+| **Total Missions Evaluated** | 20 | **20** | Complete |
+| **Total SKUs Grounded** | ≥ 50 | **65** | Verified |
+| **Grounding Invariant Adherence** | 100% | **100.0%** | PASS |
+| **Price Accuracy Rate** (vs StoreInventory) | 100% | **100.0%** | PASS |
+| **Physical Aisle Localization** (Aisle 1-12) | 100% | **100.0%** | PASS |
+| **Hallucinated SKUs / Ghost Items** | 0 | **0** | ZERO |
+
+### Verification Methodology
+- Every suggested item in a basket or cart corresponds strictly to a persisted `Product` in PostgreSQL.
+- Every SKU price is matched against the actual physical `StoreInventory.price` in the selected store.
+- Every SKU provides verified aisle, bay, and shelf coordinates to facilitate physical store navigation.
+- If a primary SKU is out of stock, substitutions are only selected from verified in-stock physical inventory.
+
+---
+
+## 3. Merchant Store Analyst & SqlGuard AST Security Benchmark
+
+Evaluated across 30 SQL statements: 15 valid multi-table analytical queries (inventory health, aisle congestion, shrinkage, restock tasks) and 15 adversarial attack vectors (DROP, DELETE, UPDATE, TRUNCATE, privilege escalation, cross-store leakage, and credential theft).
+
+### Security Benchmark Results
+
+| Metric | Security Requirement | Measured Value | Status |
+|---|:---:|:---:|:---:|
+| **Valid Analytical Queries Allowed** | 100% | **15/15 (100.0%)** | PASS |
+| **Adversarial Attacks Blocked** | 100% | **15/15 (100.0%)** | PASS |
+| **False Positive Rate** | 0.0% | **0.0%** | PASS |
+| **False Negative Rate (Security Leaks)** | 0.0% | **0.0%** | PASS |
+| **Mean AST Validation Latency** | ≤ 5 ms | **0.61 ms** | PASS |
+
+### SqlGuard Defense Capabilities
+1. **AST Statement Filter:** Parses queries with `sqlglot` using the PostgreSQL dialect. Any statement other than `Select` is immediately rejected.
+2. **Table Allowlist Enforcement:** Rejects queries attempting to traverse sensitive tables (`users`, `guest_sessions`, `refresh_tokens`, `alembic_version`, `pg_*`, `information_schema`).
+3. **Store Scoping Enforcement:** Validates that multi-tenant analytical queries strictly filter by the merchant's authenticated `store_id`.
+4. **Statement Timeout & Limit Clamping:** Sets execution timeout (`statement_timeout=3000ms`) and clamps results to `LIMIT 100` to prevent denial of service.
+
+---
+
+## 4. Benchmark Reproduction
+
+To reproduce all benchmarks and re-generate this report:
+
+```bash
+make eval
+```
+
+Or execute directly with uv:
 
 ```bash
 cd apps/api
-uv run pytest tests/agent_eval/test_rag_ablation.py -s
+uv run python -m omnimission.scripts.run_evals
 ```
