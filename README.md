@@ -205,6 +205,7 @@ docker compose run --rm api mypy src
 
 ## 8. Documentation Index
 
+- [Team Startup & Testing Guide](STARTUP.md)
 - [System Architecture & Hexagonal Ports](docs/ARCHITECTURE.md)
 - [Multi-Agent System & Governance Harness](docs/AGENTS.md)
 - [Empirical Evaluation & Benchmark Report](docs/EVALUATION.md)
