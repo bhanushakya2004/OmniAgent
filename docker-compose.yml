@@ -75,6 +75,22 @@ services:
     environment:
       NEXT_PUBLIC_API_BASE_URL: http://localhost:8000
 
+  caddy:
+    image: caddy:2-alpine
+    container_name: omnimission-caddy
+    restart: unless-stopped
+    depends_on:
+      - api
+      - web
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./infra/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
 volumes:
   pgdata:
   api_uploads:
+  caddy_data:
+  caddy_config:

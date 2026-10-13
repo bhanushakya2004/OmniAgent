@@ -1,4 +1,6 @@
-"""Mission service orchestrating mission creation, SSE event streaming, basket edits, and wayfinding."""
+"""Mission service orchestrating mission creation, resumable SSE streaming, basket edits, and wayfinding."""
+
+from __future__ import annotations
 
 import json
 import uuid
@@ -12,6 +14,7 @@ from omnimission.agents.schemas import OptimizedBasketItem
 from omnimission.agents.wayfinding import WayfindingService
 from omnimission.agents.workflow import MissionWorkflow
 from omnimission.core.errors import ForbiddenError, NotFoundError
+from omnimission.core.principal import Principal
 from omnimission.models.mission import Mission
 from omnimission.repositories.mission_repo import MissionRepository
 from omnimission.schemas.mission import (
@@ -24,26 +27,29 @@ from omnimission.schemas.mission import (
     MissionTraceResponse,
     RouteWaypointResponse,
 )
+from omnimission.services.event_persistence_service import EventPersistenceService
 
 
 class MissionService:
-    """Business logic for shopper mission lifecycle."""
+    """Business logic for shopper mission lifecycle with resumable SSE streaming."""
 
     def __init__(self) -> None:
         self.repo = MissionRepository()
         self.workflow = MissionWorkflow()
         self.wayfinding = WayfindingService()
+        self.event_persistence = EventPersistenceService()
 
     async def create_mission(
         self,
         session: AsyncSession,
-        user_id: uuid.UUID,
+        principal: Principal,
         request: CreateMissionRequest,
     ) -> Mission:
-        """Create a pending mission record."""
+        """Create a pending mission record for user or anonymous guest."""
         mission = await self.repo.create_mission(
             session=session,
-            user_id=user_id,
+            user_id=principal.user_id if principal.is_authenticated else None,
+            guest_session_id=principal.guest_session_id if principal.is_guest else None,
             raw_text=request.prompt,
             selected_store_ids=request.store_ids,
             language=request.language,
@@ -57,51 +63,72 @@ class MissionService:
         self,
         session: AsyncSession,
         mission_id: uuid.UUID,
-        user_id: uuid.UUID,
+        principal: Principal,
+        last_event_id: int | None = None,
     ) -> AsyncGenerator[dict[str, Any], None]:
-        """Stream real-time multi-agent execution events for a mission via SSE."""
+        """Stream real-time multi-agent execution events with sequence IDs and Last-Event-ID replay."""
         mission = await self.repo.get_by_id(session, mission_id)
         if not mission:
             yield {
+                "id": "1",
                 "event": "error",
                 "data": json.dumps({"error": f"Mission {mission_id} not found"}),
             }
             return
 
-        if mission.user_id != user_id:
+        # Ownership authorization check
+        if mission.user_id and principal.is_authenticated:
+            if mission.user_id != principal.user_id:
+                yield {
+                    "id": "1",
+                    "event": "error",
+                    "data": json.dumps({"error": "Unauthorized access to mission"}),
+                }
+                return
+        elif mission.guest_session_id and principal.is_guest:
+            if mission.guest_session_id != principal.guest_session_id:
+                yield {
+                    "id": "1",
+                    "event": "error",
+                    "data": json.dumps({"error": "Unauthorized access to mission"}),
+                }
+                return
+
+        # 1. REPLAY PHASE: Deliver historical events with sequence_id > last_event_id
+        start_seq = last_event_id or 0
+        historical_events = await self.event_persistence.get_events_after(
+            session=session,
+            mission_id=mission_id,
+            after_seq=start_seq,
+        )
+        for h_event in historical_events:
             yield {
-                "event": "error",
-                "data": json.dumps({"error": "Unauthorized access to mission"}),
+                "id": str(h_event.sequence_id),
+                "event": h_event.event_type,
+                "data": json.dumps(h_event.payload, default=str),
             }
+
+        # If mission was already completed, stop stream after historical replay
+        if mission.status == "completed":
             return
 
-        if mission.status == "completed":
-            # Replay existing traces if mission was already completed
-            for trace in mission.traces:
-                yield {
-                    "event": "timeline",
-                    "data": json.dumps(
-                        {
-                            "step": trace.step,
-                            "status": "completed",
-                            "agent": trace.agent,
-                            "title": trace.step.replace("_", " ").title(),
-                            "description": trace.output_summary,
-                            "latency_ms": trace.latency_ms,
-                        }
-                    ),
-                }
-            yield {
-                "event": "done",
-                "data": json.dumps(
-                    {
-                        "mission_id": str(mission.id),
-                        "status": "completed",
-                        "total_cost": str(mission.total_cost) if mission.total_cost else "0.00",
-                    }
-                ),
-            }
-            return
+        # 2. LIVE EXECUTION PHASE
+        def map_event_type(step: str) -> str:
+            if step in ("parsing_intent", "intent_parsed", "planning_items", "items_planned"):
+                return "agent_thought"
+            if step == "searching_catalog":
+                return "tool_call"
+            if step == "catalog_searched":
+                return "tool_result"
+            if step == "optimizing_basket":
+                return "basket_update"
+            if step == "grounding_validated":
+                return "grounding_check"
+            if step == "wayfinding_routed":
+                return "wayfinding_route"
+            if step == "complete":
+                return "mission_complete"
+            return "agent_thought"
 
         try:
             async for event in self.workflow.execute_streaming(
@@ -111,32 +138,59 @@ class MissionService:
                 selected_store_ids=mission.selected_store_ids,
                 language=mission.language,
             ):
-                event_name = "done" if event.step == "complete" else "timeline"
+                event_type = map_event_type(event.step)
+                payload = event.model_dump()
+
+                # Persist event with monotonic sequence_id
+                recorded = await self.event_persistence.record_event(
+                    session=session,
+                    mission_id=mission.id,
+                    event_type=event_type,
+                    payload=payload,
+                )
+                await session.commit()
+
                 yield {
-                    "event": event_name,
-                    "data": json.dumps(event.model_dump(), default=str),
+                    "id": str(recorded.sequence_id),
+                    "event": event_type,
+                    "data": json.dumps(payload, default=str),
                 }
         except Exception as exc:
+            err_payload = {"error": str(exc)}
+            recorded_err = await self.event_persistence.record_event(
+                session=session,
+                mission_id=mission.id,
+                event_type="error",
+                payload=err_payload,
+            )
+            await session.commit()
             yield {
+                "id": str(recorded_err.sequence_id),
                 "event": "error",
-                "data": json.dumps({"error": str(exc)}),
+                "data": json.dumps(err_payload),
             }
 
     async def get_mission(
         self,
         session: AsyncSession,
         mission_id: uuid.UUID,
-        user_id: uuid.UUID,
+        principal: Principal,
     ) -> MissionResponse:
         """Fetch mission with loaded items, products, and agent execution traces."""
         mission = await self.repo.get_by_id(session, mission_id)
         if not mission:
             raise NotFoundError(detail=f"Mission {mission_id} not found", code="MISSION_NOT_FOUND")
 
-        if mission.user_id != user_id:
-            raise ForbiddenError(
-                detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
-            )
+        if mission.user_id and principal.is_authenticated:
+            if mission.user_id != principal.user_id:
+                raise ForbiddenError(
+                    detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
+                )
+        elif mission.guest_session_id and principal.is_guest:
+            if mission.guest_session_id != principal.guest_session_id:
+                raise ForbiddenError(
+                    detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
+                )
 
         items_resp: list[MissionItemResponse] = []
         for it in mission.items:
@@ -179,6 +233,7 @@ class MissionService:
         return MissionResponse(
             id=mission.id,
             user_id=mission.user_id,
+            guest_session_id=mission.guest_session_id,
             raw_text=mission.raw_text,
             status=mission.status,
             language=mission.language,
@@ -194,12 +249,18 @@ class MissionService:
     async def list_missions(
         self,
         session: AsyncSession,
-        user_id: uuid.UUID,
+        principal: Principal,
         limit: int = 20,
         offset: int = 0,
     ) -> MissionListResponse:
-        """Fetch mission history for user."""
-        missions = await self.repo.list_for_user(session, user_id, limit=limit, offset=offset)
+        """Fetch mission history for user or guest."""
+        missions = await self.repo.list_for_user(
+            session=session,
+            user_id=principal.user_id if principal.is_authenticated else None,
+            guest_session_id=principal.guest_session_id if principal.is_guest else None,
+            limit=limit,
+            offset=offset,
+        )
         summary_items = [
             MissionListItemResponse(
                 id=m.id,
@@ -218,7 +279,7 @@ class MissionService:
         session: AsyncSession,
         mission_id: uuid.UUID,
         item_id: uuid.UUID,
-        user_id: uuid.UUID,
+        principal: Principal,
         quantity: int,
     ) -> MissionItemResponse:
         """Update an item quantity in a basket and recalculate mission total."""
@@ -226,10 +287,16 @@ class MissionService:
         if not mission:
             raise NotFoundError(detail=f"Mission {mission_id} not found", code="MISSION_NOT_FOUND")
 
-        if mission.user_id != user_id:
-            raise ForbiddenError(
-                detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
-            )
+        if mission.user_id and principal.is_authenticated:
+            if mission.user_id != principal.user_id:
+                raise ForbiddenError(
+                    detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
+                )
+        elif mission.guest_session_id and principal.is_guest:
+            if mission.guest_session_id != principal.guest_session_id:
+                raise ForbiddenError(
+                    detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
+                )
 
         item = await self.repo.get_item_by_id(session, item_id)
         if not item or item.mission_id != mission_id:
@@ -280,21 +347,26 @@ class MissionService:
         self,
         session: AsyncSession,
         mission_id: uuid.UUID,
-        user_id: uuid.UUID,
+        principal: Principal,
     ) -> MissionRouteResponse:
-        """Compute monotonic in-store walking path for completed mission."""
+        """Generate wayfinding path for mission items."""
         mission = await self.repo.get_by_id(session, mission_id)
         if not mission:
             raise NotFoundError(detail=f"Mission {mission_id} not found", code="MISSION_NOT_FOUND")
 
-        if mission.user_id != user_id:
-            raise ForbiddenError(
-                detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
-            )
+        if mission.user_id and principal.is_authenticated:
+            if mission.user_id != principal.user_id:
+                raise ForbiddenError(
+                    detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
+                )
+        elif mission.guest_session_id and principal.is_guest:
+            if mission.guest_session_id != principal.guest_session_id:
+                raise ForbiddenError(
+                    detail="Unauthorized access to this mission", code="MISSION_FORBIDDEN"
+                )
 
-        # Convert mission items into OptimizedBasketItem for WayfindingService
-        basket_items: list[OptimizedBasketItem] = []
         store_names: dict[uuid.UUID, str] = {}
+        basket_items: list[OptimizedBasketItem] = []
 
         for it in mission.items:
             s_name = it.store.name if it.store else "Store"

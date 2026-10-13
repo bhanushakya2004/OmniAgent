@@ -5,7 +5,7 @@ import uuid
 from decimal import Decimal
 from typing import TYPE_CHECKING, Any
 
-from sqlalchemy import DateTime, ForeignKey, Integer, Numeric, String, func
+from sqlalchemy import DateTime, ForeignKey, Integer, Numeric, String, UniqueConstraint, func
 from sqlalchemy.dialects.postgresql import ARRAY, JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -22,10 +22,16 @@ class Mission(Base, UUIDPrimaryKeyMixin, TimestampMixin):
 
     __tablename__ = "missions"
 
-    user_id: Mapped[uuid.UUID] = mapped_column(
+    user_id: Mapped[uuid.UUID | None] = mapped_column(
         UUID(as_uuid=True),
         ForeignKey("users.id", ondelete="CASCADE"),
-        nullable=False,
+        nullable=True,
+        index=True,
+    )
+    guest_session_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True),
+        ForeignKey("guest_sessions.id", ondelete="CASCADE"),
+        nullable=True,
         index=True,
     )
     status: Mapped[str] = mapped_column(
@@ -73,6 +79,12 @@ class Mission(Base, UUIDPrimaryKeyMixin, TimestampMixin):
         back_populates="mission",
         cascade="all, delete-orphan",
         order_by="MissionRun.created_at",
+    )
+    events: Mapped[list["MissionEvent"]] = relationship(
+        "MissionEvent",
+        back_populates="mission",
+        cascade="all, delete-orphan",
+        order_by="MissionEvent.sequence_id",
     )
 
 
@@ -191,3 +203,40 @@ class MissionRun(Base, UUIDPrimaryKeyMixin):
     )
 
     mission: Mapped["Mission"] = relationship("Mission", back_populates="traces")
+
+
+class MissionEvent(Base, UUIDPrimaryKeyMixin):
+    """Persisted Server-Sent Event for resumable streaming replay."""
+
+    __tablename__ = "mission_events"
+
+    mission_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True),
+        ForeignKey("missions.id", ondelete="CASCADE"),
+        nullable=False,
+        index=True,
+    )
+    sequence_id: Mapped[int] = mapped_column(
+        Integer,
+        nullable=False,
+        index=True,
+    )
+    event_type: Mapped[str] = mapped_column(
+        String(50),
+        nullable=False,
+        index=True,
+    )
+    payload: Mapped[dict[str, Any]] = mapped_column(
+        JSONB,
+        nullable=False,
+        default=dict,
+    )
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime(timezone=True),
+        server_default=func.now(),
+        nullable=False,
+    )
+
+    mission: Mapped["Mission"] = relationship("Mission", back_populates="events")
+
+    __table_args__ = (UniqueConstraint("mission_id", "sequence_id", name="uq_mission_sequence"),)

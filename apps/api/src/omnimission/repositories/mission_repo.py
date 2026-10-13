@@ -16,9 +16,10 @@ class MissionRepository:
     async def create_mission(
         self,
         session: AsyncSession,
-        user_id: uuid.UUID,
+        user_id: uuid.UUID | None,
         raw_text: str,
         selected_store_ids: list[uuid.UUID],
+        guest_session_id: uuid.UUID | None = None,
         language: str = "en",
         input_modalities: list[str] | None = None,
         constraints: dict[str, Any] | None = None,
@@ -26,6 +27,7 @@ class MissionRepository:
         """Create initial mission record."""
         mission = Mission(
             user_id=user_id,
+            guest_session_id=guest_session_id,
             raw_text=raw_text.strip(),
             selected_store_ids=selected_store_ids,
             language=language,
@@ -54,19 +56,23 @@ class MissionRepository:
     async def list_for_user(
         self,
         session: AsyncSession,
-        user_id: uuid.UUID,
+        user_id: uuid.UUID | None = None,
+        guest_session_id: uuid.UUID | None = None,
         limit: int = 20,
         offset: int = 0,
     ) -> list[Mission]:
-        """List past missions for a user."""
+        """List past missions for a user or guest session."""
         stmt = (
             select(Mission)
             .options(selectinload(Mission.items))
-            .where(Mission.user_id == user_id)
             .order_by(Mission.created_at.desc())
             .limit(limit)
             .offset(offset)
         )
+        if user_id:
+            stmt = stmt.where(Mission.user_id == user_id)
+        elif guest_session_id:
+            stmt = stmt.where(Mission.guest_session_id == guest_session_id)
         result = await session.execute(stmt)
         return list(result.scalars().all())
 

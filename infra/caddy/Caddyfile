@@ -1,0 +1,32 @@
+{
+    admin off
+    auto_https disable_redirects
+}
+
+# OmniMission AI local HTTP/2 TLS termination
+localhost:8443 {
+    tls internal
+
+    # FastAPI Backend Reverse Proxy (with unbuffered SSE streaming)
+    handle /api/* {
+        reverse_proxy api:8000 {
+            transport http {
+                versions 1.1 2
+            }
+            flush_interval -1
+        }
+    }
+
+    handle /static/* {
+        reverse_proxy api:8000
+    }
+
+    handle /health {
+        reverse_proxy api:8000
+    }
+
+    # Next.js Frontend Reverse Proxy
+    handle /* {
+        reverse_proxy web:3000
+    }
+}
