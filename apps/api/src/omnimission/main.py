@@ -14,9 +14,11 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from omnimission.api.v1.auth import router as auth_router
+from omnimission.api.v1.cart import router as cart_router
 from omnimission.api.v1.catalog import router as catalog_router
 from omnimission.api.v1.merchant import router as merchant_router
 from omnimission.api.v1.missions import router as missions_router
+from omnimission.api.v1.orders import router as orders_router
 from omnimission.api.v1.stores import router as stores_router
 from omnimission.api.v1.uploads import router as uploads_router
 from omnimission.api.v1.vision import router as vision_router
@@ -139,6 +141,8 @@ def create_app() -> FastAPI:
 
     # Mount API routers
     app.include_router(auth_router, prefix="/api/v1")
+    app.include_router(cart_router, prefix="/api/v1")
+    app.include_router(orders_router, prefix="/api/v1")
     app.include_router(stores_router, prefix="/api/v1")
     app.include_router(catalog_router, prefix="/api/v1")
     app.include_router(missions_router, prefix="/api/v1")

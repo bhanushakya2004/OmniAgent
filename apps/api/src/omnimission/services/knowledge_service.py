@@ -132,7 +132,9 @@ class KnowledgeService:
                         .values(id=dt_node_id, name=dt, entity_type="dietary_tag", properties={})
                         .on_conflict_do_nothing()
                     )
-                    edge_id = uuid.uuid5(uuid.NAMESPACE_DNS, f"edge:{doc_node_id}:{dt_node_id}:satisfies")
+                    edge_id = uuid.uuid5(
+                        uuid.NAMESPACE_DNS, f"edge:{doc_node_id}:{dt_node_id}:satisfies"
+                    )
                     await session.execute(
                         insert(KGEdge)
                         .values(
@@ -163,7 +165,9 @@ class KnowledgeService:
                     )
                     node_count += 1
 
-                    edge_id = uuid.uuid5(uuid.NAMESPACE_DNS, f"edge:{doc_node_id}:{ing_node_id}:requires")
+                    edge_id = uuid.uuid5(
+                        uuid.NAMESPACE_DNS, f"edge:{doc_node_id}:{ing_node_id}:requires"
+                    )
                     await session.execute(
                         insert(KGEdge)
                         .values(
@@ -195,7 +199,9 @@ class KnowledgeService:
                             )
                             .on_conflict_do_nothing()
                         )
-                        sub_edge_id = uuid.uuid5(uuid.NAMESPACE_DNS, f"edge:{sub_node_id}:{ing_node_id}:sub")
+                        sub_edge_id = uuid.uuid5(
+                            uuid.NAMESPACE_DNS, f"edge:{sub_node_id}:{ing_node_id}:sub"
+                        )
                         await session.execute(
                             insert(KGEdge)
                             .values(
@@ -273,7 +279,9 @@ class KnowledgeService:
 
         # 1. Servings / People
         servings: int | None = None
-        serv_match = re.search(r"(\d+)\s*(people|persons|servings|guests|pax)", clean, re.IGNORECASE)
+        serv_match = re.search(
+            r"(\d+)\s*(people|persons|servings|guests|pax)", clean, re.IGNORECASE
+        )
         if serv_match:
             servings = int(serv_match.group(1))
 
@@ -294,8 +302,15 @@ class KnowledgeService:
             diet_tags.append("keto")
 
         # 3. Cleaned Search Goal
-        goal = re.sub(r"for\s+\d+\s*(people|persons|servings|guests|pax)", "", clean, flags=re.IGNORECASE)
-        goal = re.sub(r"eggless|gluten[-\s]free|vegan|vegetarian|high[-\s]protein|keto", "", goal, flags=re.IGNORECASE)
+        goal = re.sub(
+            r"for\s+\d+\s*(people|persons|servings|guests|pax)", "", clean, flags=re.IGNORECASE
+        )
+        goal = re.sub(
+            r"eggless|gluten[-\s]free|vegan|vegetarian|high[-\s]protein|keto",
+            "",
+            goal,
+            flags=re.IGNORECASE,
+        )
         goal = re.sub(r"i want (to make|everything needed to make)?", "", goal, flags=re.IGNORECASE)
         goal = goal.strip(" ,.-")
 
@@ -332,9 +347,31 @@ class KnowledgeService:
         )
 
         stop_words = {
-            "i", "want", "everything", "needed", "to", "make", "an", "a", "the",
-            "for", "people", "persons", "guests", "with", "and", "in", "of", "some",
-            "give", "me", "need", "find", "get", "looking", "all"
+            "i",
+            "want",
+            "everything",
+            "needed",
+            "to",
+            "make",
+            "an",
+            "a",
+            "the",
+            "for",
+            "people",
+            "persons",
+            "guests",
+            "with",
+            "and",
+            "in",
+            "of",
+            "some",
+            "give",
+            "me",
+            "need",
+            "find",
+            "get",
+            "looking",
+            "all",
         }
         words = [w for w in re.findall(r"\w+", query.lower()) if len(w) > 1 and w not in stop_words]
         or_terms = " | ".join(words) if words else query
@@ -347,9 +384,9 @@ class KnowledgeService:
                 KnowledgeDoc.title,
                 KnowledgeDoc.type,
                 KnowledgeDoc.diet_tags,
-                func.ts_rank(
-                    KnowledgeChunk.tsv, func.to_tsquery("english", or_terms)
-                ).label("rank"),
+                func.ts_rank(KnowledgeChunk.tsv, func.to_tsquery("english", or_terms)).label(
+                    "rank"
+                ),
             )
             .join(KnowledgeDoc, KnowledgeChunk.doc_id == KnowledgeDoc.id)
             .where(KnowledgeChunk.tsv.op("@@")(func.to_tsquery("english", or_terms)))
@@ -463,21 +500,25 @@ class KnowledgeService:
                 rel = row["relation_type"]
                 if rel == "requires":
                     props = row["properties"] or {}
-                    ingredients.append({
-                        "name": row["entity_name"],
-                        "qty": props.get("qty", 1),
-                        "unit": props.get("unit", "piece"),
-                        "optional": props.get("optional", False),
-                    })
+                    ingredients.append(
+                        {
+                            "name": row["entity_name"],
+                            "qty": props.get("qty", 1),
+                            "unit": props.get("unit", "piece"),
+                            "optional": props.get("optional", False),
+                        }
+                    )
                 elif rel == "satisfies_diet":
                     diets.append(row["entity_name"])
 
             sub_res = await session.execute(sub_stmt)
             for row in sub_res.mappings().all():
-                substitutions.append({
-                    "substitute": row["substitute_name"],
-                    "replaces": row["original_name"],
-                })
+                substitutions.append(
+                    {
+                        "substitute": row["substitute_name"],
+                        "replaces": row["original_name"],
+                    }
+                )
 
         return {
             "ingredients": ingredients,
@@ -485,9 +526,7 @@ class KnowledgeService:
             "substitutions": substitutions,
         }
 
-    async def retrieve_and_plan(
-        self, raw_query: str, top_k: int = 5
-    ) -> dict[str, Any]:
+    async def retrieve_and_plan(self, raw_query: str, top_k: int = 5) -> dict[str, Any]:
         """Full pipeline: query decomposition -> hybrid chunk retrieval -> graph expansion -> reranking."""
         decomp = self.decompose_query(raw_query)
         goal = decomp["goal"]

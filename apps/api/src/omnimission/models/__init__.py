@@ -1,5 +1,11 @@
-"""Database models module."""
-
+from omnimission.models.commerce import (
+    Cart,
+    CartItem,
+    GuestSession,
+    Order,
+    OrderItem,
+    PaymentSimulated,
+)
 from omnimission.models.inventory import StoreInventory
 from omnimission.models.knowledge import KGEdge, KGNode, KnowledgeChunk, KnowledgeDoc
 from omnimission.models.mission import Mission, MissionItem, MissionRun
@@ -23,4 +29,10 @@ __all__ = [
     "KnowledgeChunk",
     "KGNode",
     "KGEdge",
+    "GuestSession",
+    "Cart",
+    "CartItem",
+    "Order",
+    "OrderItem",
+    "PaymentSimulated",
 ]
