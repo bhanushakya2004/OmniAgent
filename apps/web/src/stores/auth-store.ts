@@ -17,6 +17,7 @@ interface AuthState {
   isLoading: boolean;
   setAuth: (user: User, token: string) => void;
   clearAuth: () => void;
+  logout: () => void;
   setUser: (user: User) => void;
 }
 
@@ -36,6 +37,14 @@ export const useAuthStore = create<AuthState>()(
         set({ user, accessToken: token });
       },
       clearAuth: () => {
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("omni_access_token");
+          document.cookie = "omni_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+          document.cookie = "omni_logged_in=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+        set({ user: null, accessToken: null });
+      },
+      logout: () => {
         if (typeof window !== "undefined") {
           localStorage.removeItem("omni_access_token");
           document.cookie = "omni_role=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
