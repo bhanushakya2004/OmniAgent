@@ -3,7 +3,9 @@ FROM python:3.12-slim AS builder
 WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    VIRTUAL_ENV=/opt/venv \
+    PATH="/opt/venv/bin:$PATH"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
@@ -12,14 +14,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY --from=ghcr.io/astral-sh/uv:0.8.15 /uv /bin/uv
 
+RUN uv venv /opt/venv
+
 COPY pyproject.toml README.md ./
-RUN uv venv /opt/venv && uv pip install --no-cache -r pyproject.toml
+COPY src ./src
+RUN uv pip install --no-cache .
 
 FROM python:3.12-slim AS runner
 
 WORKDIR /app
 
 ENV PATH="/opt/venv/bin:$PATH" \
+    VIRTUAL_ENV=/opt/venv \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
@@ -30,9 +36,11 @@ COPY --from=builder /opt/venv /opt/venv
 COPY src ./src
 COPY migrations ./migrations
 COPY alembic.ini ./alembic.ini
+COPY entrypoint.sh ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh && chown omni:omni ./entrypoint.sh
 
 USER omni
 
 EXPOSE 8000
 
-CMD ["uvicorn", "omnimission.main:app", "--host", "0.0.0.0", "--port", "8000"]
+ENTRYPOINT ["./entrypoint.sh"]

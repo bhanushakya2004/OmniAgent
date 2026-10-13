@@ -1,15 +1,16 @@
-# OmniMission AI 🛒✨
+# OmniAgent 🛒✨
 **Multimodal Goal-Driven Phygital Commerce Engine**  
 *Built for the Google AI Hackathon — Phase 2: The Agentic Intelligence Layer (v0.2.0)*
 
-[![CI Status](https://github.com/omnimission/omnimission-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/omnimission/omnimission-ai/actions)
+[![CI Status](https://github.com/bhanushakya2004/OmniAgent/actions/workflows/ci.yml/badge.svg)](https://github.com/bhanushakya2004/OmniAgent/actions)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi)](https://fastapi.tiangolo.com)
 [![Next.js](https://img.shields.io/badge/Next.js-15.5+-black?logo=next.js)](https://nextjs.org)
 [![Agno](https://img.shields.io/badge/Agno-3.1.3-blue)](https://agno.com)
 [![Gemini](https://img.shields.io/badge/Google-Gemini_2.0/2.5-4285F4?logo=google)](https://ai.google.dev)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16_+_pgvector-336791?logo=postgresql)](https://github.com/pgvector/pgvector)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict_5.0-3178C6?logo=typescript)](https://www.typescriptlang.org)
-[![Tests](https://img.shields.io/badge/Tests-98_Passing-success)](https://github.com/omnimission/omnimission-ai)
+[![Docker](https://img.shields.io/badge/Docker-One--Command-2496ED?logo=docker)](docker-compose.yml)
+[![Tests](https://img.shields.io/badge/Tests-98_Passing-success)](docs/EVALUATION.md)
 [![Grounding Invariant](https://img.shields.io/badge/Grounding_Invariant-100%25-brightgreen)](docs/EVALUATION.md)
 [![SqlGuard](https://img.shields.io/badge/SqlGuard-100%25_Attacks_Blocked-brightgreen)](docs/EVALUATION.md)
 
@@ -22,15 +23,13 @@
 
 Traditional ecommerce applications show static, flat catalogs without understanding real human goals, and disconnect shoppers from the physical retail inventory situated within 2 kilometers of their homes. When a customer wants to host an 8-person dinner party, prepare an eggless high-protein cake, or purchase travel-sized toiletries compliant with airline rules, they must manually search dozens of individual ingredients and guess whether local stores actually have them in stock.
 
-**OmniMission AI** bridges this physical-digital ("phygital") gap through a dual-sided platform powered by an agentic intelligence harness:
+**OmniAgent** bridges this physical-digital ("phygital") gap through a dual-sided platform powered by an agentic intelligence harness:
 - **Shoppers (`user` & anonymous guests):** State fuzzy goals in text, multi-lingual voice (Hindi, Tamil, Kannada), or photos. An autonomous **Agno** multi-agent workflow powered by **Google Gemini** decomposes the intent into required ingredients, performs hybrid vector + full-text search against the physical inventory of nearby stores, proposes dietary-aligned substitutes when items are out of stock, resolves exact in-store shelf coordinates (`Aisle`, `Bay`, `Shelf`), generates a monotonic walking path, and adds items directly to a cart with guest session persistence and seamless checkout.
 - **Merchants (`merchant`):** Operate a real-time command portal providing neighborhood demand radar (tracking trending searches and out-of-stock substitution revenue loss), live shelf inventory management, automated AI vision shelf audits via Gemini Vision, replenishment restock task workflows, and an autonomous **Store Analyst** with guarded natural-language-to-SQL (NL2SQL), proactive daily briefings, and Human-in-the-Loop (HITL) action proposals.
 
 ---
 
 ## 2. Phase 2 Agentic Intelligence Layer Highlights
-
-Phase 2 transforms OmniMission AI from an app with an LLM call into a genuinely agentic, retrieval-grounded, tool-governed commerce engine:
 
 1. **Guest-First Conversational Commerce (`/shop`):**
    - Unauthenticated shoppers immediately search physical catalog items with instant dietary filter chips or switch to **Ask AI** mode.
@@ -67,7 +66,7 @@ Phase 2 transforms OmniMission AI from an app with an LLM call into a genuinely 
 7. **Glass-Box Agent Inspector:**
    - Dedicated "Inspect AI" telemetry modal on `/shop` exposing the complete internal trajectory: model used, agent transitions, tool invocations, RAG chunks, SQL queries, grounding audits, and latency statistics.
 
-8. **Empirical Evaluation Suite (`make eval`):**
+8. **Empirical Evaluation Suite:**
    - Automated benchmark suite measuring:
      - Knowledge Retrieval: **Hit Rate @ 5 = 1.00**, **MRR @ 5 = 0.90**, Latency = ~65 ms.
      - Physical Grounding Invariant: **100.0% adherence**, **100.0% price accuracy**, **0 hallucinations** across 20 shopper missions.
@@ -152,55 +151,23 @@ flowchart TB
 
 ---
 
-## 5. 5-Minute Quickstart
+## 5. One-Command Quickstart (Docker)
 
-### Prerequisites
-- [Docker & Docker Compose](https://www.docker.com/)
-- [uv](https://docs.astral.sh/uv/) (Fast Python package manager)
-- [Node.js](https://nodejs.org/) v20+ & npm
+Everything starts with **just one Docker command**. The containers automatically start PostgreSQL with pgvector, run all database migrations, load the retail seed catalog (358 SKUs across 7 stores), and launch the FastAPI backend, Next.js frontend, and Caddy reverse proxy:
 
-### 1. Clone & Configure Environment
 ```bash
-git clone https://github.com/omnimission/omnimission-ai.git
-cd omnimission-ai
-cp .env.example .env
-# Optional: Add GOOGLE_API_KEY in .env to use live Gemini models
-# (Deterministic offline fallback runs automatically without an API key)
+docker compose up --build
 ```
 
-### 2. Start PostgreSQL with pgvector
-```bash
-make db
-# Starts pgvector/pgvector:pg16 container on localhost:5432
-```
+### Access URLs
+- **Shopper Experience:** [http://localhost:3000/shop](http://localhost:3000/shop)
+- **Merchant Operations:** [http://localhost:3000/merchant](http://localhost:3000/merchant)
+- **Backend API Docs (Swagger):** [http://localhost:8000/docs](http://localhost:8000/docs)
+- **Caddy HTTP/2 Reverse Proxy:** [https://localhost:8443](https://localhost:8443)
 
-### 3. Apply Migrations & Deterministic Seed Data
+### Stop Services
 ```bash
-make migrate
-make seed
-# Seeds 358 SKUs across 10 departments, 7 stores (2,506 inventory rows),
-# and 65 structured knowledge base documents with Knowledge Graph edges
-```
-
-### 4. Run Automated Evaluation Harness
-```bash
-make eval
-# Runs RAG retrieval, Physical Grounding Invariant, and SqlGuard benchmarks
-# Results are automatically verified and written to docs/EVALUATION.md
-```
-
-### 5. Start Development Stack
-```bash
-# Terminal 1: Backend API
-make dev-api
-# API available at http://localhost:8000
-# OpenAPI Docs: http://localhost:8000/docs
-
-# Terminal 2: Web Frontend
-make dev-web
-# Web UI available at http://localhost:3000
-# Flagship shopper route: http://localhost:3000/shop
-# Merchant operations:    http://localhost:3000/merchant
+docker compose down
 ```
 
 ---
@@ -218,20 +185,20 @@ make dev-web
 
 ---
 
-## 7. Verification & Quality Commands
+## 7. Verification & Evaluation Commands
+
+Run tests and benchmarks directly inside Docker without needing local language toolchains:
 
 ```bash
-# Run backend test suite (98 unit, integration, and agent-eval tests)
-make test
+# Run backend test suite (98 passing tests)
+docker compose run --rm api pytest -v
 
-# Run empirical evaluation harness (RAG, Grounding Invariant, SqlGuard)
-make eval
+# Run automated empirical evaluation benchmarks (RAG, Grounding Invariant, SqlGuard)
+docker compose run --rm api python -m omnimission.scripts.run_evals
 
-# Run code style, formatting, and strict type checking
-make lint
-
-# Build and verify production Next.js frontend bundle
-cd apps/web && npm run build
+# Run backend linter & strict type checking
+docker compose run --rm api ruff check .
+docker compose run --rm api mypy src
 ```
 
 ---

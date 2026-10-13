@@ -34,7 +34,7 @@ Evaluated over the curated 65-document multi-corpora knowledge base (recipes, tr
 | **Hit Rate @ 1** | ≥ 0.60 | **0.80** | PASS |
 | **Hit Rate @ 5** | ≥ 0.80 | **1.00** | PASS |
 | **MRR @ 5 (Mean Reciprocal Rank)** | ≥ 0.70 | **0.90** | PASS |
-| **Mean Retrieval Latency** | ≤ 100 ms | **65.8 ms** | PASS |
+| **Mean Retrieval Latency** | ≤ 100 ms | **66.4 ms** | PASS |
 
 ### Ablation Matrix & Architecture Comparison
 
@@ -44,7 +44,7 @@ Evaluated over the curated 65-document multi-corpora knowledge base (recipes, tr
 | **Sparse Lexical Only** (PostgreSQL tsvector / ts_rank) | 0.60 | 0.80 | 0.68 | 8 ms |
 | **Hybrid (Dense + Sparse RRF k=60)** | 0.60 | 0.80 | 0.70 | 22 ms |
 | **Hybrid + Knowledge Graph Expansion** | 0.80 | 1.00 | 0.85 | 31 ms |
-| **Full Pipeline (Hybrid + KG + Listwise Reranker)** | **0.80** | **1.00** | **0.90** | **65.8 ms** |
+| **Full Pipeline (Hybrid + KG + Listwise Reranker)** | **0.80** | **1.00** | **0.90** | **66.4 ms** |
 
 ### Key Architectural Findings
 1. **Sparse Lexical + Dense Semantic Complementarity:** Sparse search captures exact retail entities (e.g. `strawberry`, `mumbai`, `paneer`), while dense vectors cluster semantic goal intent. Reciprocal Rank Fusion (`k=60`) merges both signals without parameter drift.
@@ -88,7 +88,7 @@ Evaluated across 30 SQL statements: 15 valid multi-table analytical queries (inv
 | **Adversarial Attacks Blocked** | 100% | **15/15 (100.0%)** | PASS |
 | **False Positive Rate** | 0.0% | **0.0%** | PASS |
 | **False Negative Rate (Security Leaks)** | 0.0% | **0.0%** | PASS |
-| **Mean AST Validation Latency** | ≤ 5 ms | **0.61 ms** | PASS |
+| **Mean AST Validation Latency** | ≤ 5 ms | **0.6 ms** | PASS |
 
 ### SqlGuard Defense Capabilities
 1. **AST Statement Filter:** Parses queries with `sqlglot` using the PostgreSQL dialect. Any statement other than `Select` is immediately rejected.
@@ -100,10 +100,10 @@ Evaluated across 30 SQL statements: 15 valid multi-table analytical queries (inv
 
 ## 4. Benchmark Reproduction
 
-To reproduce all benchmarks and re-generate this report:
+To reproduce all benchmarks and re-generate this report via Docker:
 
 ```bash
-make eval
+docker compose run --rm api python -m omnimission.scripts.run_evals
 ```
 
 Or execute directly with uv:
