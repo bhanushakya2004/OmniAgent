@@ -10,6 +10,7 @@ import {
   Sparkles,
   RefreshCw,
   Store,
+  Bot,
 } from "lucide-react";
 import { StoreHeader } from "@/components/merchant/store-header";
 import { KpiOverview } from "@/components/merchant/kpi-overview";
@@ -17,6 +18,7 @@ import { DemandRadar } from "@/components/merchant/demand-radar";
 import { InventoryTable } from "@/components/merchant/inventory-table";
 import { ShelfAuditPanel } from "@/components/merchant/shelf-audit-panel";
 import { RestockTasksKanban } from "@/components/merchant/restock-tasks-kanban";
+import { StoreAnalystConsole } from "@/components/merchant/store-analyst-console";
 import {
   getMerchantStores,
   getStoreOverviewKpis,
@@ -25,12 +27,12 @@ import {
   getRestockTasks,
 } from "@/lib/merchant-api";
 
-type ActiveTab = "overview" | "inventory" | "shelf-audit" | "restock-tasks";
+type ActiveTab = "analyst" | "overview" | "inventory" | "shelf-audit" | "restock-tasks";
 
 export default function MerchantPortalPage() {
   const queryClient = useQueryClient();
   const [selectedStoreId, setSelectedStoreId] = useState<string>("");
-  const [activeTab, setActiveTab] = useState<ActiveTab>("overview");
+  const [activeTab, setActiveTab] = useState<ActiveTab>("analyst");
   const [filterLowStockOnly, setFilterLowStockOnly] = useState(false);
 
   // 1. Fetch merchant stores
@@ -142,6 +144,21 @@ export default function MerchantPortalPage() {
           <nav className="-mb-px flex space-x-6 overflow-x-auto text-sm font-semibold">
             <button
               onClick={() => {
+                setActiveTab("analyst");
+                setFilterLowStockOnly(false);
+              }}
+              className={`flex items-center gap-2 border-b-2 py-3 px-1 transition-all ${
+                activeTab === "analyst"
+                  ? "border-emerald-600 text-emerald-600 dark:border-emerald-400 dark:text-emerald-400"
+                  : "border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+              }`}
+            >
+              <Bot className="h-4 w-4 text-primary" />
+              Store Analyst (AI Console)
+            </button>
+
+            <button
+              onClick={() => {
                 setActiveTab("overview");
                 setFilterLowStockOnly(false);
               }}
@@ -202,6 +219,10 @@ export default function MerchantPortalPage() {
         </div>
 
         {/* Tab Content Panes */}
+        {activeTab === "analyst" && (
+          <StoreAnalystConsole storeId={selectedStoreId} />
+        )}
+
         {activeTab === "overview" && (
           <div className="space-y-6">
             <DemandRadar
