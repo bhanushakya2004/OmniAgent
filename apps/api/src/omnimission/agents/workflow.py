@@ -217,7 +217,11 @@ class MissionWorkflow:
                     substitutions_applied += 1
                     # Find hit for proposal
                     prop_hit = next(
-                        (h for h in all_search_hits if h.product_id == proposal.substitute_product_id),
+                        (
+                            h
+                            for h in all_search_hits
+                            if h.product_id == proposal.substitute_product_id
+                        ),
                         candidates[0],
                     )
                     subtotal = prop_hit.price * Decimal(item.quantity)
@@ -272,8 +276,7 @@ class MissionWorkflow:
         # Distinct stores used
         used_store_ids = {it.store_id for it in validated_basket}
         stores_used = [
-            {"id": str(s_id), "name": store_names.get(s_id, "Store")}
-            for s_id in used_store_ids
+            {"id": str(s_id), "name": store_names.get(s_id, "Store")} for s_id in used_store_ids
         ]
 
         mission_result = MissionResult(

@@ -10,6 +10,7 @@ from omnimission.ports.search_backend import SearchResult
 
 class GroundingViolation(Exception):
     """Raised when an ungrounded SKU or fabricated price is detected."""
+
     pass
 
 

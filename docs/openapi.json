@@ -1394,10 +1394,686 @@
           }
         }
       }
+    },
+    "/api/v1/merchant/stores": {
+      "get": {
+        "tags": [
+          "merchant"
+        ],
+        "summary": "List physical stores owned by merchant",
+        "description": "Retrieve all physical retail locations registered to the merchant.",
+        "operationId": "list_merchant_stores_api_v1_merchant_stores_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MerchantStoreResponse"
+                  },
+                  "title": "Response List Merchant Stores Api V1 Merchant Stores Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchant/inventory": {
+      "get": {
+        "tags": [
+          "merchant"
+        ],
+        "summary": "List store inventory with shelf coordinates and stock levels",
+        "description": "List inventory SKUs, stock counts, and Aisle/Bay/Shelf positions.",
+        "operationId": "list_store_inventory_api_v1_merchant_inventory_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Store UUID",
+              "title": "Store Id"
+            },
+            "description": "Store UUID"
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MerchantInventoryItemResponse"
+                  },
+                  "title": "Response List Store Inventory Api V1 Merchant Inventory Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchant/inventory/{inventory_id}": {
+      "patch": {
+        "tags": [
+          "merchant"
+        ],
+        "summary": "Update SKU stock quantity, price, or shelf location",
+        "description": "Update stock quantity, active flag, or physical aisle coordinates.",
+        "operationId": "update_inventory_item_api_v1_merchant_inventory__inventory_id__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "inventory_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Inventory Id"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInventoryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MerchantInventoryItemResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchant/inventory/import": {
+      "post": {
+        "tags": [
+          "merchant"
+        ],
+        "summary": "Batch import or update inventory via CSV file",
+        "description": "Upload CSV inventory batch with atomic validation and error reporting.",
+        "operationId": "import_inventory_csv_api_v1_merchant_inventory_import_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Store UUID",
+              "title": "Store Id"
+            },
+            "description": "Store UUID"
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_import_inventory_csv_api_v1_merchant_inventory_import_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CsvImportReport"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchant/analytics/overview": {
+      "get": {
+        "tags": [
+          "merchant"
+        ],
+        "summary": "Store KPI metrics (active missions, grounded GMV, at-risk SKUs)",
+        "description": "Get operational KPIs for merchant dashboard.",
+        "operationId": "get_overview_kpis_api_v1_merchant_analytics_overview_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Store UUID",
+              "title": "Store Id"
+            },
+            "description": "Store UUID"
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StoreOverviewKpis"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchant/analytics/demand": {
+      "get": {
+        "tags": [
+          "merchant"
+        ],
+        "summary": "Demand radar signals and unmet customer queries",
+        "description": "Get trending customer intents and out-of-stock substitution frequencies.",
+        "operationId": "get_demand_signals_api_v1_merchant_analytics_demand_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Store UUID",
+              "title": "Store Id"
+            },
+            "description": "Store UUID"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 50,
+              "minimum": 1,
+              "default": 10,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DemandSignal"
+                  },
+                  "title": "Response Get Demand Signals Api V1 Merchant Analytics Demand Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchant/shelf-audit": {
+      "post": {
+        "tags": [
+          "merchant"
+        ],
+        "summary": "Run AI shelf audit on uploaded photo and auto-draft restock tasks",
+        "description": "Inspect shelf photo, identify stock gaps against catalog, and draft replenishment tasks.",
+        "operationId": "conduct_shelf_audit_api_v1_merchant_shelf_audit_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShelfAuditRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShelfAuditResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchant/restock-tasks": {
+      "get": {
+        "tags": [
+          "merchant"
+        ],
+        "summary": "List replenishment restock tasks",
+        "description": "Retrieve restock replenishment tasks for store operations.",
+        "operationId": "list_restock_tasks_api_v1_merchant_restock_tasks_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "store_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Store UUID",
+              "title": "Store Id"
+            },
+            "description": "Store UUID"
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RestockTaskResponse"
+                  },
+                  "title": "Response List Restock Tasks Api V1 Merchant Restock Tasks Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/merchant/restock-tasks/{task_id}": {
+      "patch": {
+        "tags": [
+          "merchant"
+        ],
+        "summary": "Update restock task status (approved, completed, dismissed)",
+        "description": "Approve or complete a replenishment restock task.",
+        "operationId": "update_restock_task_api_v1_merchant_restock_tasks__task_id__patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Task Id"
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Optional access token for SSE EventSource",
+              "title": "Token"
+            },
+            "description": "Optional access token for SSE EventSource"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRestockTaskRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestockTaskResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Body_import_inventory_csv_api_v1_merchant_inventory_import_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "contentMediaType": "application/octet-stream",
+            "title": "File",
+            "description": "CSV file with sku_slug, stock_qty, aisle, bay, shelf"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_import_inventory_csv_api_v1_merchant_inventory_import_post"
+      },
       "Body_transcribe_voice_api_v1_voice_transcribe_post": {
         "properties": {
           "file": {
@@ -1494,6 +2170,67 @@
         "title": "CreateMissionRequest",
         "description": "Payload to initiate a new mission."
       },
+      "CsvImportReport": {
+        "properties": {
+          "total_rows": {
+            "type": "integer",
+            "title": "Total Rows"
+          },
+          "imported_count": {
+            "type": "integer",
+            "title": "Imported Count"
+          },
+          "updated_count": {
+            "type": "integer",
+            "title": "Updated Count"
+          },
+          "errors": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Errors"
+          }
+        },
+        "type": "object",
+        "required": [
+          "total_rows",
+          "imported_count",
+          "updated_count"
+        ],
+        "title": "CsvImportReport",
+        "description": "Summary of batch inventory CSV upload."
+      },
+      "DemandSignal": {
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "mention_count": {
+            "type": "integer",
+            "title": "Mention Count"
+          },
+          "unmet_count": {
+            "type": "integer",
+            "title": "Unmet Count"
+          },
+          "trending_score": {
+            "type": "number",
+            "title": "Trending Score"
+          }
+        },
+        "type": "object",
+        "required": [
+          "query",
+          "mention_count",
+          "unmet_count",
+          "trending_score"
+        ],
+        "title": "DemandSignal",
+        "description": "Aggregated shopper intent demand velocity."
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -1506,6 +2243,149 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "MerchantInventoryItemResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "store_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Store Id"
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Product Id"
+          },
+          "product_name": {
+            "type": "string",
+            "title": "Product Name"
+          },
+          "product_brand": {
+            "type": "string",
+            "title": "Product Brand"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "sku": {
+            "type": "string",
+            "title": "Sku"
+          },
+          "price": {
+            "type": "string",
+            "title": "Price"
+          },
+          "mrp": {
+            "type": "string",
+            "title": "Mrp"
+          },
+          "stock_qty": {
+            "type": "integer",
+            "title": "Stock Qty"
+          },
+          "low_stock_threshold": {
+            "type": "integer",
+            "title": "Low Stock Threshold"
+          },
+          "aisle": {
+            "type": "integer",
+            "title": "Aisle"
+          },
+          "bay": {
+            "type": "integer",
+            "title": "Bay"
+          },
+          "shelf": {
+            "type": "integer",
+            "title": "Shelf"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          },
+          "stock_status": {
+            "type": "string",
+            "title": "Stock Status",
+            "description": "'healthy', 'low_stock', 'out_of_stock'"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "store_id",
+          "product_id",
+          "product_name",
+          "product_brand",
+          "category",
+          "sku",
+          "price",
+          "mrp",
+          "stock_qty",
+          "low_stock_threshold",
+          "aisle",
+          "bay",
+          "shelf",
+          "is_active",
+          "stock_status"
+        ],
+        "title": "MerchantInventoryItemResponse",
+        "description": "Store inventory SKU details."
+      },
+      "MerchantStoreResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "address": {
+            "type": "string",
+            "title": "Address"
+          },
+          "city": {
+            "type": "string",
+            "title": "City"
+          },
+          "lat": {
+            "type": "number",
+            "title": "Lat"
+          },
+          "lng": {
+            "type": "number",
+            "title": "Lng"
+          },
+          "is_active": {
+            "type": "boolean",
+            "title": "Is Active"
+          },
+          "total_skus": {
+            "type": "integer",
+            "title": "Total Skus",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "address",
+          "city",
+          "lat",
+          "lng",
+          "is_active"
+        ],
+        "title": "MerchantStoreResponse",
+        "description": "Store owned by merchant."
       },
       "MissionItemResponse": {
         "properties": {
@@ -1923,6 +2803,84 @@
         "title": "RefreshTokenRequest",
         "description": "Explicit refresh token payload for non-cookie HTTP clients."
       },
+      "RestockTaskResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "store_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Store Id"
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Product Id"
+          },
+          "product_name": {
+            "type": "string",
+            "title": "Product Name"
+          },
+          "aisle": {
+            "type": "integer",
+            "title": "Aisle"
+          },
+          "bay": {
+            "type": "integer",
+            "title": "Bay"
+          },
+          "shelf": {
+            "type": "integer",
+            "title": "Shelf"
+          },
+          "current_qty": {
+            "type": "integer",
+            "title": "Current Qty"
+          },
+          "recommended_qty": {
+            "type": "integer",
+            "title": "Recommended Qty"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "source": {
+            "type": "string",
+            "title": "Source"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "store_id",
+          "product_id",
+          "product_name",
+          "aisle",
+          "bay",
+          "shelf",
+          "current_qty",
+          "recommended_qty",
+          "reason",
+          "status",
+          "source",
+          "created_at"
+        ],
+        "title": "RestockTaskResponse",
+        "description": "Restock task representation."
+      },
       "RouteWaypointResponse": {
         "properties": {
           "step_number": {
@@ -2077,6 +3035,126 @@
         ],
         "title": "SearchResult",
         "description": "Normalized search candidate hit returned from candidate retrieval."
+      },
+      "ShelfAuditRequest": {
+        "properties": {
+          "file_url": {
+            "type": "string",
+            "title": "File Url",
+            "description": "URL of uploaded shelf photo"
+          },
+          "store_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Store Id"
+          },
+          "aisle": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Aisle",
+            "default": 1
+          }
+        },
+        "type": "object",
+        "required": [
+          "file_url",
+          "store_id"
+        ],
+        "title": "ShelfAuditRequest",
+        "description": "Payload to trigger visual shelf audit."
+      },
+      "ShelfAuditResult": {
+        "properties": {
+          "store_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Store Id"
+          },
+          "aisle": {
+            "type": "integer",
+            "title": "Aisle"
+          },
+          "total_gaps_detected": {
+            "type": "integer",
+            "title": "Total Gaps Detected"
+          },
+          "summary": {
+            "type": "string",
+            "title": "Summary"
+          },
+          "findings": {
+            "items": {
+              "$ref": "#/components/schemas/ShelfGapFinding"
+            },
+            "type": "array",
+            "title": "Findings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "store_id",
+          "aisle",
+          "total_gaps_detected",
+          "summary"
+        ],
+        "title": "ShelfAuditResult",
+        "description": "Comprehensive visual shelf audit report."
+      },
+      "ShelfGapFinding": {
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Product Id"
+          },
+          "product_name": {
+            "type": "string",
+            "title": "Product Name"
+          },
+          "aisle": {
+            "type": "integer",
+            "title": "Aisle"
+          },
+          "bay": {
+            "type": "integer",
+            "title": "Bay"
+          },
+          "shelf": {
+            "type": "integer",
+            "title": "Shelf"
+          },
+          "current_qty_estimate": {
+            "type": "integer",
+            "title": "Current Qty Estimate"
+          },
+          "recommended_qty": {
+            "type": "integer",
+            "title": "Recommended Qty"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          },
+          "severity": {
+            "type": "string",
+            "title": "Severity",
+            "description": "'high', 'medium', 'low'",
+            "default": "high"
+          }
+        },
+        "type": "object",
+        "required": [
+          "product_id",
+          "product_name",
+          "aisle",
+          "bay",
+          "shelf",
+          "current_qty_estimate",
+          "recommended_qty",
+          "reason"
+        ],
+        "title": "ShelfGapFinding",
+        "description": "Specific stock gap detected on a shelf."
       },
       "StoreDetailResponse": {
         "properties": {
@@ -2278,6 +3356,46 @@
         "title": "StoreNearbyResponse",
         "description": "Nearby store with computed distance."
       },
+      "StoreOverviewKpis": {
+        "properties": {
+          "store_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Store Id"
+          },
+          "store_name": {
+            "type": "string",
+            "title": "Store Name"
+          },
+          "total_missions": {
+            "type": "integer",
+            "title": "Total Missions"
+          },
+          "total_grounded_gmv": {
+            "type": "string",
+            "title": "Total Grounded Gmv"
+          },
+          "at_risk_skus_count": {
+            "type": "integer",
+            "title": "At Risk Skus Count"
+          },
+          "open_restock_tasks_count": {
+            "type": "integer",
+            "title": "Open Restock Tasks Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "store_id",
+          "store_name",
+          "total_missions",
+          "total_grounded_gmv",
+          "at_risk_skus_count",
+          "open_restock_tasks_count"
+        ],
+        "title": "StoreOverviewKpis",
+        "description": "Store level operational KPIs."
+      },
       "StoreResponse": {
         "properties": {
           "name": {
@@ -2390,6 +3508,87 @@
         "title": "TokenResponse",
         "description": "Access token payload returned upon login and refresh."
       },
+      "UpdateInventoryRequest": {
+        "properties": {
+          "stock_qty": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stock Qty"
+          },
+          "price": {
+            "anyOf": [
+              {
+                "type": "number",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price"
+          },
+          "aisle": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aisle"
+          },
+          "bay": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bay"
+          },
+          "shelf": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shelf"
+          },
+          "is_active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Active"
+          }
+        },
+        "type": "object",
+        "title": "UpdateInventoryRequest",
+        "description": "Payload to update stock count or shelf placement."
+      },
       "UpdateMissionItemRequest": {
         "properties": {
           "quantity": {
@@ -2405,6 +3604,21 @@
         ],
         "title": "UpdateMissionItemRequest",
         "description": "Payload to update an item's quantity in a mission basket."
+      },
+      "UpdateRestockTaskRequest": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "pattern": "^(pending|approved|completed|dismissed)$",
+            "title": "Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "UpdateRestockTaskRequest",
+        "description": "Payload to update task status."
       },
       "UploadResponse": {
         "properties": {

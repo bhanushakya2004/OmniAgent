@@ -412,10 +412,198 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/merchant/stores": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List physical stores owned by merchant
+         * @description Retrieve all physical retail locations registered to the merchant.
+         */
+        get: operations["list_merchant_stores_api_v1_merchant_stores_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/merchant/inventory": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List store inventory with shelf coordinates and stock levels
+         * @description List inventory SKUs, stock counts, and Aisle/Bay/Shelf positions.
+         */
+        get: operations["list_store_inventory_api_v1_merchant_inventory_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/merchant/inventory/{inventory_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Update SKU stock quantity, price, or shelf location
+         * @description Update stock quantity, active flag, or physical aisle coordinates.
+         */
+        patch: operations["update_inventory_item_api_v1_merchant_inventory__inventory_id__patch"];
+        trace?: never;
+    };
+    "/api/v1/merchant/inventory/import": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Batch import or update inventory via CSV file
+         * @description Upload CSV inventory batch with atomic validation and error reporting.
+         */
+        post: operations["import_inventory_csv_api_v1_merchant_inventory_import_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/merchant/analytics/overview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Store KPI metrics (active missions, grounded GMV, at-risk SKUs)
+         * @description Get operational KPIs for merchant dashboard.
+         */
+        get: operations["get_overview_kpis_api_v1_merchant_analytics_overview_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/merchant/analytics/demand": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Demand radar signals and unmet customer queries
+         * @description Get trending customer intents and out-of-stock substitution frequencies.
+         */
+        get: operations["get_demand_signals_api_v1_merchant_analytics_demand_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/merchant/shelf-audit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Run AI shelf audit on uploaded photo and auto-draft restock tasks
+         * @description Inspect shelf photo, identify stock gaps against catalog, and draft replenishment tasks.
+         */
+        post: operations["conduct_shelf_audit_api_v1_merchant_shelf_audit_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/merchant/restock-tasks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List replenishment restock tasks
+         * @description Retrieve restock replenishment tasks for store operations.
+         */
+        get: operations["list_restock_tasks_api_v1_merchant_restock_tasks_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/merchant/restock-tasks/{task_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Update restock task status (approved, completed, dismissed)
+         * @description Approve or complete a replenishment restock task.
+         */
+        patch: operations["update_restock_task_api_v1_merchant_restock_tasks__task_id__patch"];
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** Body_import_inventory_csv_api_v1_merchant_inventory_import_post */
+        Body_import_inventory_csv_api_v1_merchant_inventory_import_post: {
+            /**
+             * File
+             * @description CSV file with sku_slug, stock_qty, aisle, bay, shelf
+             */
+            file: string;
+        };
         /** Body_transcribe_voice_api_v1_voice_transcribe_post */
         Body_transcribe_voice_api_v1_voice_transcribe_post: {
             /** File */
@@ -462,10 +650,118 @@ export interface components {
                 [key: string]: unknown;
             } | null;
         };
+        /**
+         * CsvImportReport
+         * @description Summary of batch inventory CSV upload.
+         */
+        CsvImportReport: {
+            /** Total Rows */
+            total_rows: number;
+            /** Imported Count */
+            imported_count: number;
+            /** Updated Count */
+            updated_count: number;
+            /** Errors */
+            errors?: {
+                [key: string]: unknown;
+            }[];
+        };
+        /**
+         * DemandSignal
+         * @description Aggregated shopper intent demand velocity.
+         */
+        DemandSignal: {
+            /** Query */
+            query: string;
+            /** Mention Count */
+            mention_count: number;
+            /** Unmet Count */
+            unmet_count: number;
+            /** Trending Score */
+            trending_score: number;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
+        };
+        /**
+         * MerchantInventoryItemResponse
+         * @description Store inventory SKU details.
+         */
+        MerchantInventoryItemResponse: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Store Id
+             * Format: uuid
+             */
+            store_id: string;
+            /**
+             * Product Id
+             * Format: uuid
+             */
+            product_id: string;
+            /** Product Name */
+            product_name: string;
+            /** Product Brand */
+            product_brand: string;
+            /** Category */
+            category: string;
+            /** Sku */
+            sku: string;
+            /** Price */
+            price: string;
+            /** Mrp */
+            mrp: string;
+            /** Stock Qty */
+            stock_qty: number;
+            /** Low Stock Threshold */
+            low_stock_threshold: number;
+            /** Aisle */
+            aisle: number;
+            /** Bay */
+            bay: number;
+            /** Shelf */
+            shelf: number;
+            /** Is Active */
+            is_active: boolean;
+            /**
+             * Stock Status
+             * @description 'healthy', 'low_stock', 'out_of_stock'
+             */
+            stock_status: string;
+        };
+        /**
+         * MerchantStoreResponse
+         * @description Store owned by merchant.
+         */
+        MerchantStoreResponse: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Name */
+            name: string;
+            /** Address */
+            address: string;
+            /** City */
+            city: string;
+            /** Lat */
+            lat: number;
+            /** Lng */
+            lng: number;
+            /** Is Active */
+            is_active: boolean;
+            /**
+             * Total Skus
+             * @default 0
+             */
+            total_skus: number;
         };
         /**
          * MissionItemResponse
@@ -636,6 +932,50 @@ export interface components {
             refresh_token?: string | null;
         };
         /**
+         * RestockTaskResponse
+         * @description Restock task representation.
+         */
+        RestockTaskResponse: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Store Id
+             * Format: uuid
+             */
+            store_id: string;
+            /**
+             * Product Id
+             * Format: uuid
+             */
+            product_id: string;
+            /** Product Name */
+            product_name: string;
+            /** Aisle */
+            aisle: number;
+            /** Bay */
+            bay: number;
+            /** Shelf */
+            shelf: number;
+            /** Current Qty */
+            current_qty: number;
+            /** Recommended Qty */
+            recommended_qty: number;
+            /** Reason */
+            reason: string;
+            /** Status */
+            status: string;
+            /** Source */
+            source: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+        };
+        /**
          * RouteWaypointResponse
          * @description Wayfinding stop in store.
          */
@@ -714,6 +1054,77 @@ export interface components {
              * @default hybrid_rrf
              */
             match_method: string;
+        };
+        /**
+         * ShelfAuditRequest
+         * @description Payload to trigger visual shelf audit.
+         */
+        ShelfAuditRequest: {
+            /**
+             * File Url
+             * @description URL of uploaded shelf photo
+             */
+            file_url: string;
+            /**
+             * Store Id
+             * Format: uuid
+             */
+            store_id: string;
+            /**
+             * Aisle
+             * @default 1
+             */
+            aisle: number;
+        };
+        /**
+         * ShelfAuditResult
+         * @description Comprehensive visual shelf audit report.
+         */
+        ShelfAuditResult: {
+            /**
+             * Store Id
+             * Format: uuid
+             */
+            store_id: string;
+            /** Aisle */
+            aisle: number;
+            /** Total Gaps Detected */
+            total_gaps_detected: number;
+            /** Summary */
+            summary: string;
+            /** Findings */
+            findings?: components["schemas"]["ShelfGapFinding"][];
+        };
+        /**
+         * ShelfGapFinding
+         * @description Specific stock gap detected on a shelf.
+         */
+        ShelfGapFinding: {
+            /**
+             * Product Id
+             * Format: uuid
+             */
+            product_id: string;
+            /** Product Name */
+            product_name: string;
+            /** Aisle */
+            aisle: number;
+            /** Bay */
+            bay: number;
+            /** Shelf */
+            shelf: number;
+            /** Current Qty Estimate */
+            current_qty_estimate: number;
+            /** Recommended Qty */
+            recommended_qty: number;
+            /** Reason */
+            reason: string;
+            /**
+             * Severity
+             * @description 'high', 'medium', 'low'
+             * @default high
+             */
+            severity: string;
         };
         /**
          * StoreDetailResponse
@@ -813,6 +1224,27 @@ export interface components {
             categories?: string[];
         };
         /**
+         * StoreOverviewKpis
+         * @description Store level operational KPIs.
+         */
+        StoreOverviewKpis: {
+            /**
+             * Store Id
+             * Format: uuid
+             */
+            store_id: string;
+            /** Store Name */
+            store_name: string;
+            /** Total Missions */
+            total_missions: number;
+            /** Total Grounded Gmv */
+            total_grounded_gmv: string;
+            /** At Risk Skus Count */
+            at_risk_skus_count: number;
+            /** Open Restock Tasks Count */
+            open_restock_tasks_count: number;
+        };
+        /**
          * StoreResponse
          * @description Store entity representation.
          */
@@ -866,6 +1298,24 @@ export interface components {
             user: components["schemas"]["UserResponse"];
         };
         /**
+         * UpdateInventoryRequest
+         * @description Payload to update stock count or shelf placement.
+         */
+        UpdateInventoryRequest: {
+            /** Stock Qty */
+            stock_qty?: number | null;
+            /** Price */
+            price?: number | string | null;
+            /** Aisle */
+            aisle?: number | null;
+            /** Bay */
+            bay?: number | null;
+            /** Shelf */
+            shelf?: number | null;
+            /** Is Active */
+            is_active?: boolean | null;
+        };
+        /**
          * UpdateMissionItemRequest
          * @description Payload to update an item's quantity in a mission basket.
          */
@@ -875,6 +1325,14 @@ export interface components {
              * @description Updated quantity (0 to remove)
              */
             quantity: number;
+        };
+        /**
+         * UpdateRestockTaskRequest
+         * @description Payload to update task status.
+         */
+        UpdateRestockTaskRequest: {
+            /** Status */
+            status: string;
         };
         /**
          * UploadResponse
@@ -1750,6 +2208,325 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["VisionAnalyzeResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_merchant_stores_api_v1_merchant_stores_get: {
+        parameters: {
+            query?: {
+                /** @description Optional access token for SSE EventSource */
+                token?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MerchantStoreResponse"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_store_inventory_api_v1_merchant_inventory_get: {
+        parameters: {
+            query: {
+                /** @description Store UUID */
+                store_id: string;
+                /** @description Optional access token for SSE EventSource */
+                token?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MerchantInventoryItemResponse"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_inventory_item_api_v1_merchant_inventory__inventory_id__patch: {
+        parameters: {
+            query?: {
+                /** @description Optional access token for SSE EventSource */
+                token?: string | null;
+            };
+            header?: never;
+            path: {
+                inventory_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateInventoryRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MerchantInventoryItemResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    import_inventory_csv_api_v1_merchant_inventory_import_post: {
+        parameters: {
+            query: {
+                /** @description Store UUID */
+                store_id: string;
+                /** @description Optional access token for SSE EventSource */
+                token?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_import_inventory_csv_api_v1_merchant_inventory_import_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CsvImportReport"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_overview_kpis_api_v1_merchant_analytics_overview_get: {
+        parameters: {
+            query: {
+                /** @description Store UUID */
+                store_id: string;
+                /** @description Optional access token for SSE EventSource */
+                token?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StoreOverviewKpis"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_demand_signals_api_v1_merchant_analytics_demand_get: {
+        parameters: {
+            query: {
+                /** @description Store UUID */
+                store_id: string;
+                limit?: number;
+                /** @description Optional access token for SSE EventSource */
+                token?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DemandSignal"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    conduct_shelf_audit_api_v1_merchant_shelf_audit_post: {
+        parameters: {
+            query?: {
+                /** @description Optional access token for SSE EventSource */
+                token?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ShelfAuditRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ShelfAuditResult"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_restock_tasks_api_v1_merchant_restock_tasks_get: {
+        parameters: {
+            query: {
+                /** @description Store UUID */
+                store_id: string;
+                /** @description Optional access token for SSE EventSource */
+                token?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestockTaskResponse"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_restock_task_api_v1_merchant_restock_tasks__task_id__patch: {
+        parameters: {
+            query?: {
+                /** @description Optional access token for SSE EventSource */
+                token?: string | null;
+            };
+            header?: never;
+            path: {
+                task_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateRestockTaskRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestockTaskResponse"];
                 };
             };
             /** @description Validation Error */
