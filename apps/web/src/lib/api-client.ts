@@ -38,6 +38,22 @@ export class ApiError extends Error {
   }
 }
 
+export function getOrCreateGuestSessionId(): string {
+  if (typeof window === "undefined") {
+    return "guest_ssr";
+  }
+  let guestId = localStorage.getItem("omni_guest_session_id");
+  if (!guestId) {
+    guestId =
+      "guest_" +
+      (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+        ? crypto.randomUUID().replace(/-/g, "").slice(0, 16)
+        : Math.random().toString(36).substring(2, 18));
+    localStorage.setItem("omni_guest_session_id", guestId);
+  }
+  return guestId;
+}
+
 export async function apiClient<T>(
   endpoint: string,
   options: RequestInit = {}
@@ -45,11 +61,16 @@ export async function apiClient<T>(
   const url = `${API_BASE_URL}${endpoint}`;
   const headers = new Headers(options.headers || {});
 
-  // Attach token from localStorage if available in browser
+  // Attach token and guest session from localStorage if available in browser
   if (typeof window !== "undefined") {
     const token = localStorage.getItem("omni_access_token");
     if (token && !headers.has("Authorization")) {
       headers.set("Authorization", `Bearer ${token}`);
+    }
+
+    const guestId = getOrCreateGuestSessionId();
+    if (guestId && !headers.has("X-Guest-Session-ID")) {
+      headers.set("X-Guest-Session-ID", guestId);
     }
   }
 

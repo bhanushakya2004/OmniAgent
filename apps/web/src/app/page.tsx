@@ -81,10 +81,10 @@ export default function LandingPage() {
 
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link
-                  href="/login?redirect=/app"
+                  href="/shop"
                   className="flex items-center gap-2 rounded-xl bg-orange-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-orange-600/25 transition hover:bg-orange-500 hover:shadow-orange-600/35"
                 >
-                  <ShoppingBag className="h-5 w-5" /> Start Shopper Mission
+                  <ShoppingBag className="h-5 w-5" /> Start Shopping (Guest AI)
                 </Link>
                 <Link
                   href="/login?redirect=/merchant"
