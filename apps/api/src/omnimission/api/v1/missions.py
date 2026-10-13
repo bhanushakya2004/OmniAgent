@@ -1,15 +1,17 @@
-"""Missions API endpoints for creating, streaming, editing, and routing missions."""
+"""Missions API endpoints for creating, resumable streaming, editing, and routing missions."""
+
+from __future__ import annotations
 
 import uuid
 from typing import Any
 
-from fastapi import APIRouter, Depends, Query, status
+from fastapi import APIRouter, Depends, Header, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sse_starlette.sse import EventSourceResponse
 
-from omnimission.core.deps import get_current_user, require_user
+from omnimission.core.deps import get_current_principal
+from omnimission.core.principal import Principal
 from omnimission.db.session import get_db_session
-from omnimission.models.user import User
 from omnimission.schemas.mission import (
     CreateMissionRequest,
     MissionItemResponse,
@@ -36,14 +38,14 @@ def get_mission_service() -> MissionService:
 )
 async def create_mission(
     request: CreateMissionRequest,
-    current_user: User = Depends(require_user),
+    principal: Principal = Depends(get_current_principal),
     session: AsyncSession = Depends(get_db_session),
     mission_service: MissionService = Depends(get_mission_service),
 ) -> dict[str, Any]:
-    """Initiate a shopping mission across specified physical stores."""
+    """Initiate a shopping mission across specified physical stores for user or anonymous guest."""
     mission = await mission_service.create_mission(
         session=session,
-        user_id=current_user.id,
+        principal=principal,
         request=request,
     )
     return {
@@ -55,21 +57,24 @@ async def create_mission(
 
 @router.get(
     "/{mission_id}/stream",
-    summary="Stream real-time agent workflow events via SSE",
+    summary="Stream real-time agent workflow events via resumable SSE",
 )
 async def stream_mission(
     mission_id: uuid.UUID,
-    current_user: User = Depends(get_current_user),
+    last_event_id: str | None = Header(None, alias="Last-Event-ID"),
+    principal: Principal = Depends(get_current_principal),
     session: AsyncSession = Depends(get_db_session),
     mission_service: MissionService = Depends(get_mission_service),
 ) -> EventSourceResponse:
-    """Server-Sent Events (SSE) stream emitting real-time agent thought steps and final grounded basket."""
+    """Server-Sent Events stream with sequence IDs, typed events, and Last-Event-ID replay."""
+    last_seq = int(last_event_id) if last_event_id and last_event_id.isdigit() else None
     event_generator = mission_service.stream_mission_execution(
         session=session,
         mission_id=mission_id,
-        user_id=current_user.id,
+        principal=principal,
+        last_event_id=last_seq,
     )
-    return EventSourceResponse(event_generator)
+    return EventSourceResponse(event_generator, ping=15)
 
 
 @router.get(
@@ -79,7 +84,7 @@ async def stream_mission(
 )
 async def get_mission(
     mission_id: uuid.UUID,
-    current_user: User = Depends(require_user),
+    principal: Principal = Depends(get_current_principal),
     session: AsyncSession = Depends(get_db_session),
     mission_service: MissionService = Depends(get_mission_service),
 ) -> MissionResponse:
@@ -87,26 +92,26 @@ async def get_mission(
     return await mission_service.get_mission(
         session=session,
         mission_id=mission_id,
-        user_id=current_user.id,
+        principal=principal,
     )
 
 
 @router.get(
     "",
     response_model=MissionListResponse,
-    summary="List past missions for authenticated user",
+    summary="List past missions for caller",
 )
 async def list_missions(
     limit: int = Query(20, ge=1, le=100),
     offset: int = Query(0, ge=0),
-    current_user: User = Depends(require_user),
+    principal: Principal = Depends(get_current_principal),
     session: AsyncSession = Depends(get_db_session),
     mission_service: MissionService = Depends(get_mission_service),
 ) -> MissionListResponse:
     """List historical shopping missions."""
     return await mission_service.list_missions(
         session=session,
-        user_id=current_user.id,
+        principal=principal,
         limit=limit,
         offset=offset,
     )
@@ -121,7 +126,7 @@ async def update_mission_item(
     mission_id: uuid.UUID,
     item_id: uuid.UUID,
     request: UpdateMissionItemRequest,
-    current_user: User = Depends(require_user),
+    principal: Principal = Depends(get_current_principal),
     session: AsyncSession = Depends(get_db_session),
     mission_service: MissionService = Depends(get_mission_service),
 ) -> MissionItemResponse:
@@ -130,7 +135,7 @@ async def update_mission_item(
         session=session,
         mission_id=mission_id,
         item_id=item_id,
-        user_id=current_user.id,
+        principal=principal,
         quantity=request.quantity,
     )
 
@@ -142,7 +147,7 @@ async def update_mission_item(
 )
 async def get_mission_route(
     mission_id: uuid.UUID,
-    current_user: User = Depends(require_user),
+    principal: Principal = Depends(get_current_principal),
     session: AsyncSession = Depends(get_db_session),
     mission_service: MissionService = Depends(get_mission_service),
 ) -> MissionRouteResponse:
@@ -150,5 +155,5 @@ async def get_mission_route(
     return await mission_service.get_mission_route(
         session=session,
         mission_id=mission_id,
-        user_id=current_user.id,
+        principal=principal,
     )
