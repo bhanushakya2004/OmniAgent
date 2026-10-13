@@ -156,58 +156,122 @@ class PlannerAgentRunner:
             rationale = f"Balanced party supplies and snacks tailored for {count} guests."
 
         elif "cake" in desc or intent.goal_type == "recipe":
-            items = [
-                NeededItem(
-                    label="Maida All-Purpose Flour",
-                    category="Baking & Cooking",
-                    quantity=1,
-                    unit="kg",
-                    importance="essential",
-                ),
-                NeededItem(
-                    label="Cocoa Powder",
-                    category="Baking & Cooking",
-                    quantity=1,
-                    unit="g",
-                    importance="essential",
-                ),
-                NeededItem(
-                    label="Double Action Baking Powder",
-                    category="Baking & Cooking",
-                    quantity=1,
-                    unit="g",
-                    importance="essential",
-                ),
-                NeededItem(
-                    label="Pure Baking Soda",
-                    category="Baking & Cooking",
-                    quantity=1,
-                    unit="g",
-                    importance="essential",
-                ),
-                NeededItem(
-                    label="High Protein Greek Yogurt Curd",
-                    category="Dairy",
-                    quantity=1,
-                    unit="g",
-                    importance="essential",
-                ),
-                NeededItem(
-                    label="Protein Powder Supplement",
-                    category="Health & Nutrition",
-                    quantity=1,
-                    unit="pack",
-                    importance="essential",
-                ),
-                NeededItem(
-                    label="Bourbon Vanilla Extract",
-                    category="Baking & Cooking",
-                    quantity=1,
-                    unit="ml",
-                    importance="optional",
-                ),
-            ]
-            rationale = "Formulated complete eggless cake recipe with Greek yogurt binder and protein supplement."
+            scale = max(1, (intent.servings_or_people or 4) // 4)
+            if "strawberry" in desc:
+                items = [
+                    NeededItem(
+                        label="Fresh Strawberries",
+                        category="Produce",
+                        quantity=scale,
+                        unit="pack",
+                        importance="essential",
+                    ),
+                    NeededItem(
+                        label="Maida All-Purpose Flour",
+                        category="Baking & Cooking",
+                        quantity=scale,
+                        unit="kg",
+                        importance="essential",
+                    ),
+                    NeededItem(
+                        label="Double Action Baking Powder",
+                        category="Baking & Cooking",
+                        quantity=1,
+                        unit="g",
+                        importance="essential",
+                    ),
+                    NeededItem(
+                        label="Pure Baking Soda",
+                        category="Baking & Cooking",
+                        quantity=1,
+                        unit="g",
+                        importance="essential",
+                    ),
+                    NeededItem(
+                        label="Sweetened Condensed Milk",
+                        category="Dairy",
+                        quantity=scale,
+                        unit="tin",
+                        importance="essential",
+                        dietary_notes="Moisture & binding eggless replacement",
+                    ),
+                    NeededItem(
+                        label="Castor Sugar",
+                        category="Baking & Cooking",
+                        quantity=1,
+                        unit="kg",
+                        importance="essential",
+                    ),
+                    NeededItem(
+                        label="Bourbon Vanilla Extract",
+                        category="Baking & Cooking",
+                        quantity=1,
+                        unit="ml",
+                        importance="essential",
+                    ),
+                    NeededItem(
+                        label="Whipping Cream",
+                        category="Dairy",
+                        quantity=scale,
+                        unit="ml",
+                        importance="essential",
+                    ),
+                ]
+                rationale = f"Grounded eggless strawberry cake recipe scaled for {intent.servings_or_people or 4} servings using condensed milk binder."
+            else:
+                items = [
+                    NeededItem(
+                        label="Maida All-Purpose Flour",
+                        category="Baking & Cooking",
+                        quantity=scale,
+                        unit="kg",
+                        importance="essential",
+                    ),
+                    NeededItem(
+                        label="Cocoa Powder",
+                        category="Baking & Cooking",
+                        quantity=1,
+                        unit="g",
+                        importance="essential",
+                    ),
+                    NeededItem(
+                        label="Double Action Baking Powder",
+                        category="Baking & Cooking",
+                        quantity=1,
+                        unit="g",
+                        importance="essential",
+                    ),
+                    NeededItem(
+                        label="Pure Baking Soda",
+                        category="Baking & Cooking",
+                        quantity=1,
+                        unit="g",
+                        importance="essential",
+                    ),
+                    NeededItem(
+                        label="High Protein Greek Yogurt Curd",
+                        category="Dairy",
+                        quantity=scale,
+                        unit="g",
+                        importance="essential",
+                        dietary_notes="High protein eggless moisture binder",
+                    ),
+                    NeededItem(
+                        label="Protein Powder Supplement",
+                        category="Health & Nutrition",
+                        quantity=1,
+                        unit="pack",
+                        importance="essential",
+                    ),
+                    NeededItem(
+                        label="Bourbon Vanilla Extract",
+                        category="Baking & Cooking",
+                        quantity=1,
+                        unit="ml",
+                        importance="optional",
+                    ),
+                ]
+                rationale = f"Formulated complete eggless cake recipe with Greek yogurt binder scaled for {intent.servings_or_people or 4} people."
 
         else:
             items = [

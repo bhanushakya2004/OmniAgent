@@ -1,5 +1,4 @@
-"""Shopping cart business service with guest-to-user merging and stock price snapshots."""
-
+import datetime
 import uuid
 from decimal import Decimal
 from typing import Any
@@ -48,6 +47,21 @@ class CartService:
         cart = res.scalars().first()
 
         if cart is None:
+            if principal.is_guest and principal.guest_session_id:
+                guest_rec = await session.get(GuestSession, principal.guest_session_id)
+                if guest_rec is None:
+                    token = principal.session_token or f"guest_{principal.guest_session_id.hex}"
+                    expires = datetime.datetime.now(datetime.UTC) + datetime.timedelta(days=30)
+                    session.add(
+                        GuestSession(
+                            id=principal.guest_session_id,
+                            session_token=token,
+                            expires_at=expires,
+                            properties={},
+                        )
+                    )
+                    await session.flush()
+
             cart = Cart(
                 user_id=principal.user_id if principal.is_authenticated else None,
                 guest_session_id=principal.guest_session_id if principal.is_guest else None,
