@@ -1,6 +1,7 @@
 """Database models module."""
 
 from omnimission.models.inventory import StoreInventory
+from omnimission.models.knowledge import KGEdge, KGNode, KnowledgeChunk, KnowledgeDoc
 from omnimission.models.mission import Mission, MissionItem, MissionRun
 from omnimission.models.product import Product
 from omnimission.models.refresh_token import RefreshToken
@@ -18,4 +19,8 @@ __all__ = [
     "MissionItem",
     "MissionRun",
     "RestockTask",
+    "KnowledgeDoc",
+    "KnowledgeChunk",
+    "KGNode",
+    "KGEdge",
 ]
