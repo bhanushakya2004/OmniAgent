@@ -69,7 +69,8 @@ class MissionResponse(BaseModel):
     """Comprehensive mission detail."""
 
     id: uuid.UUID
-    user_id: uuid.UUID
+    user_id: uuid.UUID | None = None
+    guest_session_id: uuid.UUID | None = None
     raw_text: str
     status: str
     language: str
