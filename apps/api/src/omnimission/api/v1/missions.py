@@ -157,3 +157,22 @@ async def get_mission_route(
         mission_id=mission_id,
         principal=principal,
     )
+
+
+@router.get(
+    "/{mission_id}/inspector",
+    response_model=dict[str, Any],
+    summary="Get Glass-Box Agent Inspector telemetry",
+)
+async def get_mission_inspector(
+    mission_id: uuid.UUID,
+    principal: Principal = Depends(get_current_principal),
+    session: AsyncSession = Depends(get_db_session),
+    mission_service: MissionService = Depends(get_mission_service),
+) -> dict[str, Any]:
+    """Retrieve full observability telemetry, tool execution logs, and grounding checks."""
+    return await mission_service.get_mission_inspector_telemetry(
+        session=session,
+        mission_id=mission_id,
+        principal=principal,
+    )
