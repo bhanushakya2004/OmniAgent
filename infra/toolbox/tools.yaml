@@ -1,0 +1,142 @@
+# Google GenAI / MCP Toolbox for Databases Configuration
+# Open-source MCP Server: googleapis/mcp-toolbox
+
+sources:
+  omnimission-pg:
+    kind: postgres
+    host: ${DB_HOST:db}
+    port: ${DB_PORT:5432}
+    database: ${DB_NAME:omnimission}
+    user: ${DB_USER:toolbox_ro}
+    password: ${DB_PASSWORD:toolbox_ro_secret}
+
+tools:
+  - name: search_store_inventory
+    kind: postgres-sql
+    source: omnimission-pg
+    description: Search real-time inventory in a physical store by product keyword, brand, or category.
+    parameters:
+      - name: store_id
+        type: string
+        description: UUID of the target physical store.
+      - name: query
+        type: string
+        description: Keyword or product title to search for (e.g. 'strawberries', 'almond flour', 'sunscreen').
+      - name: limit
+        type: integer
+        description: Maximum number of products to return (default 10, max 50).
+    statement: |
+      SELECT
+          product_id, sku, product_name, brand, category, subcategory,
+          size_label, unit, dietary_tags, is_travel_size,
+          stock_qty, price, mrp, aisle, bay, shelf
+      FROM v_store_inventory
+      WHERE store_id = $1::uuid
+        AND (
+            product_name ILIKE '%' || $2 || '%'
+            OR brand ILIKE '%' || $2 || '%'
+            OR category ILIKE '%' || $2 || '%'
+            OR subcategory ILIKE '%' || $2 || '%'
+        )
+      ORDER BY stock_qty DESC, product_name ASC
+      LIMIT $3::int;
+
+  - name: get_product_location
+    kind: postgres-sql
+    source: omnimission-pg
+    description: Lookup exact physical store coordinates (aisle, bay, shelf) for a specific product SKU.
+    parameters:
+      - name: store_id
+        type: string
+        description: UUID of the physical store.
+      - name: sku
+        type: string
+        description: SKU code of the product.
+    statement: |
+      SELECT
+          store_id, store_name, product_id, sku, product_name, brand,
+          aisle, bay, shelf, stock_qty, price
+      FROM v_aisle_locations
+      WHERE store_id = $1::uuid AND sku = $2;
+
+  - name: check_stock_levels
+    kind: postgres-sql
+    source: omnimission-pg
+    description: Check the live on-shelf stock quantity and unit price of a product in a store.
+    parameters:
+      - name: store_id
+        type: string
+        description: UUID of the physical store.
+      - name: product_id
+        type: string
+        description: UUID of the product.
+    statement: |
+      SELECT
+          store_id, product_id, sku, product_name, stock_qty, price, currency
+      FROM v_store_inventory
+      WHERE store_id = $1::uuid AND product_id = $2::uuid;
+
+  - name: get_dietary_substitutes
+    kind: postgres-sql
+    source: omnimission-pg
+    description: Find in-stock substitute products conforming to dietary tags (e.g. vegan, gluten_free, eggless).
+    parameters:
+      - name: store_id
+        type: string
+        description: UUID of the physical store.
+      - name: category
+        type: string
+        description: Product category (e.g. 'Dairy & Eggs', 'Flours & Grains', 'Baking Essentials').
+      - name: dietary_tag
+        type: string
+        description: Required dietary tag (e.g. 'gluten_free', 'vegan', 'eggless', 'sugar_free').
+      - name: limit
+        type: integer
+        description: Maximum number of substitutes to return.
+    statement: |
+      SELECT
+          product_id, sku, product_name, brand, category, subcategory,
+          dietary_tags, stock_qty, price, aisle, bay, shelf
+      FROM v_dietary_substitutes
+      WHERE store_id = $1::uuid
+        AND (category ILIKE '%' || $2 || '%' OR subcategory ILIKE '%' || $2 || '%')
+        AND $3 = ANY(dietary_tags)
+      ORDER BY stock_qty DESC
+      LIMIT $4::int;
+
+  - name: get_store_details
+    kind: postgres-sql
+    source: omnimission-pg
+    description: Retrieve store metadata, opening hours, contact details, and location coordinates.
+    parameters:
+      - name: store_id
+        type: string
+        description: UUID of the physical store.
+    statement: |
+      SELECT
+          store_id, merchant_id, store_name, address, city, lat, lng, phone, opening_hours, is_active
+      FROM v_store_details
+      WHERE store_id = $1::uuid;
+
+  - name: find_nearby_stores
+    kind: postgres-sql
+    source: omnimission-pg
+    description: Find physical stores within a given kilometer radius of geographic coordinates.
+    parameters:
+      - name: lat
+        type: float
+        description: Latitude of shopper location.
+      - name: lng
+        type: float
+        description: Longitude of shopper location.
+      - name: radius_km
+        type: float
+        description: Search radius in kilometers.
+    statement: |
+      SELECT
+          store_id, store_name, address, city, lat, lng, phone,
+          (point(lng, lat) <@> point($2, $1)) * 1.609344 AS distance_km
+      FROM v_store_details
+      WHERE is_active = true
+        AND (point(lng, lat) <@> point($2, $1)) * 1.609344 <= $3
+      ORDER BY distance_km ASC;

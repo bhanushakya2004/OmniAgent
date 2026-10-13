@@ -34,6 +34,7 @@ services:
       CORS_ORIGINS: http://localhost:3000
       STORAGE_BACKEND: local
       LOCAL_STORAGE_PATH: /app/.data/uploads
+      TOOLBOX_URL: http://toolbox:5000
     volumes:
       - api_uploads:/app/.data/uploads
     healthcheck:
@@ -41,6 +42,25 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+
+  toolbox:
+    image: ghcr.io/googleapis/genai-toolbox:latest
+    container_name: omnimission-toolbox
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./infra/toolbox/tools.yaml:/tools.yaml:ro
+    command: ["--tools-file", "/tools.yaml", "--port", "5000"]
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: omnimission
+      DB_USER: toolbox_ro
+      DB_PASSWORD: toolbox_ro_secret
 
   web:
     build:

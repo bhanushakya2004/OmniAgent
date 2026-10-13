@@ -41,7 +41,11 @@ class Settings(BaseSettings):
     gemini_model_vision: str = "gemini-2.5-flash"
     gemini_embedding_model: str = "text-embedding-004"
 
-    # Tooling
+    # Tooling & Google MCP Toolbox
+    toolbox_url: str = "http://localhost:5000"
+    toolbox_database_url: str = (
+        "postgresql+psycopg://toolbox_ro:toolbox_ro_secret@localhost:5432/omnimission"
+    )
     agno_mcp_token: str | None = None
 
     @property
