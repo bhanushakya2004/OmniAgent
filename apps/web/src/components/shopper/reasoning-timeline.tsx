@@ -1,13 +1,25 @@
 "use client";
 
-import React from "react";
-import { CheckCircle2, Clock, Bot, Cpu, Sparkles, AlertCircle } from "lucide-react";
-import { TimelineStepEvent, StreamStatus } from "@/hooks/use-mission-stream";
+import React, { useState } from "react";
+import {
+  CheckCircle2,
+  Clock,
+  Bot,
+  Wrench,
+  ShieldCheck,
+  ShoppingBag,
+  Navigation,
+  Sparkles,
+  AlertCircle,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
+import { StreamEvent, StreamStatus } from "@/hooks/use-mission-stream";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 interface ReasoningTimelineProps {
-  events: TimelineStepEvent[];
+  events: StreamEvent[];
   status: StreamStatus;
   error: string | null;
 }
@@ -17,14 +29,73 @@ export function ReasoningTimeline({
   status,
   error,
 }: ReasoningTimelineProps): React.JSX.Element | null {
+  const [expandedThoughts, setExpandedThoughts] = useState<Record<number, boolean>>({});
+
   if (status === "idle" && events.length === 0) return null;
+
+  const toggleThought = (idx: number) => {
+    setExpandedThoughts((prev) => ({ ...prev, [idx]: !prev[idx] }));
+  };
+
+  const getEventBadge = (type: string) => {
+    switch (type) {
+      case "agent_thought":
+        return (
+          <Badge variant="secondary" className="gap-1 text-[10px] bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20">
+            <Bot className="w-3 h-3" /> Thought
+          </Badge>
+        );
+      case "tool_call":
+        return (
+          <Badge variant="secondary" className="gap-1 text-[10px] bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20">
+            <Wrench className="w-3 h-3" /> Tool Call
+          </Badge>
+        );
+      case "tool_result":
+        return (
+          <Badge variant="secondary" className="gap-1 text-[10px] bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border-cyan-500/20">
+            <Sparkles className="w-3 h-3" /> Tool Result
+          </Badge>
+        );
+      case "grounding_check":
+        return (
+          <Badge variant="secondary" className="gap-1 text-[10px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20">
+            <ShieldCheck className="w-3 h-3" /> Grounding Check
+          </Badge>
+        );
+      case "basket_update":
+        return (
+          <Badge variant="secondary" className="gap-1 text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20">
+            <ShoppingBag className="w-3 h-3" /> Cart Action
+          </Badge>
+        );
+      case "wayfinding_route":
+        return (
+          <Badge variant="secondary" className="gap-1 text-[10px] bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border-indigo-500/20">
+            <Navigation className="w-3 h-3" /> Wayfinding
+          </Badge>
+        );
+      case "mission_complete":
+        return (
+          <Badge variant="accent" className="gap-1 text-[10px]">
+            <CheckCircle2 className="w-3 h-3" /> Completed
+          </Badge>
+        );
+      default:
+        return (
+          <Badge variant="secondary" className="text-[10px]">
+            {type}
+          </Badge>
+        );
+    }
+  };
 
   return (
     <Card className="p-6 bg-card/60 backdrop-blur-md border-border/80 shadow-md">
       <div className="flex items-center justify-between pb-4 border-b border-border/60">
         <div className="flex items-center gap-2">
           <Bot className="w-5 h-5 text-primary" />
-          <h3 className="font-bold text-lg">Multi-Agent Reasoning Timeline</h3>
+          <h3 className="font-bold text-lg">Multi-Agent Reasoning Stream</h3>
         </div>
         <div className="flex items-center gap-2">
           {status === "streaming" || status === "connecting" ? (
@@ -48,60 +119,99 @@ export function ReasoningTimeline({
       {/* Steps List */}
       <div className="mt-5 space-y-3">
         {events.map((evt, idx) => {
-          const isDone = evt.status === "completed";
+          const isThought = evt.event_type === "agent_thought";
+          const thoughtText =
+            typeof evt.payload.thought === "string"
+              ? evt.payload.thought
+              : typeof evt.payload.message === "string"
+              ? evt.payload.message
+              : "";
+          const isExpanded = !!expandedThoughts[idx];
+
           return (
             <div
-              key={`${evt.step}-${idx}`}
-              className={`p-4 rounded-xl border transition-all ${
-                isDone
-                  ? "bg-card border-border/70 shadow-sm"
-                  : "bg-primary/5 border-primary/30 ring-1 ring-primary/20"
-              }`}
+              key={`${evt.sequence_id}-${evt.event_type}-${idx}`}
+              className="p-4 rounded-xl border border-border/70 bg-card shadow-sm transition-all space-y-2"
             >
               <div className="flex items-start justify-between gap-3">
-                <div className="flex items-start gap-3">
-                  <div className="mt-0.5">
-                    {isDone ? (
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                    ) : (
-                      <div className="w-5 h-5 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-                    )}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h4 className="font-semibold text-sm text-foreground">{evt.title}</h4>
-                      <Badge variant="secondary" className="text-[10px] py-0 px-2">
-                        {evt.agent}
-                      </Badge>
-                    </div>
-                    <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                      {evt.description}
-                    </p>
-                  </div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-mono text-[11px] text-muted-foreground">
+                    #{evt.sequence_id}
+                  </span>
+                  {getEventBadge(evt.event_type)}
                 </div>
 
-                {evt.latency_ms !== undefined && (
-                  <span className="text-[11px] font-mono text-muted-foreground flex items-center gap-1 shrink-0">
-                    <Clock className="w-3 h-3" />
-                    {evt.latency_ms}ms
-                  </span>
+                {isThought && thoughtText.length > 120 && (
+                  <button
+                    onClick={() => toggleThought(idx)}
+                    className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1"
+                  >
+                    {isExpanded ? (
+                      <>
+                        Less <ChevronUp className="w-3.5 h-3.5" />
+                      </>
+                    ) : (
+                      <>
+                        More <ChevronDown className="w-3.5 h-3.5" />
+                      </>
+                    )}
+                  </button>
                 )}
               </div>
 
-              {/* Data tags if present */}
-              {evt.data && Object.keys(evt.data).length > 0 && (
-                <div className="mt-3 pt-2.5 border-t border-border/40 flex items-center gap-1.5 flex-wrap">
-                  {Object.entries(evt.data).map(([k, v]) => {
-                    if (v === null || v === undefined || typeof v === "object") return null;
-                    return (
-                      <span
-                        key={k}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border/50"
-                      >
-                        {k}: <strong className="text-foreground">{String(v)}</strong>
-                      </span>
-                    );
-                  })}
+              {/* Event Content */}
+              {isThought && (
+                <p className={`text-xs text-foreground/90 leading-relaxed font-sans ${
+                  !isExpanded && thoughtText.length > 120 ? "line-clamp-2" : ""
+                }`}>
+                  {thoughtText || "Deliberating next step..."}
+                </p>
+              )}
+
+              {evt.event_type === "tool_call" && (
+                <div className="text-xs font-mono bg-muted/60 p-2.5 rounded-lg border border-border/40 text-muted-foreground">
+                  <span className="text-primary font-bold">
+                    {String(evt.payload.tool || "tool")}
+                  </span>
+                  (
+                  {evt.payload.inputs ? JSON.stringify(evt.payload.inputs) : ""}
+                  )
+                </div>
+              )}
+
+              {evt.event_type === "tool_result" && (
+                <div className="text-xs font-mono bg-muted/40 p-2 rounded-lg text-muted-foreground">
+                  Returned {String(evt.payload.hits ?? "result")}:{" "}
+                  {JSON.stringify(evt.payload.result || evt.payload).slice(0, 160)}
+                </div>
+              )}
+
+              {evt.event_type === "grounding_check" && (
+                <div className="text-xs text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 shrink-0" />
+                  Grounded: SKU {String(evt.payload.sku || "")} verified in store inventory
+                  {evt.payload.aisle ? ` (Aisle ${evt.payload.aisle})` : ""}
+                </div>
+              )}
+
+              {evt.event_type === "basket_update" && (
+                <div className="text-xs text-amber-600 dark:text-amber-400 font-medium flex items-center gap-1.5">
+                  <ShoppingBag className="w-4 h-4 shrink-0" />
+                  Cart updated: {String(evt.payload.product_name || evt.payload.sku || "Item added")}
+                </div>
+              )}
+
+              {evt.event_type === "wayfinding_route" && (
+                <div className="text-xs text-indigo-600 dark:text-indigo-400 font-medium flex items-center gap-1.5">
+                  <Navigation className="w-4 h-4 shrink-0" />
+                  Optimal store walking path calculated ({String(evt.payload.distance_m || 45)}m walk)
+                </div>
+              )}
+
+              {evt.event_type === "mission_complete" && (
+                <div className="text-xs text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 shrink-0" />
+                  Mission complete! {typeof evt.payload.summary === "string" ? evt.payload.summary : ""}
                 </div>
               )}
             </div>
